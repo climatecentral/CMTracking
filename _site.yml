@@ -2,10 +2,10 @@ name: "Climate Matters Tracking"
 navbar:
   title: "Climate Matters Tracking"
   left:
-    - text: "Seasonal Evaluation"
+    - text: "Seasonal Evaluations"
       href: index.html
-    - text: "Journal"
-      href: Journal.html
-    - text: "Links"
-      href: Links.html
+    #- text: "Journal"
+      #href: Journal.html
+    #- text: "Links"
+     # href: Links.html
 output_dir: "docs"

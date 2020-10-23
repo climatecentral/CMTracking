@@ -1,5 +1,5 @@
 ---
-title: "CM Evaluation"
+title: "Seasonal Evaluations"
 output: 
   html_document:
     toc: true
@@ -107,6 +107,7 @@ names(countedSortedGraphics.formatted) <- c("Rank", "Graphic", "Social", "Storie
 seasonGraphicsHits <- merge(graphicPopularity, releases.sep, by.x="graphic.used", by.y="graphic", all.y=TRUE)
 #reformat
 seasonsGraphicsByHits <- seasonGraphicsHits[,c(6,1,2,3,4,5)]
+seasonsGraphicsByHits <- seasonsGraphicsByHits[order(seasonsGraphicsByHits$total, decreasing=TRUE),]
 names(seasonsGraphicsByHits) <- c("Date Published", "Graphic Name", "Social", "Stories", "TV", "Total Hits")
 #format using HTML widget
 library(DT)
