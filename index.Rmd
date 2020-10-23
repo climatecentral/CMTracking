@@ -6,7 +6,7 @@ output:
     toc_float: true
     collapsed: false
     number_sections: false
-    toc_depth: 1
+    toc_depth: 2
 ---
 
 
@@ -18,11 +18,14 @@ output:
 </style>
 
 <div class="row" style="padding-top: 30px;">
-<div class="col-sm-10">
+<div class="col-sm-14">
 
 
 # **Summer 2020**
 
+If you're unsure about release and graphic names, [click here](https://docs.google.com/spreadsheets/d/1bArJV-oHTp09L4fk1vrAXzKVUX-wzr1ONmv0PGuXiwY/edit#gid=1301634659) to find a guide, under **'Graphics Directory'** tab.
+
+Summer content is considered to be all weekly releases and graphics published between '2020FirstDayAbove' and '2020Records'. 
 
 ```{r setup, include=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -85,7 +88,7 @@ datatable(seasonsReleasesByHits, fillContainer=TRUE, options = list(scrollX="70p
 
 
 ## Ranked Graphics
-
+ 
 ```{r Ranked Graphics, include=FALSE}
 graphicPopularity <- rankGraphics(seasonData)
 #format table
@@ -124,7 +127,11 @@ library(DT)
 datatable(popularByRelease, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
 ```
 
-## Graphic Popularity by Type and Geo
+## Graphic Popularity by Attribute
+
+'Attribute' is used to describe two characteristics of a graphic: the geographic resolution, and the 
+
+Warming Stripes campaign included two graphics: a "local other" and a "local gif".
 
 ```{r Graphic Popularity by Type and Geo, echo = FALSE, warning=FALSE, message=FALSE}
 graphicSort <- tapply(popularGraphicTypes$total, popularGraphicTypes$type, sum)
@@ -156,11 +163,11 @@ graphicTypePopularity$hitsPerGraphic <- graphicTypePopularity$hits/graphicTypePo
 gtp.forpie <- graphicTypePopularity[,c("type", "hitsPerGraphic")]
 
 par(mfrow=c(1,2))
-pie(ggp.forpie$hitsPerGraphic,ggp.forpie$distribution, main="Geo Popularity")
-pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type Popularity")
+pie(ggp.forpie$hitsPerGraphic,ggp.forpie$distribution, main="Geography")
+pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type")
 ```
 
-## Without 'Warming Stripes' campaign
+### Excluding 'Warming Stripes' campaign
 
 ```{r Graphic Popularity by Type and Geo (without WS), echo = FALSE, warning=FALSE, message=FALSE}
 
@@ -199,12 +206,21 @@ graphicTypePopularity$hitsPerGraphic <- graphicTypePopularity$hits/graphicTypePo
 gtp.forpie <- graphicTypePopularity[,c("type", "hitsPerGraphic")]
 
 par(mfrow=c(1,2))
-pie(ggp.forpie$hitsPerGraphic,ggp.forpie$distribution, main="Geo Popularity")
-pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type Popularity")
+pie(ggp.forpie$hitsPerGraphic,ggp.forpie$distribution, main="Geography")
+pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type")
 ```
 
 
 ## Evergreen releases
+
+Content usage that was tracked during the summer but had been published earlier.
+
+**WeatherPower** was the top evergreen graphic, largely because of AJ Fox's continued sponsored segment. 
+
+After that, the top three 'Evergreen' releases were [20202019EOYGlobalTemps](https://medialibrary.climatecentral.org/resources/2019-in-review-global-temperature-rankings), [2017SummerHeatPrepPackage	](https://medialibrary.climatecentral.org/resources/the-season-of-extreme-heat), and [2019HeatIndex](https://medialibrary.climatecentral.org/resources/climate-matters-extreme-heat-index-threatening-outdoor-sports).
+
+
+
 ```{r Evergreen releases, echo = FALSE, warning=FALSE, message=FALSE}
 #remove rows which have hits from current season
 seasonData.sep <- separate_rows(seasonData, program.content, sep=", ")
@@ -219,7 +235,7 @@ datatable(evergreen.rank.tidy, fillContainer=TRUE, options = list(scrollX="70px"
 
 
 </div>
-<div class="col-sm-10">
+<div class="col-sm-14">
 
 <a>
 </a>
