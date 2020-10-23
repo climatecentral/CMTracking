@@ -1,8 +1,8 @@
-name: "Website Test"
+name: "Climate Matters Tracking"
 navbar:
-  title: "Website Test"
+  title: "Climate Matters Tracking"
   left:
-    - text: "Home"
+    - text: "Seasonal Evaluation"
       href: index.html
     - text: "Journal"
       href: Journal.html

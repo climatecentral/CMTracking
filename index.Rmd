@@ -1,37 +1,39 @@
 ---
-title: "TestWebsite"
-output: html_document
+title: "CM Evaluation"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
 ---
+
 
 <style type="text/css">
 .title {
   display: none;
 }
 
-#getting-started img {
-  margin-right: 10px;
-}
-
 </style>
 
 <div class="row" style="padding-top: 30px;">
-<div class="col-sm-6">
-
-# **Website Test**
+<div class="col-sm-10">
 
 
-```{r setup, include=FALSE}
+# **Summer 2020**
+
+
+```{r setup, include=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = "C:/Users/lsheridan/Documents/R_data/releases_and_graphics/monthly_reports")
 knitr::opts_knit$set(root.dir = "/Users/lsheridan/Documents/R_data/releases_and_graphics/monthly_reports")
 setwd("/Users/lsheridan/Documents/R_data/releases_and_graphics/monthly_reports")
 library(flexdashboard)
 library(shiny)
-getwd()
-
 ```
 
-```{r Read in Data, echo = FALSE}
+```{r Read in Data, echo = FALSE, warning=FALSE, message=FALSE}
 #read in tracking data from Master Tracking Google Spreadsheet
 data <- read.csv("trackingdata_August2020.csv")
 
@@ -57,7 +59,7 @@ write.csv(releases.sep, "summer2020releasesandgraphics.csv")
 
 ## Ranked Releases
 
-```{r Ranked Releases, include = FALSE}
+```{r Ranked Releases, include = FALSE, echo = FALSE, warning=FALSE, message=FALSE}
 releasePopularity <- rankReleases(seasonData)
 #format table
 library(formattable)
@@ -70,12 +72,12 @@ countedSortedReleases.formatted <- countedSortedReleases.formatted[,c(6,1,2,3,4,
 names(countedSortedReleases.formatted) <- c("Rank", "Release", "Social", "Stories", "TV", "Total Hits")
 ```
 
-```{r Summer Releases, echo = FALSE}
+```{r Summer Releases, echo = FALSE, warning=FALSE, message=FALSE}
 #merge tracking data with list of Summer 2020 releases
 seasonReleasesHits <- merge(releasePopularity, releases, by.x="program.content", by.y="title", all.y=TRUE)
 #reformat
 seasonsReleasesByHits <- seasonReleasesHits[,c(6,1,2,3,4,5)]
-names(seasonsReleasesByHits) <- c("Date Published", "Release Name", "Social", "Stories", "TV", "Total Hits")
+names(seasonsReleasesByHits) <- c("Date Published", "Release", "Social", "Stories", "TV", "Total Hits")
 #format using HTML widget
 library(DT)
 datatable(seasonsReleasesByHits, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
@@ -124,7 +126,7 @@ datatable(popularByRelease, fillContainer=TRUE, options = list(scrollX="70px", s
 
 ## Graphic Popularity by Type and Geo
 
-```{r Graphic Popularity by Type and Geo, echo=FALSE}
+```{r Graphic Popularity by Type and Geo, echo = FALSE, warning=FALSE, message=FALSE}
 graphicSort <- tapply(popularGraphicTypes$total, popularGraphicTypes$type, sum)
 graphicDistribution <- tapply(popularGraphicTypes$total, popularGraphicTypes$distribution, sum)
 
@@ -160,7 +162,7 @@ pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type Popularity")
 
 ## Without 'Warming Stripes' campaign
 
-```{r Graphic Popularity by Type and Geo (without WS), echo=FALSE}
+```{r Graphic Popularity by Type and Geo (without WS), echo = FALSE, warning=FALSE, message=FALSE}
 
 #remove Warming Stripes campaign
 popularGraphicTypes.woWS <- popularGraphicTypes[-which(popularGraphicTypes$title=="2020WarmingStripes"),]
@@ -203,17 +205,22 @@ pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type Popularity")
 
 
 ## Evergreen releases
-```{r Evergreen releases, echo=FALSE}
+```{r Evergreen releases, echo = FALSE, warning=FALSE, message=FALSE}
 #remove rows which have hits from current season
 seasonData.sep <- separate_rows(seasonData, program.content, sep=", ")
 nonSeasonReleases <- seasonData.sep[-which(seasonData.sep$program.content %in% releases$title),]
 
 evergreen.rank <- rankReleases(nonSeasonReleases)
 evergreen.rank.tidy <- evergreen.rank[-c(2,3, 9),]
+names(evergreen.rank.tidy) <- c("Release", "Social", "Stories", "TV", "Total Hits")
 library(DT)
 datatable(evergreen.rank.tidy, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
 ```
 
 
+</div>
+<div class="col-sm-10">
+
+<a>
 </a>
 </div>
