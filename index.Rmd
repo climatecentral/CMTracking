@@ -19,25 +19,201 @@ output: html_document
 
 # **Website Test**
 
-This is a template example for lab journaling. Students in Matt Crump's Human Cognition and Performance Lab will use this template to learn R, and other things. Students can replace this text with more fun things. People not in my lab can use this too.
 
-## How to use
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "C:/Users/lsheridan/Documents/R_data/releases_and_graphics/monthly_reports")
+knitr::opts_knit$set(root.dir = "/Users/lsheridan/Documents/R_data/releases_and_graphics/monthly_reports")
+setwd("/Users/lsheridan/Documents/R_data/releases_and_graphics/monthly_reports")
+library(flexdashboard)
+library(shiny)
+getwd()
 
-1. fork the repo for this website and follow instructions on read me to get set up. [https://github.com/CrumpLab/LabJournalWebsite](https://github.com/CrumpLab/LabJournalWebsite)
+```
 
-2. Blog/journal what you are doing in R, by editing the Journal.Rmd. See the [Journal page](https://crumplab.github.io/LabJournalWebsite/Journal.html) for an example of what to do to get started learning R.
+```{r Read in Data, echo = FALSE}
+#read in tracking data from Master Tracking Google Spreadsheet
+data <- read.csv("trackingdata_August2020.csv")
 
-3. See the [links page](https://crumplab.github.io/LabJournalWebsite/Links.html) for lots of helpful links on learning R.
+#load pre-written evaluation functions
+source("monthlyreport_functions.R")
 
-4. Change everything to make it your own.
+#reformat
+dataReformatted <- reformat_googlesheet(data)
+#extract data for season #NEED TO ADD SEPTEMBER
+seasonData <- dataReformatted[which(dataReformatted$month==c("May", "June", "July", "August") & dataReformatted$year=="2020"),]
+
+#read in csv of season's releases
+releases <- read.csv("summer2020releases.csv")
+require('tidyr')
+releases.sep <- separate_rows(releases, graphic, sep=",")
+#remove blank space from release and graphic columns
+releases.sep$title <- trimws(releases.sep$title, which="both")
+releases.sep$graphic <- trimws(releases.sep$graphic, which="both")
+#cast date column as date
+releases.sep$date <- as.Date(releases.sep$date, format="%m/%d/%Y")
+write.csv(releases.sep, "summer2020releasesandgraphics.csv")
+```
+
+## Ranked Releases
+
+```{r Ranked Releases, include = FALSE}
+releasePopularity <- rankReleases(seasonData)
+#format table
+library(formattable)
+countedSortedReleases.formatted <- formattable(releasePopularity, align=c("r", "c", "c", "c", "c"))
+#add rank column
+countedSortedReleases.formatted$rank <- seq.int(nrow(countedSortedReleases.formatted))
+#reorder columns
+countedSortedReleases.formatted <- countedSortedReleases.formatted[,c(6,1,2,3,4,5)]
+#rename columns
+names(countedSortedReleases.formatted) <- c("Rank", "Release", "Social", "Stories", "TV", "Total Hits")
+```
+
+```{r Summer Releases, echo = FALSE}
+#merge tracking data with list of Summer 2020 releases
+seasonReleasesHits <- merge(releasePopularity, releases, by.x="program.content", by.y="title", all.y=TRUE)
+#reformat
+seasonsReleasesByHits <- seasonReleasesHits[,c(6,1,2,3,4,5)]
+names(seasonsReleasesByHits) <- c("Date Published", "Release Name", "Social", "Stories", "TV", "Total Hits")
+#format using HTML widget
+library(DT)
+datatable(seasonsReleasesByHits, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
+```
 
 
-</div>
-<div class="col-sm-6">
+## Ranked Graphics
 
-### [Crump Lab: Human Cognition and Performance](https://crumplab.github.io)
+```{r Ranked Graphics, include=FALSE}
+graphicPopularity <- rankGraphics(seasonData)
+#format table
+library(formattable)
+countedSortedGraphics.formatted <- formattable(releasePopularity, align=c("r", "c", "c", "c", "c"))
+#add rank column
+countedSortedGraphics.formatted$rank <- seq.int(nrow(countedSortedGraphics.formatted))
+#reorder columns
+countedSortedGraphics.formatted <- countedSortedGraphics.formatted[,c(6,1,2,3,4,5)]
+#rename columns
+names(countedSortedGraphics.formatted) <- c("Rank", "Graphic", "Social", "Stories", "TV", "Total Hits")
+```
 
-<a href = "https://crumplab.github.io">
-![](images/logo.png)
+```{r Summer Graphics, echo=FALSE}
+#merge tracking data with list of Summer 2020 Graphics
+seasonGraphicsHits <- merge(graphicPopularity, releases.sep, by.x="graphic.used", by.y="graphic", all.y=TRUE)
+#reformat
+seasonsGraphicsByHits <- seasonGraphicsHits[,c(6,1,2,3,4,5)]
+names(seasonsGraphicsByHits) <- c("Date Published", "Graphic Name", "Social", "Stories", "TV", "Total Hits")
+#format using HTML widget
+library(DT)
+datatable(seasonsGraphicsByHits, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
+```
+
+## Graphic Popularity by Release
+```{r, Graphic Popularity by Release, echo=FALSE}
+graphicType <- read.csv('summer2020releasesandgraphicstype.csv')
+popularGraphicTypes <- merge(graphicPopularity, graphicType, by.x = "graphic.used", by.y = "graphic")
+popularGraphicType <- popularGraphicTypes[,c("date", "title", "graphic.used", "total")]
+popularGraphicType$date <- as.Date(popularGraphicType$date, format="%m/%d/%Y")
+
+#sort for most popular graphics in each release
+popularByRelease <- popularGraphicType[order(popularGraphicType$date, -popularGraphicType$total),]
+names(popularByRelease) <- c("Date Published", "Release", "Graphic Name", "Total Hits")
+library(DT)
+datatable(popularByRelease, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
+```
+
+## Graphic Popularity by Type and Geo
+
+```{r Graphic Popularity by Type and Geo, echo=FALSE}
+graphicSort <- tapply(popularGraphicTypes$total, popularGraphicTypes$type, sum)
+graphicDistribution <- tapply(popularGraphicTypes$total, popularGraphicTypes$distribution, sum)
+
+graphicSortProduced <- graphicType %>%
+  group_by(type) %>%
+  summarize(n())
+graphicSortProduced <- as.data.frame(graphicSortProduced)
+graphicGeoProduced <- graphicType %>%
+  group_by(distribution) %>%
+  summarize(n())
+graphicGeoProduced <- as.data.frame(graphicGeoProduced)
+
+graphicDistribution.df <- as.data.frame(graphicDistribution)
+graphicDistribution.df$distribution <- rownames(graphicDistribution.df)
+names(graphicDistribution.df)[1] <- "hits" 
+names(graphicGeoProduced)[2] <- "count"
+graphicGeoPopularity <- merge(graphicDistribution.df, graphicGeoProduced, by="distribution")
+graphicGeoPopularity$hitsPerGraphic <- graphicGeoPopularity$hits/graphicGeoPopularity$count
+ggp.forpie <- graphicGeoPopularity[,c("distribution", "hitsPerGraphic")]
+
+graphicSort.df <- as.data.frame(graphicSort)
+graphicSort.df$type <- rownames(graphicSort.df)
+names(graphicSort.df)[1] <- "hits"
+names(graphicSortProduced)[2] <- "count"
+graphicTypePopularity <- merge(graphicSort.df, graphicSortProduced, by="type")
+graphicTypePopularity$hitsPerGraphic <- graphicTypePopularity$hits/graphicTypePopularity$count
+gtp.forpie <- graphicTypePopularity[,c("type", "hitsPerGraphic")]
+
+par(mfrow=c(1,2))
+pie(ggp.forpie$hitsPerGraphic,ggp.forpie$distribution, main="Geo Popularity")
+pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type Popularity")
+```
+
+## Without 'Warming Stripes' campaign
+
+```{r Graphic Popularity by Type and Geo (without WS), echo=FALSE}
+
+#remove Warming Stripes campaign
+popularGraphicTypes.woWS <- popularGraphicTypes[-which(popularGraphicTypes$title=="2020WarmingStripes"),]
+
+graphicType.woWS <- graphicType[-which(graphicType$title=="2020WarmingStripes"),]
+
+
+graphicSort <- tapply(popularGraphicTypes.woWS$total, popularGraphicTypes.woWS$type, sum)
+graphicDistribution <- tapply(popularGraphicTypes.woWS$total, popularGraphicTypes.woWS$distribution, sum)
+
+graphicSortProduced <- graphicType.woWS %>%
+  group_by(type) %>%
+  summarize(n())
+graphicSortProduced <- as.data.frame(graphicSortProduced)
+graphicGeoProduced <- graphicType.woWS %>%
+  group_by(distribution) %>%
+  summarize(n())
+graphicGeoProduced <- as.data.frame(graphicGeoProduced)
+
+graphicDistribution.df <- as.data.frame(graphicDistribution)
+graphicDistribution.df$distribution <- rownames(graphicDistribution.df)
+names(graphicDistribution.df)[1] <- "hits" 
+names(graphicGeoProduced)[2] <- "count"
+graphicGeoPopularity <- merge(graphicDistribution.df, graphicGeoProduced, by="distribution")
+graphicGeoPopularity$hitsPerGraphic <- graphicGeoPopularity$hits/graphicGeoPopularity$count
+ggp.forpie <- graphicGeoPopularity[,c("distribution", "hitsPerGraphic")]
+
+graphicSort.df <- as.data.frame(graphicSort)
+graphicSort.df$type <- rownames(graphicSort.df)
+names(graphicSort.df)[1] <- "hits"
+names(graphicSortProduced)[2] <- "count"
+graphicTypePopularity <- merge(graphicSort.df, graphicSortProduced, by="type")
+graphicTypePopularity$hitsPerGraphic <- graphicTypePopularity$hits/graphicTypePopularity$count
+gtp.forpie <- graphicTypePopularity[,c("type", "hitsPerGraphic")]
+
+par(mfrow=c(1,2))
+pie(ggp.forpie$hitsPerGraphic,ggp.forpie$distribution, main="Geo Popularity")
+pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type Popularity")
+```
+
+
+## Evergreen releases
+```{r Evergreen releases, echo=FALSE}
+#remove rows which have hits from current season
+seasonData.sep <- separate_rows(seasonData, program.content, sep=", ")
+nonSeasonReleases <- seasonData.sep[-which(seasonData.sep$program.content %in% releases$title),]
+
+evergreen.rank <- rankReleases(nonSeasonReleases)
+evergreen.rank.tidy <- evergreen.rank[-c(2,3, 9),]
+library(DT)
+datatable(evergreen.rank.tidy, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
+```
+
+
 </a>
 </div>
