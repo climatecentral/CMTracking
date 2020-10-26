@@ -11,14 +11,14 @@ output:
 
 ```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
 source("monthlyreport_functions.R")
-data <- read.csv('September2020trackingdata.csv')
+data <- read.csv('Sept2020TrackingData.csv')
 tracking.data <-reformat_googlesheet(data)
 tracking.data.month <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2020"),]
 ```
 
 # September 2020
 
-##
+Repository for CM/N Programs Monthly Tracking report. Hits by release table is yet to come.
 
 ### Hits by Program
 ```{r, Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
@@ -45,4 +45,39 @@ expanded.hits.formatted
 month.hitsbyregion <- hitsbyregion(tracking.data.month)
 
 month.hitsbyregion
+```
+
+
+## August 2020
+
+```{r}
+tracking.data.August2020 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2020"),]
+tracking.data.August2020
+```
+
+### Hits by Program
+```{r, Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+#expanded view
+library("tidyr")
+expanded.hits.draf.August2020 <- hitsbyprogram(tracking.data.August2020)
+expanded.hits.August2020 <- expanded.hits.draft.August2020[,c("source", "Twitter", "fb", "other",
+                                  "online.article", "radio", "tv")]
+names(expanded.hits.August2020) <- c("Program", "Twitter", "Facebook", "Other ",
+                          "Online Articles", "Radio", "TV")
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.August2020 <- subset(expanded.hits.August2020, Program=="CC"|Program=="CM"|Program=="CMN"|Program=="Total")
+library("formattable")
+expanded.hits.formatted.August2020 <- formattable(expanded.hits.CMprograms.August2020,
+                                       align=c("l", "c", "c", "c", "c", "c", "c"),
+                                       list(''))
+expanded.hits.formatted.August2020
+```
+
+
+### Hits by Region
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.August2020 <- hitsbyregion(tracking.data.August2020)
+
+month.hitsbyregion.August2020
 ```

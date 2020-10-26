@@ -21,7 +21,7 @@ output:
 <div class="col-sm-14">
 
 
-# **Schumer 2020**
+# **Summer 2020**
 
 If you're unsure about release and graphic names, [click here](https://docs.google.com/spreadsheets/d/1bArJV-oHTp09L4fk1vrAXzKVUX-wzr1ONmv0PGuXiwY/edit#gid=1301634659) to find a guide, under **'Graphics Directory'** tab.
 
