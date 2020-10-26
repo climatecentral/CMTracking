@@ -98,7 +98,7 @@ expanded.hits.formatted.August2020
 ```
 
 ### Top 10 Releases
-```{r}
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
 rankedreleases.August2020 <- rankReleases(tracking.data.August2020)
 top10releases.August2020 <-rankedreleases.August2020[c(1:10),]
 library("formattable")
