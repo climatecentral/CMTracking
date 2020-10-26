@@ -4,8 +4,8 @@ navbar:
   left:
     - text: "Seasonal Evaluations"
       href: index.html
-    #- text: "Monthly Numbers"
-     # href: Journal.html
+    - text: "Monthly Numbers"
+      href: Journal.html
     #- text: "Links"
      # href: Links.html
 output_dir: "docs"
