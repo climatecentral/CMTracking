@@ -24,18 +24,18 @@ output:
 source("monthlyreport_functions.R")
 data <- read.csv('Sept2020TrackingData.csv')
 tracking.data <-reformat_googlesheet(data)
-tracking.data.month <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2020"),]
+tracking.data.September2020 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2020"),]
 ```
 
 # **September 2020**
 
-Repository for CM/N Programs Monthly Tracking report. Hits by release table is yet to come.
+Repository for CM/N Programs Monthly Tracking report.
 
 ### Hits by Program
 ```{r, Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
 #expanded view
 library("tidyr")
-expanded.hits.draft <- hitsbyprogram(tracking.data.month)
+expanded.hits.draft <- hitsbyprogram(tracking.data.September2020)
 expanded.hits <- expanded.hits.draft[,c("source", "Twitter", "fb", "other",
                                   "online.article", "radio", "tv")]
 names(expanded.hits) <- c("Program", "Twitter", "Facebook", "Other ",
@@ -49,11 +49,20 @@ expanded.hits.formatted <- formattable(expanded.hits.CMprograms,
 expanded.hits.formatted
 ```
 
+### Top 10 Releases
+```{r}
+rankedreleases.September2020 <- rankReleases(tracking.data.September2020)
+top10releases.September2020 <-rankedreleases.September2020[c(1:10),]
+library("formattable")
+names(top10releases.September2020) <- c("Release", "Social", "Stories", "TV", "Total")
+formattable(top10releases.September2020)
+```
+
 
 ### Hits by Region
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}
 #compute hits by regions
-month.hitsbyregion <- hitsbyregion(tracking.data.month)
+month.hitsbyregion <- hitsbyregion(tracking.data.September2020)
 
 month.hitsbyregion
 ```
@@ -83,11 +92,20 @@ expanded.hits.formatted.August2020 <- formattable(expanded.hits.CMprograms.Augus
 expanded.hits.formatted.August2020
 ```
 
+### Top 10 Releases
+```{r}
+rankedreleases.August2020 <- rankReleases(tracking.data.August2020)
+top10releases.August2020 <-rankedreleases.August2020[c(1:10),]
+library("formattable")
+names(top10releases.August2020) <- c("Release", "Social", "Stories", "TV", "Total")
+formattable(top10releases.August2020)
+```
 
 ### Hits by Region
 ```{r, August 2020 Hits By Region, echo = FALSE, warning=FALSE, message=FALSE}
 #compute hits by regions
 month.hitsbyregion.August2020 <- hitsbyregion(tracking.data.August2020)
-
 month.hitsbyregion.August2020
 ```
+
+

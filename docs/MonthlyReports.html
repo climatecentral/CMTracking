@@ -381,9 +381,21 @@ div.tocify {
 </div>
 
 
+<style type="text/css">
+.title {
+  display: none;
+}
+
+</style>
+<div class="row" style="padding-top: 30px;">
+<div class="col-sm-14">
+
+
+
+
 <div id="september-2020" class="section level1">
-<h1>September 2020</h1>
-<p>Repository for CM/N Programs Monthly Tracking report. Hits by release table is yet to come.</p>
+<h1><strong>September 2020</strong></h1>
+<p>Repository for CM/N Programs Monthly Tracking report.</p>
 <div id="hits-by-program" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
@@ -480,6 +492,208 @@ CMN
 </td>
 <td style="text-align:center;">
 13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="top-10-releases" class="section level3">
+<h3>Top 10 Releases</h3>
+<pre class="r"><code>rankedreleases.September2020 &lt;- rankReleases(tracking.data.September2020)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>top10releases.September2020 &lt;-rankedreleases.September2020[c(1:10),]
+library(&quot;formattable&quot;)
+names(top10releases.September2020) &lt;- c(&quot;Release&quot;, &quot;Social&quot;, &quot;Stories&quot;, &quot;TV&quot;, &quot;Total&quot;)
+formattable(top10releases.September2020)</code></pre>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+Release
+</th>
+<th style="text-align:right;">
+Social
+</th>
+<th style="text-align:right;">
+Stories
+</th>
+<th style="text-align:right;">
+TV
+</th>
+<th style="text-align:right;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2020WesternWildfires
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+169
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020FallPackage
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+161
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+WeatherPower
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+71
+</td>
+<td style="text-align:right;">
+101
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020HurricanesII
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+88
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020Records
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+78
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020ArcticMin
+</td>
+<td style="text-align:right;">
+49
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+66
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020OHW
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+57
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+The Inequality of City Heat
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+56
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020DaysAbove
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+39
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020SmokeWaves
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+36
 </td>
 </tr>
 </tbody>
@@ -649,7 +863,7 @@ Hawaii
 </div>
 </div>
 <div id="august-2020" class="section level1">
-<h1>August 2020</h1>
+<h1><strong>August 2020</strong></h1>
 <div id="hits-by-program-1" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
@@ -746,6 +960,208 @@ CMN
 </td>
 <td style="text-align:center;">
 0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="top-10-releases-1" class="section level3">
+<h3>Top 10 Releases</h3>
+<pre class="r"><code>rankedreleases.August2020 &lt;- rankReleases(tracking.data.August2020)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>top10releases.August2020 &lt;-rankedreleases.August2020[c(1:10),]
+library(&quot;formattable&quot;)
+names(top10releases.August2020) &lt;- c(&quot;Release&quot;, &quot;Social&quot;, &quot;Stories&quot;, &quot;TV&quot;, &quot;Total&quot;)
+formattable(top10releases.August2020)</code></pre>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+Release
+</th>
+<th style="text-align:right;">
+Social
+</th>
+<th style="text-align:right;">
+Stories
+</th>
+<th style="text-align:right;">
+TV
+</th>
+<th style="text-align:right;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2020CDD
+</td>
+<td style="text-align:right;">
+135
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:right;">
+234
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020Ticks
+</td>
+<td style="text-align:right;">
+78
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+135
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+WeatherPower
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+71
+</td>
+<td style="text-align:right;">
+112
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020SummerPackage
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+86
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020Mosquitoes
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+80
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020HeatStreaks
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020DaysAbove
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+55
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019Wildfire
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+51
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020OHW
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019Warming
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+41
 </td>
 </tr>
 </tbody>
