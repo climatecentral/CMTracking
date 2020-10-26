@@ -9,6 +9,17 @@ output:
     toc_depth: 1
 ---
 
+<style type="text/css">
+.title {
+  display: none;
+}
+
+</style>
+
+<div class="row" style="padding-top: 30px;">
+<div class="col-sm-14">
+
+
 ```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
 source("monthlyreport_functions.R")
 data <- read.csv('Sept2020TrackingData.csv')
@@ -16,7 +27,7 @@ tracking.data <-reformat_googlesheet(data)
 tracking.data.month <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2020"),]
 ```
 
-# September 2020
+# **September 2020**
 
 Repository for CM/N Programs Monthly Tracking report. Hits by release table is yet to come.
 
@@ -48,7 +59,7 @@ month.hitsbyregion
 ```
 
 
-# August 2020
+# **August 2020**
 
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}
 tracking.data.August2020 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2020"),]
