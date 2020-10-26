@@ -16,8 +16,11 @@ tracking.data <-reformat_googlesheet(data)
 tracking.data.month <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2020"),]
 ```
 
+# September 2020
 
-### Hits by Program (Expanded View)
+
+
+### Hits by Program
 ```{r, Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
 #expanded view
 library("tidyr")
@@ -35,27 +38,6 @@ expanded.hits.formatted <- formattable(expanded.hits.CMprograms,
 expanded.hits.formatted
 ```
 
-### (Condensed View)
-```{r, echo = FALSE, warning=FALSE, message=FALSE}
-#condensed view
-condensed.hits.draft <- expanded.hits.draft %>%
-  as_tibble() %>%
-  mutate(
-    social=rt+tw+fb+other,
-    stories=online.article+radio
-  )
-condensed.hits <- condensed.hits.draft[,c("source", "social", "stories", "tv")]
-names(condensed.hits) <- c("Program", "Social Media", "Stories", "TV")
-
-#restrict data to CC, CM, CMN sources
-condensed.hits.CMprograms <- subset(condensed.hits, Program=="CC"|Program=="CM"|Program=="CMN"|Program=="Total")
-
-#design into publishable table
-library(formattable)
-condensed.hits.formatted <- formattable(condensed.hits.CMprograms,align=c("l", "c", "c", "c"))
-
-condensed.hits.formatted
-```
 
 ### Hits by Region
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}
@@ -64,4 +46,3 @@ month.hitsbyregion <- hitsbyregion(tracking.data.month)
 
 month.hitsbyregion
 ```
-
