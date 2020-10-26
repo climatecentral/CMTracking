@@ -27,15 +27,6 @@ If you're unsure about release and graphic names, [click here](https://docs.goog
 
 Summer content is considered to be all weekly releases and graphics published between '2020FirstDayAbove' and '2020Records'. 
 
-```{r setup, include=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "C:/Users/lsheridan/Documents/R_data/releases_and_graphics/monthly_reports")
-knitr::opts_knit$set(root.dir = "/Users/lsheridan/Documents/R_data/releases_and_graphics/monthly_reports")
-setwd("/Users/lsheridan/Documents/R_data/releases_and_graphics/monthly_reports")
-library(flexdashboard)
-library(shiny)
-```
-
 ```{r Read in Data, echo = FALSE, warning=FALSE, message=FALSE}
 #read in tracking data from Master Tracking Google Spreadsheet
 data <- read.csv("trackingdata_August2020.csv")
