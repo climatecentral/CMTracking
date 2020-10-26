@@ -29,15 +29,15 @@ Summer content is considered to be all weekly releases and graphics published be
 
 ```{r Read in Data, echo = FALSE, warning=FALSE, message=FALSE}
 #read in tracking data from Master Tracking Google Spreadsheet
-data <- read.csv("trackingdata_August2020.csv")
+data <- read.csv("Sept2020TrackingData.csv")
 
 #load pre-written evaluation functions
 source("monthlyreport_functions.R")
 
 #reformat
 dataReformatted <- reformat_googlesheet(data)
-#extract data for season #NEED TO ADD SEPTEMBER
-seasonData <- dataReformatted[which(dataReformatted$month==c("May", "June", "July", "August") & dataReformatted$year=="2020"),]
+#extract data for season
+seasonData <- dataReformatted[which(dataReformatted$month==c("May", "June", "July", "August", "September") & dataReformatted$year=="2020"),]
 
 #read in csv of season's releases
 releases <- read.csv("summer2020releases.csv")
@@ -225,10 +225,3 @@ library(DT)
 datatable(evergreen.rank.tidy, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
 ```
 
-
-</div>
-<div class="col-sm-14">
-
-<a>
-</a>
-</div>

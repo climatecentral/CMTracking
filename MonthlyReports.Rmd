@@ -48,18 +48,17 @@ month.hitsbyregion
 ```
 
 
-## August 2020
+# August 2020
 
-```{r}
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
 tracking.data.August2020 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2020"),]
-tracking.data.August2020
 ```
 
 ### Hits by Program
-```{r, Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+```{r, August 2020 Hits by Program, echo = FALSE, warning=FALSE, message=FALSE}
 #expanded view
 library("tidyr")
-expanded.hits.draf.August2020 <- hitsbyprogram(tracking.data.August2020)
+expanded.hits.draft.August2020 <- hitsbyprogram(tracking.data.August2020)
 expanded.hits.August2020 <- expanded.hits.draft.August2020[,c("source", "Twitter", "fb", "other",
                                   "online.article", "radio", "tv")]
 names(expanded.hits.August2020) <- c("Program", "Twitter", "Facebook", "Other ",
@@ -75,7 +74,7 @@ expanded.hits.formatted.August2020
 
 
 ### Hits by Region
-```{r, echo = FALSE, warning=FALSE, message=FALSE}
+```{r, August 2020 Hits By Region, echo = FALSE, warning=FALSE, message=FALSE}
 #compute hits by regions
 month.hitsbyregion.August2020 <- hitsbyregion(tracking.data.August2020)
 
