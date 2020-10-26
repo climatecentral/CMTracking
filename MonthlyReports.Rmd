@@ -19,6 +19,11 @@ output:
 <div class="row" style="padding-top: 30px;">
 <div class="col-sm-14">
 
+```{css, echo=FALSE}
+h1 {
+  text-align: center;
+}
+```
 
 ```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
 source("monthlyreport_functions.R")
@@ -50,7 +55,7 @@ expanded.hits.formatted
 ```
 
 ### Top 10 Releases
-```{r}
+```{r, Sept 2020 Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
 rankedreleases.September2020 <- rankReleases(tracking.data.September2020)
 top10releases.September2020 <-rankedreleases.September2020[c(1:10),]
 library("formattable")

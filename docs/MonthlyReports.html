@@ -390,9 +390,11 @@ div.tocify {
 <div class="row" style="padding-top: 30px;">
 <div class="col-sm-14">
 
-
-
-
+<style type="text/css">
+h1 {
+  text-align: center;
+}
+</style>
 <div id="september-2020" class="section level1">
 <h1><strong>September 2020</strong></h1>
 <p>Repository for CM/N Programs Monthly Tracking report.</p>
@@ -499,12 +501,6 @@ CMN
 </div>
 <div id="top-10-releases" class="section level3">
 <h3>Top 10 Releases</h3>
-<pre class="r"><code>rankedreleases.September2020 &lt;- rankReleases(tracking.data.September2020)</code></pre>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<pre class="r"><code>top10releases.September2020 &lt;-rankedreleases.September2020[c(1:10),]
-library(&quot;formattable&quot;)
-names(top10releases.September2020) &lt;- c(&quot;Release&quot;, &quot;Social&quot;, &quot;Stories&quot;, &quot;TV&quot;, &quot;Total&quot;)
-formattable(top10releases.September2020)</code></pre>
 <table class="table table-condensed">
 <thead>
 <tr>
