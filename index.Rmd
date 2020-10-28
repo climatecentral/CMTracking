@@ -26,11 +26,15 @@ h1 {
 }
 ```
 
+Summer Evaluations are internal reports looking back on the releases published in a season to gain insights into what the most popular topics were across our different programs and different media types, which assets performed well and which content was less popular.
+
+***
+
 # **Summer 2020**
 
-If you're unsure about release and graphic names, [click here](https://docs.google.com/spreadsheets/d/1bArJV-oHTp09L4fk1vrAXzKVUX-wzr1ONmv0PGuXiwY/edit#gid=1301634659) to find a guide, under **'Graphics Directory'** tab.
+If you're unsure about release or graphic names, [click here](https://docs.google.com/spreadsheets/d/1bArJV-oHTp09L4fk1vrAXzKVUX-wzr1ONmv0PGuXiwY/edit#gid=1301634659) to find a guide, under **'Graphics Directory'** tab.
 
-Summer content is considered to be all weekly releases and graphics published between '2020FirstDayAbove' and '2020Records'. 
+Summer content is considered to be all weekly releases and graphics published between '2020FirstDayAbove' and '2020Records', inclusive. 
 
 ```{r Read in Data, echo = FALSE, warning=FALSE, message=FALSE}
 #read in tracking data from Master Tracking Google Spreadsheet
@@ -126,7 +130,7 @@ datatable(popularByRelease, fillContainer=TRUE, options = list(scrollX="70px", s
 
 ## Graphic Popularity by Attribute
 
-'Attribute' is used to describe two characteristics of a graphic: the geographic resolution, and the 
+'Attribute' is used to describe two characteristics of a graphic: the geographic resolution, and the type of graphic.
 
 Warming Stripes campaign included two graphics: a "local other" and a "local gif".
 
@@ -208,14 +212,13 @@ pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type")
 ```
 
 
-## Evergreen releases
+## Previous Content Used
 
-Content usage that was tracked during the summer but had been published earlier.
+Content usage that was tracked during the summer but but was published earlier.
 
 **WeatherPower** was the top evergreen graphic, largely because of AJ Fox's continued sponsored segment. 
 
 After that, the top three 'Evergreen' releases were [20202019EOYGlobalTemps](https://medialibrary.climatecentral.org/resources/2019-in-review-global-temperature-rankings), [2017SummerHeatPrepPackage	](https://medialibrary.climatecentral.org/resources/the-season-of-extreme-heat), and [2019HeatIndex](https://medialibrary.climatecentral.org/resources/climate-matters-extreme-heat-index-threatening-outdoor-sports).
-
 
 
 ```{r Evergreen releases, echo = FALSE, warning=FALSE, message=FALSE}
@@ -224,9 +227,10 @@ seasonData.sep <- separate_rows(seasonData, program.content, sep=", ")
 nonSeasonReleases <- seasonData.sep[-which(seasonData.sep$program.content %in% releases$title),]
 
 evergreen.rank <- rankReleases(nonSeasonReleases)
-evergreen.rank.tidy <- evergreen.rank[-c(2,3, 9),]
+evergreen.rank.tidy <- evergreen.rank[-c(4),]
 names(evergreen.rank.tidy) <- c("Release", "Social", "Stories", "TV", "Total Hits")
 library(DT)
 datatable(evergreen.rank.tidy, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
 ```
 
+***

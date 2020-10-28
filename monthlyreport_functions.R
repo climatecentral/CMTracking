@@ -247,13 +247,16 @@ tvheatmap.withAJFox <- function(dat){
 tvheatmap.withoutAJFox <- function(dat){
   #subset data
   tv.data.woAJFOX <- tracking.data[,c("name", "location", "program.content", "tv")]
-  tv.data.woAJFOX <- tv.data.woAJFOX[-which(tv.data.woAJFOX$name=="A.J. - Fox"),]
+  tv.data.woAJFOX <- tv.data.woAJFOX[-which(tv.data.woAJFOX$name=="A.J. Fox"),]
   #aggregate tracking data to TV hits by state
   tvhits.bystate.woAJFOX <- aggregate(tv.data.woAJFOX$tv, by=list(states=tv.data.woAJFOX$location), FUN=sum)
   #eliminate non-states from "location" column
   tvhits.bystate.woAJFOX <- tvhits.bystate.woAJFOX[which(tvhits.bystate.woAJFOX$states %in% state.abb),]
   names(tvhits.bystate.woAJFOX) <- c("state", "hits")
   #plot hits by state
+  library("usmap")
+  library("ggplot2")
+  library("dplyr")
   tvhits.plot.withoutAJFOX <- plot_usmap(data=tvhits.bystate.woAJFOX, values="hits", color="black", labels=TRUE) + 
     scale_fill_continuous(name="TV Hits", label=scales::comma, high="dark blue", low="white", na.value="white") + 
     labs(title="TV hits by State (excluding AJ Fox)") + 

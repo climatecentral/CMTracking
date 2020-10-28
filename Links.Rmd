@@ -1,19 +1,53 @@
 ---
-title: "Resources"
-output: html_document
+title: "Content Use Highlights"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
 ---
 
-### R and R-Studio
+```{css, echo=FALSE}
+h1 {
+  text-align: center;
+}
+```
 
-[R](http://www.r-project.org) is a free open-source programming language that can be used for statistical analysis, data-simulation, graphing, and lots of other stuff. Another free program is [R-studio](http://www.rstudio.com), that provides a nice graphic interface for R. Download R first, then download R-studio. Both can run on PCs, Macs or Linux. Students will be learning R in the stats labs using the lab manual []().
+***
 
-### Additional R resources
+# September 2020  
 
-1. Google is great, Google your problem
-2. [Stackoverflow](https://stackoverflow.com) is great, google will often take you there because someone has already asked your question, and someone else has answered, usually many people have answered your question many ways.
-3. Danielle Navarro wrote a [free Psych Stats textbook using R](https://compcogscisydney.org/learning-statistics-with-r/), it's worth checking out (some of our textbook are based on Danielle's)
-4. I am currently writing another stats textbook (incorporating some of the above). You can read it while it's being made right here [https://crumplab.github.io/statistics/](https://crumplab.github.io/statistics/), also check out the lab manual for more specific things about doing various stats in R (also in draft right now) [https://crumplab.github.io/statisticsLab/](https://crumplab.github.io/statisticsLab/)
-5. Daniell Navarro recently made this website for introducing R, it's great, check it out (also made using this R markdown process): [http://compcogscisydney.org/psyr/](http://compcogscisydney.org/psyr/)
-6. Check out my slightly older programming book that also introduces R [https://crumplab.github.io/programmingforpsych/](https://crumplab.github.io/programmingforpsych/)
-7. This is the definitive guide for all things R Markdown (you will find this very useful as you get better at this skill): [https://bookdown.org/yihui/rmarkdown/](https://bookdown.org/yihui/rmarkdown/)
+As part of the annual September Climate Week, **Janice Huff** “[schools us](https://www.iqmediacorp.com/ClipPlayer/?ClipID=33030365-9313-4456-bffb-fadd4521c7f0&ps=2)” on how our changing climate is making for stronger Atlantic storms.
 
+**John Morales** (WTVJ/NBC) [reports](https://www.iqmediacorp.com/ClipPlayer/?ClipID=8db22313-42ec-4018-ba5b-a84b7c91a985&ps=2) on how extreme heat due to climate change is disproportionately impacting low-income communities in Miami.
+
+**Jeff Berardelli** [explains](https://www.cbsnews.com/news/wildfire-climate-change-extreme-weather/) the link between worsening wildfires and climate change (which happened to be briefly featured on 'Late Night with Seth Meyers').
+
+**Ariana Brocious** (Arizona Public Media) [discusses](https://news.azpm.org/p/news-topical-nature/2020/9/4/179760-the-risks-of-severe-heat/) the health risks of severe heat in Tucson, which are particularly threatening to the city's low-income residents.
+
+**Jeff Ranieri** (KNTV/NBC, CA) “puts some numbers” on the story of climate change, [using our graphic](https://www.iqmediacorp.com/ClipPlayer/?ClipID=e5ddbbea-c9a9-4cee-b3a8-69dae0f616fa&ps=2) to explain how increasing average temperatures are making for larger wildfires.
+
+**Haddie McLean** (WISC/CBS, WI) [explains](https://www.iqmediacorp.com/ClipPlayer/?ClipID=f75a1d04-4087-4a7d-89e8-7d310229b3cb&ps=2) how record high temperatures have been outpacing record lows in Madison, due to our warming climate.
+
+***
+
+# August 2020  
+
+**Debra Utacia Krol** (Arizona Republic) [used](https://www.azcentral.com/in-depth/news/2020/08/26/heat-killing-more-people-cities-sizzle-hotter-temperatures/4553439002/) data from our [extreme heat analysis](https://medialibrary.climatecentral.org/resources/2020-days-above-thresholds) last month for their own interactive map, to help illustrate the worsening extreme heat in Phoenix, Arizona.
+
+**Ian James** (Arizona Republic) [explained](https://www.azcentral.com/story/news/local/arizona-environment/2020/08/28/how-climate-change-making-wildfires-worse-across-west/5643391002/) the linkage between the ongoing western wildfires and climate change.
+
+**Jorges Torres** (KNXV/ABC) made use of his RtC email to [highlight](https://www.iqmediacorp.com/ClipPlayer/?ClipID=e03f22ca-9fe4-4eb3-8e54-b2b3e844454a&ps=2) how the extreme heat in Phoenix is part of a trend, due to our warming climate.
+
+**Joe Martucci** (Press of Atlantic City) enlisted Sean's help to [report](https://pressofatlanticcity.com/weather/climate-change-links-stronger-storms-to-jersey-shore-but-not-more/article_b305f9dd-e2dc-5677-9fb4-2ab9128ac4f1.html) on how warmer oceans make for stronger storms in New Jersey.
+
+**Ben Cathey** (WVLT/CBS) [interviewed](https://www.iqmediacorp.com/ClipPlayer/?ClipID=4fdcae6d-5461-41e2-b023-c14e448fd84f&ps=2) our national expert on Poison Ivy, Dr Jacqueline Mohan, for his on-air story on worsening poison ivy due to elevated CO2 levels.
+
+**Miri Marshall** (WUSA/CBS) [outlined](https://www.iqmediacorp.com/ClipPlayer/?ClipID=59be4a13-d8c4-4130-bcf9-ce744aa4fe75&ps=2) how poison ivy is becoming more toxic due to elevated atmospheric CO2 levels. Ben Cathey (WVLT/CBS) also covered the story on air, and [interviewed](https://www.iqmediacorp.com/ClipPlayer/?ClipID=4fdcae6d-5461-41e2-b023-c14e448fd84f&ps=2) our national expert on Poison Ivy, Dr Jacqueline Mohan.
+
+**Eric Sorensen** (WQAD/ABC) [warned](https://www.iqmediacorp.com/ClipPlayer/?ClipID=674db910-76f9-4abb-8cd5-2762f7fbf2d8&ps=2) his viewers that, if they were going hiking, our warming climate is making for an ever-increasing risk of developing Lyme Disease.
+
+
+***

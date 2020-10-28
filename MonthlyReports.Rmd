@@ -32,6 +32,8 @@ tracking.data <-reformat_googlesheet(data)
 tracking.data.September2020 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2020"),]
 ```
 
+***
+
 # **September 2020**
 
 Repository for CM/N Programs Monthly Tracking report.
@@ -72,6 +74,7 @@ month.hitsbyregion <- hitsbyregion(tracking.data.September2020)
 month.hitsbyregion
 ```
 
+***
 
 # **August 2020**
 
@@ -113,4 +116,4 @@ month.hitsbyregion.August2020 <- hitsbyregion(tracking.data.August2020)
 month.hitsbyregion.August2020
 ```
 
-
+***

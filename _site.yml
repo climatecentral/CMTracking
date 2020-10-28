@@ -6,6 +6,6 @@ navbar:
       href: index.html
     - text: "Monthly Numbers"
       href: MonthlyReports.html
-    #- text: "Links"
-     # href: Links.html
+    - text: "Content Use Highlights"
+      href: Links.html
 output_dir: "docs"
