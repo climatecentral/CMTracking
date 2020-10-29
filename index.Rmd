@@ -4,7 +4,7 @@ output:
   html_document:
     toc: true
     toc_float: true
-    collapsed: false
+    collapsed: true
     number_sections: false
     toc_depth: 2
 ---
@@ -130,7 +130,7 @@ datatable(popularByRelease, fillContainer=TRUE, options = list(scrollX="70px", s
 
 ## Graphic Popularity by Attribute
 
-'Attribute' is used to describe two characteristics of a graphic: the geographic resolution, and the type of graphic.
+'Attribute' is used to describe two characteristics of a graphic: the geographic resolution, and the type of graphic. Graphic popularity is calculated as the number of hits per graphic of that attribute.
 
 Warming Stripes campaign included two graphics: a "local other" and a "local gif".
 
@@ -221,7 +221,7 @@ Content usage that was tracked during the summer but but was published earlier.
 After that, the top three 'Evergreen' releases were [20202019EOYGlobalTemps](https://medialibrary.climatecentral.org/resources/2019-in-review-global-temperature-rankings), [2017SummerHeatPrepPackage	](https://medialibrary.climatecentral.org/resources/the-season-of-extreme-heat), and [2019HeatIndex](https://medialibrary.climatecentral.org/resources/climate-matters-extreme-heat-index-threatening-outdoor-sports).
 
 
-```{r Evergreen releases, echo = FALSE, warning=FALSE, message=FALSE}
+```{r Previous content used, echo = FALSE, warning=FALSE, message=FALSE}
 #remove rows which have hits from current season
 seasonData.sep <- separate_rows(seasonData, program.content, sep=", ")
 nonSeasonReleases <- seasonData.sep[-which(seasonData.sep$program.content %in% releases$title),]
