@@ -8,4 +8,6 @@ navbar:
       href: MonthlyReports.html
     - text: "Content Use Highlights"
       href: Links.html
+    - text: "Year-To-Date"
+      href: YearToDate.html     
 output_dir: "docs"
