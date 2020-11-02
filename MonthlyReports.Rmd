@@ -25,11 +25,26 @@ tracking.data <-reformat_googlesheet(data)
 tracking.data.September2020 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2020"),]
 ```
 
+Repository for CM/N Programs Monthly Tracking reports.
+
+***
+
+# **October 2020**
+
+### Enrollment
+```{r, October Enrollment, echo = FALSE, warning=FALSE, message=FALSE}
+rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
+values <- c(968, 92, 483, 55, 702)
+enrollment <- as.data.frame(cbind(rows, values))
+names(enrollment) <- c(" ", "Enrollment")
+library("formattable")
+formattable(enrollment)
+```
+
+
 ***
 
 # **September 2020**
-
-Repository for CM/N Programs Monthly Tracking report.
 
 ### Hits by Program
 ```{r, Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
@@ -70,6 +85,16 @@ month.hitsbyregion
 ***
 
 # **August 2020**
+
+### Enrollment
+```{r, August Enrollment, echo = FALSE, warning=FALSE, message=FALSE}
+rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
+values <- c(945, 92, 474, 54, 696)
+enrollment <- as.data.frame(cbind(rows, values))
+names(enrollment) <- c(" ", "Enrollment")
+library("formattable")
+formattable(enrollment)
+```
 
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}
 tracking.data.August2020 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2020"),]
