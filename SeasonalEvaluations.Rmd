@@ -1,0 +1,226 @@
+---
+title: "Seasonal Evaluations"
+date: "Last updated: 11/12/2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: true
+    number_sections: false
+    toc_depth: 2
+---
+
+```{css, echo=FALSE}
+h1 {
+  text-align: center;
+}
+```
+
+Summer Evaluations are internal reports looking back on the releases published in a season to gain insights into what the most popular topics were across our different programs and different media types, which assets performed well and which content was less popular.
+
+***
+
+# **Summer 2020**
+
+If you're unsure about release or graphic names, [click here](https://docs.google.com/spreadsheets/d/1bArJV-oHTp09L4fk1vrAXzKVUX-wzr1ONmv0PGuXiwY/edit#gid=1301634659) to find a guide, under **'Graphics Directory'** tab.
+
+Summer content is considered to be all weekly releases and graphics published between '2020FirstDayAbove' and '2020Records', inclusive. 
+
+```{r Read in Data, echo = FALSE, warning=FALSE, message=FALSE}
+#read in tracking data from Master Tracking Google Spreadsheet
+data <- read.csv("Sept2020TrackingData.csv")
+
+#load pre-written evaluation functions
+source("monthlyreport_functions.R")
+
+#reformat
+dataReformatted <- reformat_googlesheet(data)
+#extract data for season
+seasonData <- dataReformatted[which(dataReformatted$month==c("May", "June", "July", "August", "September") & dataReformatted$year=="2020"),]
+
+#read in csv of season's releases
+releases <- read.csv("summer2020releases.csv")
+require('tidyr')
+releases.sep <- separate_rows(releases, graphic, sep=",")
+#remove blank space from release and graphic columns
+releases.sep$title <- trimws(releases.sep$title, which="both")
+releases.sep$graphic <- trimws(releases.sep$graphic, which="both")
+#cast date column as date
+releases.sep$date <- as.Date(releases.sep$date, format="%m/%d/%Y")
+write.csv(releases.sep, "summer2020releasesandgraphics.csv")
+```
+
+## Ranked Releases
+
+```{r Ranked Releases, include = FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+releasePopularity <- rankReleases(seasonData)
+#format table
+library(formattable)
+countedSortedReleases.formatted <- formattable(releasePopularity, align=c("r", "c", "c", "c", "c"))
+#add rank column
+countedSortedReleases.formatted$rank <- seq.int(nrow(countedSortedReleases.formatted))
+#reorder columns
+countedSortedReleases.formatted <- countedSortedReleases.formatted[,c(6,1,2,3,4,5)]
+#rename columns
+names(countedSortedReleases.formatted) <- c("Rank", "Release", "Social", "Stories", "TV", "Total Hits")
+```
+
+```{r Summer Releases, echo = FALSE, warning=FALSE, message=FALSE}
+#merge tracking data with list of Summer 2020 releases
+seasonReleasesHits <- merge(releasePopularity, releases, by.x="program.content", by.y="title", all.y=TRUE)
+#reformat
+seasonsReleasesByHits <- seasonReleasesHits[,c(6,1,2,3,4,5)]
+names(seasonsReleasesByHits) <- c("Date Published", "Release", "Social", "Stories", "TV", "Total Hits")
+#format using HTML widget
+library(DT)
+datatable(seasonsReleasesByHits, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
+```
+
+
+## Ranked Graphics
+ 
+```{r Ranked Graphics, include=FALSE}
+graphicPopularity <- rankGraphics(seasonData)
+#format table
+library(formattable)
+countedSortedGraphics.formatted <- formattable(releasePopularity, align=c("r", "c", "c", "c", "c"))
+#add rank column
+countedSortedGraphics.formatted$rank <- seq.int(nrow(countedSortedGraphics.formatted))
+#reorder columns
+countedSortedGraphics.formatted <- countedSortedGraphics.formatted[,c(6,1,2,3,4,5)]
+#rename columns
+names(countedSortedGraphics.formatted) <- c("Rank", "Graphic", "Social", "Stories", "TV", "Total Hits")
+```
+
+```{r Summer Graphics, echo=FALSE}
+#merge tracking data with list of Summer 2020 Graphics
+seasonGraphicsHits <- merge(graphicPopularity, releases.sep, by.x="graphic.used", by.y="graphic", all.y=TRUE)
+#reformat
+seasonsGraphicsByHits <- seasonGraphicsHits[,c(6,1,2,3,4,5)]
+seasonsGraphicsByHits <- seasonsGraphicsByHits[order(seasonsGraphicsByHits$total, decreasing=TRUE),]
+names(seasonsGraphicsByHits) <- c("Date Published", "Graphic Name", "Social", "Stories", "TV", "Total Hits")
+#format using HTML widget
+library(DT)
+datatable(seasonsGraphicsByHits, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
+```
+
+## Graphic Popularity by Release
+```{r, Graphic Popularity by Release, echo=FALSE}
+graphicType <- read.csv('summer2020releasesandgraphicstype.csv')
+popularGraphicTypes <- merge(graphicPopularity, graphicType, by.x = "graphic.used", by.y = "graphic")
+popularGraphicType <- popularGraphicTypes[,c("date", "title", "graphic.used", "total")]
+popularGraphicType$date <- as.Date(popularGraphicType$date, format="%m/%d/%Y")
+
+#sort for most popular graphics in each release
+popularByRelease <- popularGraphicType[order(popularGraphicType$date, -popularGraphicType$total),]
+names(popularByRelease) <- c("Date Published", "Release", "Graphic Name", "Total Hits")
+library(DT)
+datatable(popularByRelease, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
+```
+
+## Graphic Popularity by Attribute
+
+'Attribute' is used to describe two characteristics of a graphic: the geographic resolution, and the type of graphic. Graphic popularity is calculated as the number of hits per graphic of that attribute.
+
+Warming Stripes campaign included two graphics: a "local other" and a "local gif".
+
+```{r Graphic Popularity by Type and Geo, echo = FALSE, warning=FALSE, message=FALSE}
+graphicSort <- tapply(popularGraphicTypes$total, popularGraphicTypes$type, sum)
+graphicDistribution <- tapply(popularGraphicTypes$total, popularGraphicTypes$distribution, sum)
+
+graphicSortProduced <- graphicType %>%
+  group_by(type) %>%
+  summarize(n())
+graphicSortProduced <- as.data.frame(graphicSortProduced)
+graphicGeoProduced <- graphicType %>%
+  group_by(distribution) %>%
+  summarize(n())
+graphicGeoProduced <- as.data.frame(graphicGeoProduced)
+
+graphicDistribution.df <- as.data.frame(graphicDistribution)
+graphicDistribution.df$distribution <- rownames(graphicDistribution.df)
+names(graphicDistribution.df)[1] <- "hits" 
+names(graphicGeoProduced)[2] <- "count"
+graphicGeoPopularity <- merge(graphicDistribution.df, graphicGeoProduced, by="distribution")
+graphicGeoPopularity$hitsPerGraphic <- graphicGeoPopularity$hits/graphicGeoPopularity$count
+ggp.forpie <- graphicGeoPopularity[,c("distribution", "hitsPerGraphic")]
+
+graphicSort.df <- as.data.frame(graphicSort)
+graphicSort.df$type <- rownames(graphicSort.df)
+names(graphicSort.df)[1] <- "hits"
+names(graphicSortProduced)[2] <- "count"
+graphicTypePopularity <- merge(graphicSort.df, graphicSortProduced, by="type")
+graphicTypePopularity$hitsPerGraphic <- graphicTypePopularity$hits/graphicTypePopularity$count
+gtp.forpie <- graphicTypePopularity[,c("type", "hitsPerGraphic")]
+
+par(mfrow=c(1,2))
+pie(ggp.forpie$hitsPerGraphic,ggp.forpie$distribution, main="Geography")
+pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type")
+```
+
+### Excluding 'Warming Stripes' campaign
+
+```{r Graphic Popularity by Type and Geo (without WS), echo = FALSE, warning=FALSE, message=FALSE}
+
+#remove Warming Stripes campaign
+popularGraphicTypes.woWS <- popularGraphicTypes[-which(popularGraphicTypes$title=="2020WarmingStripes"),]
+
+graphicType.woWS <- graphicType[-which(graphicType$title=="2020WarmingStripes"),]
+
+
+graphicSort <- tapply(popularGraphicTypes.woWS$total, popularGraphicTypes.woWS$type, sum)
+graphicDistribution <- tapply(popularGraphicTypes.woWS$total, popularGraphicTypes.woWS$distribution, sum)
+
+graphicSortProduced <- graphicType.woWS %>%
+  group_by(type) %>%
+  summarize(n())
+graphicSortProduced <- as.data.frame(graphicSortProduced)
+graphicGeoProduced <- graphicType.woWS %>%
+  group_by(distribution) %>%
+  summarize(n())
+graphicGeoProduced <- as.data.frame(graphicGeoProduced)
+
+graphicDistribution.df <- as.data.frame(graphicDistribution)
+graphicDistribution.df$distribution <- rownames(graphicDistribution.df)
+names(graphicDistribution.df)[1] <- "hits" 
+names(graphicGeoProduced)[2] <- "count"
+graphicGeoPopularity <- merge(graphicDistribution.df, graphicGeoProduced, by="distribution")
+graphicGeoPopularity$hitsPerGraphic <- graphicGeoPopularity$hits/graphicGeoPopularity$count
+ggp.forpie <- graphicGeoPopularity[,c("distribution", "hitsPerGraphic")]
+
+graphicSort.df <- as.data.frame(graphicSort)
+graphicSort.df$type <- rownames(graphicSort.df)
+names(graphicSort.df)[1] <- "hits"
+names(graphicSortProduced)[2] <- "count"
+graphicTypePopularity <- merge(graphicSort.df, graphicSortProduced, by="type")
+graphicTypePopularity$hitsPerGraphic <- graphicTypePopularity$hits/graphicTypePopularity$count
+gtp.forpie <- graphicTypePopularity[,c("type", "hitsPerGraphic")]
+
+par(mfrow=c(1,2))
+pie(ggp.forpie$hitsPerGraphic,ggp.forpie$distribution, main="Geography")
+pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type")
+```
+
+
+## Previous Content Used
+
+Content usage that was tracked during the summer but but was published earlier.
+
+**WeatherPower** was the top evergreen graphic, largely because of AJ Fox's continued sponsored segment. 
+
+After that, the top three 'Evergreen' releases were [20202019EOYGlobalTemps](https://medialibrary.climatecentral.org/resources/2019-in-review-global-temperature-rankings), [2017SummerHeatPrepPackage	](https://medialibrary.climatecentral.org/resources/the-season-of-extreme-heat), and [2019HeatIndex](https://medialibrary.climatecentral.org/resources/climate-matters-extreme-heat-index-threatening-outdoor-sports).
+
+
+```{r Previous content used, echo = FALSE, warning=FALSE, message=FALSE}
+#remove rows which have hits from current season
+seasonData.sep <- separate_rows(seasonData, program.content, sep=", ")
+nonSeasonReleases <- seasonData.sep[-which(seasonData.sep$program.content %in% releases$title),]
+
+evergreen.rank <- rankReleases(nonSeasonReleases)
+evergreen.rank.tidy <- evergreen.rank[-c(4),]
+names(evergreen.rank.tidy) <- c("Release", "Social", "Stories", "TV", "Total Hits")
+library(DT)
+datatable(evergreen.rank.tidy, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
+```
+
+***

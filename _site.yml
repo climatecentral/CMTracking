@@ -3,11 +3,11 @@ navbar:
   title: "Climate Matters Tracking"
   left:
     - text: "Monthly Numbers"
-      href: MonthlyReports.html
+      href: index.html
     - text: "Content Use Highlights"
       href: Links.html
     - text: "Year-To-Date"
       href: YearToDate.html 
     - text: "Seasonal Evaluations"
-      href: index.html
+      href: SeasonalEvaluations.html      
 output_dir: "docs"

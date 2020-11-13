@@ -1,14 +1,15 @@
 ---
-title: "Seasonal Evaluations"
+title: "Monthly Numbers"
 date: "Last updated: 11/12/2020"
 output:
   html_document:
     toc: true
     toc_float: true
-    collapsed: true
+    collapsed: false
     number_sections: false
-    toc_depth: 2
+    toc_depth: 1
 ---
+
 
 ```{css, echo=FALSE}
 h1 {
@@ -16,211 +17,190 @@ h1 {
 }
 ```
 
-Summer Evaluations are internal reports looking back on the releases published in a season to gain insights into what the most popular topics were across our different programs and different media types, which assets performed well and which content was less popular.
+```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
+source("monthlyreport_functions.R")
+data <- read.csv('October2020trackingdata.csv')
+tracking.data <-reformat_googlesheet(data)
+tracking.data.October2020 <- tracking.data[which(tracking.data$month=="October" & tracking.data$year=="2020"),]
+```
+
+Repository for CM/N Programs Monthly Tracking reports.
 
 ***
 
-# **Summer 2020**
+# **October 2020**
 
-If you're unsure about release or graphic names, [click here](https://docs.google.com/spreadsheets/d/1bArJV-oHTp09L4fk1vrAXzKVUX-wzr1ONmv0PGuXiwY/edit#gid=1301634659) to find a guide, under **'Graphics Directory'** tab.
-
-Summer content is considered to be all weekly releases and graphics published between '2020FirstDayAbove' and '2020Records', inclusive. 
-
-```{r Read in Data, echo = FALSE, warning=FALSE, message=FALSE}
-#read in tracking data from Master Tracking Google Spreadsheet
-data <- read.csv("Sept2020TrackingData.csv")
-
-#load pre-written evaluation functions
-source("monthlyreport_functions.R")
-
-#reformat
-dataReformatted <- reformat_googlesheet(data)
-#extract data for season
-seasonData <- dataReformatted[which(dataReformatted$month==c("May", "June", "July", "August", "September") & dataReformatted$year=="2020"),]
-
-#read in csv of season's releases
-releases <- read.csv("summer2020releases.csv")
-require('tidyr')
-releases.sep <- separate_rows(releases, graphic, sep=",")
-#remove blank space from release and graphic columns
-releases.sep$title <- trimws(releases.sep$title, which="both")
-releases.sep$graphic <- trimws(releases.sep$graphic, which="both")
-#cast date column as date
-releases.sep$date <- as.Date(releases.sep$date, format="%m/%d/%Y")
-write.csv(releases.sep, "summer2020releasesandgraphics.csv")
+### Enrollment
+```{r, October Enrollment, echo = FALSE, warning=FALSE, message=FALSE}
+rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
+values <- c(968, 92, 483, 55, 702)
+enrollment <- as.data.frame(cbind(rows, values))
+names(enrollment) <- c(" ", "Enrollment")
+library("formattable")
+formattable(enrollment)
 ```
 
-## Ranked Releases
 
-```{r Ranked Releases, include = FALSE, echo = FALSE, warning=FALSE, message=FALSE}
-releasePopularity <- rankReleases(seasonData)
-#format table
-library(formattable)
-countedSortedReleases.formatted <- formattable(releasePopularity, align=c("r", "c", "c", "c", "c"))
-#add rank column
-countedSortedReleases.formatted$rank <- seq.int(nrow(countedSortedReleases.formatted))
-#reorder columns
-countedSortedReleases.formatted <- countedSortedReleases.formatted[,c(6,1,2,3,4,5)]
-#rename columns
-names(countedSortedReleases.formatted) <- c("Rank", "Release", "Social", "Stories", "TV", "Total Hits")
+### Hits by Program
+```{r, October Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+#expanded view
+library("tidyr")
+expanded.hits.draft.October2020 <- hitsbyprogram(tracking.data.October2020)
+expanded.hits.October2020 <- expanded.hits.draft.October2020[,c("source", "Twitter", "fb", "other",
+                                  "online.article", "radio", "tv")]
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.October2020 <- subset(expanded.hits.October2020, source=="CC"|source=="CM"|source=="CMN"|source=="Total")
+#aggregate hits according to nest program model
+CMN.October2020 <- expanded.hits.CMprograms.October2020[3,2:7]
+CM.October2020 <- CMN.October2020 + expanded.hits.CMprograms.October2020[2,2:7]
+CC.October2020 <- CM.October2020 + expanded.hits.CMprograms.October2020[1,2:7]
+aggregated.hits.CMprograms.October2020 <- rbind(CC.October2020, CM.October2020, CMN.October2020)
+rownames(aggregated.hits.CMprograms.October2020) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.October2020) <- c("Twitter", "Facebook", "Other ",
+                          "Online Articles", "Radio", "TV")
+library("formattable")
+aggregated.hits.formatted.October2020 <- formattable(aggregated.hits.CMprograms.October2020,
+                                       align=c("l", "c", "c", "c", "c", "c", "c"),
+                                       list(''))
+aggregated.hits.formatted.October2020
 ```
 
-```{r Summer Releases, echo = FALSE, warning=FALSE, message=FALSE}
-#merge tracking data with list of Summer 2020 releases
-seasonReleasesHits <- merge(releasePopularity, releases, by.x="program.content", by.y="title", all.y=TRUE)
-#reformat
-seasonsReleasesByHits <- seasonReleasesHits[,c(6,1,2,3,4,5)]
-names(seasonsReleasesByHits) <- c("Date Published", "Release", "Social", "Stories", "TV", "Total Hits")
-#format using HTML widget
+### Top 10 Releases
+```{r, October 2020 Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
+rankedreleases.October2020 <- rankReleases(tracking.data.October2020)
+top10releases.October2020 <-rankedreleases.October2020[c(1:10),]
+library("formattable")
+names(top10releases.October2020) <- c("Release", "Social", "Stories", "TV", "Total")
+formattable(top10releases.October2020)
+```
+
+### Top 5 Releases
+```{r, October 2020 Top 5 Releases, echo = FALSE, warning=FALSE, message=FALSE}
+rankedreleases.October2020 <- rankReleases(tracking.data.October2020)
+top10releases.October2020 <-rankedreleases.October2020[c(1:10),]
+names(top10releases.October2020) <- c("Release", "Social", "Stories", "TV", "Total")
+top5releases.October2020 <-rankedreleases.October2020[c(1:5),]
+names(top5releases.October2020) <- c("Release", "Social", "Stories", "TV", "Total")
 library(DT)
-datatable(seasonsReleasesByHits, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
+datatable(top10releases.October2020, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
+```
+
+### Hits by Region
+```{r October Hits by Region, echo = FALSE, warning=FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.October2020 <- hitsbyregion(tracking.data.October2020)
+month.hitsbyregion.October2020
+```
+
+***
+
+# **September 2020**
+
+```{r September setup, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.September2020 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2020"),]
 ```
 
 
-## Ranked Graphics
- 
-```{r Ranked Graphics, include=FALSE}
-graphicPopularity <- rankGraphics(seasonData)
-#format table
-library(formattable)
-countedSortedGraphics.formatted <- formattable(releasePopularity, align=c("r", "c", "c", "c", "c"))
-#add rank column
-countedSortedGraphics.formatted$rank <- seq.int(nrow(countedSortedGraphics.formatted))
-#reorder columns
-countedSortedGraphics.formatted <- countedSortedGraphics.formatted[,c(6,1,2,3,4,5)]
-#rename columns
-names(countedSortedGraphics.formatted) <- c("Rank", "Graphic", "Social", "Stories", "TV", "Total Hits")
+### Hits by Program
+```{r, September Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+#expanded view
+library("tidyr")
+expanded.hits.draft.September2020 <- hitsbyprogram(tracking.data.September2020)
+expanded.hits.September2020 <- expanded.hits.draft.September2020[,c("source", "Twitter", "fb", "other",
+                                  "online.article", "radio", "tv")]
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.September2020 <- subset(expanded.hits.September2020, source=="CC"|source=="CM"|source=="CMN"|source=="Total")
+#aggregate hits according to nest program model
+CMN.September2020 <- expanded.hits.CMprograms.September2020[3,2:7]
+CM.September2020 <- CMN.September2020 + expanded.hits.CMprograms.September2020[2,2:7]
+CC.September2020 <- CM.September2020 + expanded.hits.CMprograms.September2020[1,2:7]
+aggregated.hits.CMprograms.September2020 <- rbind(CC.September2020, CM.September2020, CMN.September2020)
+rownames(aggregated.hits.CMprograms.September2020) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.September2020) <- c("Twitter", "Facebook", "Other ",
+                          "Online Articles", "Radio", "TV")
+library("formattable")
+aggregated.hits.formatted.September2020 <- formattable(aggregated.hits.CMprograms.September2020,
+                                       align=c("l", "c", "c", "c", "c", "c", "c"),
+                                       list(''))
+aggregated.hits.formatted.September2020
 ```
 
-```{r Summer Graphics, echo=FALSE}
-#merge tracking data with list of Summer 2020 Graphics
-seasonGraphicsHits <- merge(graphicPopularity, releases.sep, by.x="graphic.used", by.y="graphic", all.y=TRUE)
-#reformat
-seasonsGraphicsByHits <- seasonGraphicsHits[,c(6,1,2,3,4,5)]
-seasonsGraphicsByHits <- seasonsGraphicsByHits[order(seasonsGraphicsByHits$total, decreasing=TRUE),]
-names(seasonsGraphicsByHits) <- c("Date Published", "Graphic Name", "Social", "Stories", "TV", "Total Hits")
-#format using HTML widget
-library(DT)
-datatable(seasonsGraphicsByHits, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
-```
-
-## Graphic Popularity by Release
-```{r, Graphic Popularity by Release, echo=FALSE}
-graphicType <- read.csv('summer2020releasesandgraphicstype.csv')
-popularGraphicTypes <- merge(graphicPopularity, graphicType, by.x = "graphic.used", by.y = "graphic")
-popularGraphicType <- popularGraphicTypes[,c("date", "title", "graphic.used", "total")]
-popularGraphicType$date <- as.Date(popularGraphicType$date, format="%m/%d/%Y")
-
-#sort for most popular graphics in each release
-popularByRelease <- popularGraphicType[order(popularGraphicType$date, -popularGraphicType$total),]
-names(popularByRelease) <- c("Date Published", "Release", "Graphic Name", "Total Hits")
-library(DT)
-datatable(popularByRelease, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
-```
-
-## Graphic Popularity by Attribute
-
-'Attribute' is used to describe two characteristics of a graphic: the geographic resolution, and the type of graphic. Graphic popularity is calculated as the number of hits per graphic of that attribute.
-
-Warming Stripes campaign included two graphics: a "local other" and a "local gif".
-
-```{r Graphic Popularity by Type and Geo, echo = FALSE, warning=FALSE, message=FALSE}
-graphicSort <- tapply(popularGraphicTypes$total, popularGraphicTypes$type, sum)
-graphicDistribution <- tapply(popularGraphicTypes$total, popularGraphicTypes$distribution, sum)
-
-graphicSortProduced <- graphicType %>%
-  group_by(type) %>%
-  summarize(n())
-graphicSortProduced <- as.data.frame(graphicSortProduced)
-graphicGeoProduced <- graphicType %>%
-  group_by(distribution) %>%
-  summarize(n())
-graphicGeoProduced <- as.data.frame(graphicGeoProduced)
-
-graphicDistribution.df <- as.data.frame(graphicDistribution)
-graphicDistribution.df$distribution <- rownames(graphicDistribution.df)
-names(graphicDistribution.df)[1] <- "hits" 
-names(graphicGeoProduced)[2] <- "count"
-graphicGeoPopularity <- merge(graphicDistribution.df, graphicGeoProduced, by="distribution")
-graphicGeoPopularity$hitsPerGraphic <- graphicGeoPopularity$hits/graphicGeoPopularity$count
-ggp.forpie <- graphicGeoPopularity[,c("distribution", "hitsPerGraphic")]
-
-graphicSort.df <- as.data.frame(graphicSort)
-graphicSort.df$type <- rownames(graphicSort.df)
-names(graphicSort.df)[1] <- "hits"
-names(graphicSortProduced)[2] <- "count"
-graphicTypePopularity <- merge(graphicSort.df, graphicSortProduced, by="type")
-graphicTypePopularity$hitsPerGraphic <- graphicTypePopularity$hits/graphicTypePopularity$count
-gtp.forpie <- graphicTypePopularity[,c("type", "hitsPerGraphic")]
-
-par(mfrow=c(1,2))
-pie(ggp.forpie$hitsPerGraphic,ggp.forpie$distribution, main="Geography")
-pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type")
-```
-
-### Excluding 'Warming Stripes' campaign
-
-```{r Graphic Popularity by Type and Geo (without WS), echo = FALSE, warning=FALSE, message=FALSE}
-
-#remove Warming Stripes campaign
-popularGraphicTypes.woWS <- popularGraphicTypes[-which(popularGraphicTypes$title=="2020WarmingStripes"),]
-
-graphicType.woWS <- graphicType[-which(graphicType$title=="2020WarmingStripes"),]
-
-
-graphicSort <- tapply(popularGraphicTypes.woWS$total, popularGraphicTypes.woWS$type, sum)
-graphicDistribution <- tapply(popularGraphicTypes.woWS$total, popularGraphicTypes.woWS$distribution, sum)
-
-graphicSortProduced <- graphicType.woWS %>%
-  group_by(type) %>%
-  summarize(n())
-graphicSortProduced <- as.data.frame(graphicSortProduced)
-graphicGeoProduced <- graphicType.woWS %>%
-  group_by(distribution) %>%
-  summarize(n())
-graphicGeoProduced <- as.data.frame(graphicGeoProduced)
-
-graphicDistribution.df <- as.data.frame(graphicDistribution)
-graphicDistribution.df$distribution <- rownames(graphicDistribution.df)
-names(graphicDistribution.df)[1] <- "hits" 
-names(graphicGeoProduced)[2] <- "count"
-graphicGeoPopularity <- merge(graphicDistribution.df, graphicGeoProduced, by="distribution")
-graphicGeoPopularity$hitsPerGraphic <- graphicGeoPopularity$hits/graphicGeoPopularity$count
-ggp.forpie <- graphicGeoPopularity[,c("distribution", "hitsPerGraphic")]
-
-graphicSort.df <- as.data.frame(graphicSort)
-graphicSort.df$type <- rownames(graphicSort.df)
-names(graphicSort.df)[1] <- "hits"
-names(graphicSortProduced)[2] <- "count"
-graphicTypePopularity <- merge(graphicSort.df, graphicSortProduced, by="type")
-graphicTypePopularity$hitsPerGraphic <- graphicTypePopularity$hits/graphicTypePopularity$count
-gtp.forpie <- graphicTypePopularity[,c("type", "hitsPerGraphic")]
-
-par(mfrow=c(1,2))
-pie(ggp.forpie$hitsPerGraphic,ggp.forpie$distribution, main="Geography")
-pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type")
+### Top 10 Releases
+```{r, September Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
+rankedreleases.September2020 <- rankReleases(tracking.data.September2020)
+top10releases.September2020 <-rankedreleases.September2020[c(1:10),]
+library("formattable")
+names(top10releases.September2020) <- c("Release", "Social", "Stories", "TV", "Total")
+formattable(top10releases.September2020)
 ```
 
 
-## Previous Content Used
+### Hits by Region
+```{r September Hits by Region, echo = FALSE, warning=FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.September2020 <- hitsbyregion(tracking.data.September2020)
+month.hitsbyregion.September2020
+```
 
-Content usage that was tracked during the summer but but was published earlier.
+***
 
-**WeatherPower** was the top evergreen graphic, largely because of AJ Fox's continued sponsored segment. 
+# **August 2020**
 
-After that, the top three 'Evergreen' releases were [20202019EOYGlobalTemps](https://medialibrary.climatecentral.org/resources/2019-in-review-global-temperature-rankings), [2017SummerHeatPrepPackage	](https://medialibrary.climatecentral.org/resources/the-season-of-extreme-heat), and [2019HeatIndex](https://medialibrary.climatecentral.org/resources/climate-matters-extreme-heat-index-threatening-outdoor-sports).
+### Enrollment
+```{r, August Enrollment, echo = FALSE, warning=FALSE, message=FALSE}
+rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
+values <- c(945, 92, 473, 54, 696)
+enrollment <- as.data.frame(cbind(rows, values))
+names(enrollment) <- c(" ", "Enrollment")
+library("formattable")
+formattable(enrollment)
+```
 
+```{r August setup, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.August2020 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2020"),]
+```
 
-```{r Previous content used, echo = FALSE, warning=FALSE, message=FALSE}
-#remove rows which have hits from current season
-seasonData.sep <- separate_rows(seasonData, program.content, sep=", ")
-nonSeasonReleases <- seasonData.sep[-which(seasonData.sep$program.content %in% releases$title),]
+### Hits by Program
+```{r, August Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+#expanded view
+library("tidyr")
+expanded.hits.draft.August2020 <- hitsbyprogram(tracking.data.August2020)
+expanded.hits.August2020 <- expanded.hits.draft.August2020[,c("source", "Twitter", "fb", "other",
+                                  "online.article", "radio", "tv")]
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.August2020 <- subset(expanded.hits.August2020, source=="CC"|source=="CM"|source=="CMN"|source=="Total")
+#aggregate hits according to nest program model
+CMN.August2020 <- expanded.hits.CMprograms.August2020[3,2:7]
+CM.August2020 <- CMN.August2020 + expanded.hits.CMprograms.August2020[2,2:7]
+CC.August2020 <- CM.August2020 + expanded.hits.CMprograms.August2020[1,2:7]
+aggregated.hits.CMprograms.August2020 <- rbind(CC.August2020, CM.August2020, CMN.August2020)
+rownames(aggregated.hits.CMprograms.August2020) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.August2020) <- c("Twitter", "Facebook", "Other ",
+                          "Online Articles", "Radio", "TV")
+library("formattable")
+aggregated.hits.formatted.August2020 <- formattable(aggregated.hits.CMprograms.August2020,
+                                       align=c("l", "c", "c", "c", "c", "c", "c"),
+                                       list(''))
+aggregated.hits.formatted.August2020
+```
 
-evergreen.rank <- rankReleases(nonSeasonReleases)
-evergreen.rank.tidy <- evergreen.rank[-c(4),]
-names(evergreen.rank.tidy) <- c("Release", "Social", "Stories", "TV", "Total Hits")
-library(DT)
-datatable(evergreen.rank.tidy, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
+### Top 10 Releases
+```{r August Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
+rankedreleases.August2020 <- rankReleases(tracking.data.August2020)
+top10releases.August2020 <-rankedreleases.August2020[c(1:10),]
+library("formattable")
+names(top10releases.August2020) <- c("Release", "Social", "Stories", "TV", "Total")
+formattable(top10releases.August2020)
+```
+
+### Hits by Region
+```{r, August Hits By Region, echo = FALSE, warning=FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.August2020 <- hitsbyregion(tracking.data.August2020)
+month.hitsbyregion.August2020
 ```
 
 ***
