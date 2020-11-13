@@ -201,7 +201,7 @@ hitsbyregion <- function(dat){
   hits.byregion <- hits.byregion %>%
     group_by(region) %>%
     summarise(rt=sum(rt), tw=sum(tw), fb=sum(fb), other=sum(other), 
-              online.article=sum(online.article), radio=sum(radio), tv=sum(tv))
+              online.article=sum(online.article), radio=sum(radio), tv=sum(tv)*1.2)
   #make a condensed format
   library("dplyr")
   condensed.hits.byregion <- hits.byregion %>%
@@ -273,6 +273,8 @@ hitsbyprogram <- function(dat){
   #separate into one source per row
   library("tidyr")
   hits.sepsource <- separate_rows(hits.data, source, sep = ",")
+  #remove white space from sources
+  hits.sepsource$source <- trimws(hits.sepsource$source, which='both')
   #sum hits by source/program
   library("dplyr")
   hits.bysource <- hits.sepsource %>%

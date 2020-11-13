@@ -1,5 +1,6 @@
 ---
 title: "Content Use Highlights"
+date: "Last updated: 11/12/2020"
 output: 
   html_document:
     toc: true
@@ -17,15 +18,25 @@ h1 {
 
 ***
 
+# October 2020
+
+**Mike Favetta** (Spectrum News NY 1, NY) [discusses](https://www.ny1.com/nyc/all-boroughs/weather-news/2020/10/06/energy-disruptions-are-more-frequent-due-to-extreme-weather) how climate change and extreme weather increases the risk of energy disruptions. 
+
+**Maria Esquinca** (Remezcla) provides a [detailed analysis](https://remezcla.com/features/culture/climate-change-texas/) of how climate change is disproportionately affecting black and brown communities in Texas.
+
+**Sammy Roth** (LA Times, CA) of the [reports](https://docs.google.com/document/d/195vBP04UlkBK7jf5zxS2Q5E6G35I1P339bvyuAsNTBs/edit#) how climate change is a threat to the California power grids.
+
+***
+
 # September 2020  
 
-As part of the annual September Climate Week, **Janice Huff** “[schools us](https://www.iqmediacorp.com/ClipPlayer/?ClipID=33030365-9313-4456-bffb-fadd4521c7f0&ps=2)” on how our changing climate is making for stronger Atlantic storms.
+As part of the annual September Climate Week, **Janice Huff** (WNBC, NY) “[schools us](https://www.iqmediacorp.com/ClipPlayer/?ClipID=33030365-9313-4456-bffb-fadd4521c7f0&ps=2)” on how our changing climate is making for stronger Atlantic storms.
 
-**John Morales** (WTVJ/NBC) [reports](https://www.iqmediacorp.com/ClipPlayer/?ClipID=8db22313-42ec-4018-ba5b-a84b7c91a985&ps=2) on how extreme heat due to climate change is disproportionately impacting low-income communities in Miami.
+**John Morales** (WTVJ, FL) [reports](https://www.iqmediacorp.com/ClipPlayer/?ClipID=8db22313-42ec-4018-ba5b-a84b7c91a985&ps=2) on how extreme heat due to climate change is disproportionately impacting low-income communities in Miami.
 
-**Jeff Berardelli** [explains](https://www.cbsnews.com/news/wildfire-climate-change-extreme-weather/) the link between worsening wildfires and climate change (which happened to be briefly featured on 'Late Night with Seth Meyers').
+**Jeff Berardelli** (WCBS, NY) [explains](https://www.cbsnews.com/news/wildfire-climate-change-extreme-weather/) the link between worsening wildfires and climate change (which happened to be briefly featured on 'Late Night with Seth Meyers').
 
-**Ariana Brocious** (Arizona Public Media) [discusses](https://news.azpm.org/p/news-topical-nature/2020/9/4/179760-the-risks-of-severe-heat/) the health risks of severe heat in Tucson, which are particularly threatening to the city's low-income residents.
+**Ariana Brocious** (Arizona Public Media, AZ) [discusses](https://news.azpm.org/p/news-topical-nature/2020/9/4/179760-the-risks-of-severe-heat/) the health risks of severe heat in Tucson, which are particularly threatening to the city's low-income residents.
 
 **Jeff Ranieri** (KNTV/NBC, CA) “puts some numbers” on the story of climate change, [using our graphic](https://www.iqmediacorp.com/ClipPlayer/?ClipID=e5ddbbea-c9a9-4cee-b3a8-69dae0f616fa&ps=2) to explain how increasing average temperatures are making for larger wildfires.
 

@@ -1,5 +1,6 @@
 ---
 title: "Monthly Numbers"
+date: "Last updated: 11/12/2020"
 output:
   html_document:
     toc: true
@@ -20,9 +21,9 @@ h1 {
 
 ```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
 source("monthlyreport_functions.R")
-data <- read.csv('Sept2020TrackingData.csv')
+data <- read.csv('October2020trackingdata.csv')
 tracking.data <-reformat_googlesheet(data)
-tracking.data.September2020 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2020"),]
+tracking.data.October2020 <- tracking.data[which(tracking.data$month=="October" & tracking.data$year=="2020"),]
 ```
 
 Repository for CM/N Programs Monthly Tracking reports.
@@ -42,30 +43,94 @@ formattable(enrollment)
 ```
 
 
+### Hits by Program
+```{r, October Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+#expanded view
+library("tidyr")
+expanded.hits.draft.October2020 <- hitsbyprogram(tracking.data.October2020)
+expanded.hits.October2020 <- expanded.hits.draft.October2020[,c("source", "Twitter", "fb", "other",
+                                  "online.article", "radio", "tv")]
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.October2020 <- subset(expanded.hits.October2020, source=="CC"|source=="CM"|source=="CMN"|source=="Total")
+#aggregate hits according to nest program model
+CMN.October2020 <- expanded.hits.CMprograms.October2020[3,2:7]
+CM.October2020 <- CMN.October2020 + expanded.hits.CMprograms.October2020[2,2:7]
+CC.October2020 <- CM.October2020 + expanded.hits.CMprograms.October2020[1,2:7]
+aggregated.hits.CMprograms.October2020 <- rbind(CC.October2020, CM.October2020, CMN.October2020)
+rownames(aggregated.hits.CMprograms.October2020) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.October2020) <- c("Twitter", "Facebook", "Other ",
+                          "Online Articles", "Radio", "TV")
+library("formattable")
+aggregated.hits.formatted.October2020 <- formattable(aggregated.hits.CMprograms.October2020,
+                                       align=c("l", "c", "c", "c", "c", "c", "c"),
+                                       list(''))
+aggregated.hits.formatted.October2020
+```
+
+### Top 10 Releases
+```{r, October 2020 Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
+rankedreleases.October2020 <- rankReleases(tracking.data.October2020)
+top10releases.October2020 <-rankedreleases.October2020[c(1:10),]
+library("formattable")
+names(top10releases.October2020) <- c("Release", "Social", "Stories", "TV", "Total")
+formattable(top10releases.October2020)
+```
+
+### Top 5 Releases
+```{r, October 2020 Top 5 Releases, echo = FALSE, warning=FALSE, message=FALSE}
+rankedreleases.October2020 <- rankReleases(tracking.data.October2020)
+top10releases.October2020 <-rankedreleases.October2020[c(1:10),]
+names(top10releases.October2020) <- c("Release", "Social", "Stories", "TV", "Total")
+top5releases.October2020 <-rankedreleases.October2020[c(1:5),]
+names(top5releases.October2020) <- c("Release", "Social", "Stories", "TV", "Total")
+library(DT)
+datatable(top10releases.October2020, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
+```
+
+### Hits by Region
+```{r October Hits by Region, echo = FALSE, warning=FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.October2020 <- hitsbyregion(tracking.data.October2020)
+month.hitsbyregion.October2020
+```
+
 ***
 
 # **September 2020**
 
+```{r September setup, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.September2020 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2020"),]
+```
+
+
 ### Hits by Program
-```{r, Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+```{r, September Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
 #expanded view
 library("tidyr")
-expanded.hits.draft <- hitsbyprogram(tracking.data.September2020)
-expanded.hits <- expanded.hits.draft[,c("source", "Twitter", "fb", "other",
+expanded.hits.draft.September2020 <- hitsbyprogram(tracking.data.September2020)
+expanded.hits.September2020 <- expanded.hits.draft.September2020[,c("source", "Twitter", "fb", "other",
                                   "online.article", "radio", "tv")]
-names(expanded.hits) <- c("Program", "Twitter", "Facebook", "Other ",
-                          "Online Articles", "Radio", "TV")
 #restrict data to CC, CM, CMN sources
-expanded.hits.CMprograms <- subset(expanded.hits, Program=="CC"|Program=="CM"|Program=="CMN"|Program=="Total")
+expanded.hits.CMprograms.September2020 <- subset(expanded.hits.September2020, source=="CC"|source=="CM"|source=="CMN"|source=="Total")
+#aggregate hits according to nest program model
+CMN.September2020 <- expanded.hits.CMprograms.September2020[3,2:7]
+CM.September2020 <- CMN.September2020 + expanded.hits.CMprograms.September2020[2,2:7]
+CC.September2020 <- CM.September2020 + expanded.hits.CMprograms.September2020[1,2:7]
+aggregated.hits.CMprograms.September2020 <- rbind(CC.September2020, CM.September2020, CMN.September2020)
+rownames(aggregated.hits.CMprograms.September2020) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.September2020) <- c("Twitter", "Facebook", "Other ",
+                          "Online Articles", "Radio", "TV")
 library("formattable")
-expanded.hits.formatted <- formattable(expanded.hits.CMprograms,
+aggregated.hits.formatted.September2020 <- formattable(aggregated.hits.CMprograms.September2020,
                                        align=c("l", "c", "c", "c", "c", "c", "c"),
                                        list(''))
-expanded.hits.formatted
+aggregated.hits.formatted.September2020
 ```
 
 ### Top 10 Releases
-```{r, Sept 2020 Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
+```{r, September Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
 rankedreleases.September2020 <- rankReleases(tracking.data.September2020)
 top10releases.September2020 <-rankedreleases.September2020[c(1:10),]
 library("formattable")
@@ -75,11 +140,10 @@ formattable(top10releases.September2020)
 
 
 ### Hits by Region
-```{r, echo = FALSE, warning=FALSE, message=FALSE}
+```{r September Hits by Region, echo = FALSE, warning=FALSE, message=FALSE}
 #compute hits by regions
-month.hitsbyregion <- hitsbyregion(tracking.data.September2020)
-
-month.hitsbyregion
+month.hitsbyregion.September2020 <- hitsbyregion(tracking.data.September2020)
+month.hitsbyregion.September2020
 ```
 
 ***
@@ -89,37 +153,44 @@ month.hitsbyregion
 ### Enrollment
 ```{r, August Enrollment, echo = FALSE, warning=FALSE, message=FALSE}
 rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
-values <- c(945, 92, 474, 54, 696)
+values <- c(945, 92, 473, 54, 696)
 enrollment <- as.data.frame(cbind(rows, values))
 names(enrollment) <- c(" ", "Enrollment")
 library("formattable")
 formattable(enrollment)
 ```
 
-```{r, echo = FALSE, warning=FALSE, message=FALSE}
+```{r August setup, echo = FALSE, warning=FALSE, message=FALSE}
 tracking.data.August2020 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2020"),]
 ```
 
 ### Hits by Program
-```{r, August 2020 Hits by Program, echo = FALSE, warning=FALSE, message=FALSE}
+```{r, August Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
 #expanded view
 library("tidyr")
 expanded.hits.draft.August2020 <- hitsbyprogram(tracking.data.August2020)
 expanded.hits.August2020 <- expanded.hits.draft.August2020[,c("source", "Twitter", "fb", "other",
                                   "online.article", "radio", "tv")]
-names(expanded.hits.August2020) <- c("Program", "Twitter", "Facebook", "Other ",
-                          "Online Articles", "Radio", "TV")
 #restrict data to CC, CM, CMN sources
-expanded.hits.CMprograms.August2020 <- subset(expanded.hits.August2020, Program=="CC"|Program=="CM"|Program=="CMN"|Program=="Total")
+expanded.hits.CMprograms.August2020 <- subset(expanded.hits.August2020, source=="CC"|source=="CM"|source=="CMN"|source=="Total")
+#aggregate hits according to nest program model
+CMN.August2020 <- expanded.hits.CMprograms.August2020[3,2:7]
+CM.August2020 <- CMN.August2020 + expanded.hits.CMprograms.August2020[2,2:7]
+CC.August2020 <- CM.August2020 + expanded.hits.CMprograms.August2020[1,2:7]
+aggregated.hits.CMprograms.August2020 <- rbind(CC.August2020, CM.August2020, CMN.August2020)
+rownames(aggregated.hits.CMprograms.August2020) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.August2020) <- c("Twitter", "Facebook", "Other ",
+                          "Online Articles", "Radio", "TV")
 library("formattable")
-expanded.hits.formatted.August2020 <- formattable(expanded.hits.CMprograms.August2020,
+aggregated.hits.formatted.August2020 <- formattable(aggregated.hits.CMprograms.August2020,
                                        align=c("l", "c", "c", "c", "c", "c", "c"),
                                        list(''))
-expanded.hits.formatted.August2020
+aggregated.hits.formatted.August2020
 ```
 
 ### Top 10 Releases
-```{r, echo = FALSE, warning=FALSE, message=FALSE}
+```{r August Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
 rankedreleases.August2020 <- rankReleases(tracking.data.August2020)
 top10releases.August2020 <-rankedreleases.August2020[c(1:10),]
 library("formattable")
@@ -128,7 +199,7 @@ formattable(top10releases.August2020)
 ```
 
 ### Hits by Region
-```{r, August 2020 Hits By Region, echo = FALSE, warning=FALSE, message=FALSE}
+```{r, August Hits By Region, echo = FALSE, warning=FALSE, message=FALSE}
 #compute hits by regions
 month.hitsbyregion.August2020 <- hitsbyregion(tracking.data.August2020)
 month.hitsbyregion.August2020

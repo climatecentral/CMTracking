@@ -13,7 +13,7 @@
 
 <title>Monthly Numbers</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -27,6 +27,14 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.15.6/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -359,9 +367,6 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Seasonal Evaluations</a>
-</li>
-<li>
   <a href="MonthlyReports.html">Monthly Numbers</a>
 </li>
 <li>
@@ -369,6 +374,9 @@ div.tocify {
 </li>
 <li>
   <a href="YearToDate.html">Year-To-Date</a>
+</li>
+<li>
+  <a href="index.html">Seasonal Evaluations</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -383,6 +391,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Monthly Numbers</h1>
+<h4 class="date">Last updated: 11/12/2020</h4>
 
 </div>
 
@@ -454,20 +463,15 @@ Journalists Receiving CMN
 </tr>
 </tbody>
 </table>
-<hr />
 </div>
-</div>
-<div id="september-2020" class="section level1">
-<h1><strong>September 2020</strong></h1>
 <div id="hits-by-program" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
 <thead>
 <tr>
 <th style="text-align:left;">
-Program
 </th>
-<th style="text-align:center;">
+<th style="text-align:left;">
 Twitter
 </th>
 <th style="text-align:center;">
@@ -492,53 +496,486 @@ TV
 <td style="text-align:left;">
 CC
 </td>
+<td style="text-align:left;">
+372
+</td>
 <td style="text-align:center;">
-96
+130
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+220
 </td>
 <td style="text-align:center;">
 2
 </td>
 <td style="text-align:center;">
-0
-</td>
-<td style="text-align:center;">
-23
-</td>
-<td style="text-align:center;">
-5
-</td>
-<td style="text-align:center;">
-0
+328
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 CM
 </td>
-<td style="text-align:center;">
-329
+<td style="text-align:left;">
+277
 </td>
 <td style="text-align:center;">
-104
+121
 </td>
 <td style="text-align:center;">
-8
+6
 </td>
 <td style="text-align:center;">
-173
+127
 </td>
 <td style="text-align:center;">
 2
 </td>
 <td style="text-align:center;">
-315
+272
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 CMN
 </td>
+<td style="text-align:left;">
+25
+</td>
 <td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="top-10-releases" class="section level3">
+<h3>Top 10 Releases</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+Release
+</th>
+<th style="text-align:right;">
+Social
+</th>
+<th style="text-align:right;">
+Stories
+</th>
+<th style="text-align:right;">
+TV
+</th>
+<th style="text-align:right;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+WeatherPower
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+96
+</td>
+<td style="text-align:right;">
+153
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020LastDayAbove
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+135
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020Halloween
+</td>
+<td style="text-align:right;">
+52
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+84
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020PowerOutages
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020HurricanesII
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+62
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Climate Change is Tipping Scales Toward More Wildfires
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020ConcurrentFloods
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020Drought
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020FallPackage
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+39
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020WesternWildfires
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="top-5-releases" class="section level3">
+<h3>Top 5 Releases</h3>
+<div id="htmlwidget-8e3ccea3c3247a942279" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8e3ccea3c3247a942279">{"x":{"filter":"none","fillContainer":false,"data":[["WeatherPower","2020LastDayAbove","2020Halloween","2020PowerOutages","2020HurricanesII","Climate Change is Tipping Scales Toward More Wildfires","2020ConcurrentFloods","2020Drought","2020FallPackage","2020WesternWildfires"],[28,89,52,38,31,27,30,18,27,21],[29,11,7,11,15,33,8,9,5,8],[96,35,25,23,16,0,14,13,7,7],[153,135,84,72,62,60,52,40,39,36]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="hits-by-region" class="section level3">
+<h3>Hits by Region</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+Region
+</th>
+<th style="text-align:center;">
+Social Media
+</th>
+<th style="text-align:center;">
+Stories
+</th>
+<th style="text-align:center;">
+TV
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+Southwest
+</td>
+<td style="text-align:center;">
+98
+</td>
+<td style="text-align:center;">
+43
+</td>
+<td style="text-align:center;">
+142.8
+</td>
+<td style="text-align:center;">
+283.8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Southeast
+</td>
+<td style="text-align:center;">
+135
+</td>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;">
+62.4
+</td>
+<td style="text-align:center;">
+214.4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Northeast
+</td>
+<td style="text-align:center;">
+97
+</td>
+<td style="text-align:center;">
+49
+</td>
+<td style="text-align:center;">
+34.8
+</td>
+<td style="text-align:center;">
+180.8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Midwest
+</td>
+<td style="text-align:center;">
+42
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+15.6
+</td>
+<td style="text-align:center;">
+78.6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Great Plains
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+22.8
+</td>
+<td style="text-align:center;">
+34.8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Northwest
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.0
+</td>
+<td style="text-align:center;">
+4.0
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+</div>
+<div id="september-2020" class="section level1">
+<h1><strong>September 2020</strong></h1>
+<div id="hits-by-program-1" class="section level3">
+<h3>Hits by Program</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Twitter
+</th>
+<th style="text-align:center;">
+Facebook
+</th>
+<th style="text-align:center;">
+Other
+</th>
+<th style="text-align:center;">
+Online Articles
+</th>
+<th style="text-align:center;">
+Radio
+</th>
+<th style="text-align:center;">
+TV
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+CC
+</td>
+<td style="text-align:left;">
+453
+</td>
+<td style="text-align:center;">
+108
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+206
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+328
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CM
+</td>
+<td style="text-align:left;">
+357
+</td>
+<td style="text-align:center;">
+106
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+183
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+328
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CMN
+</td>
+<td style="text-align:left;">
 28
 </td>
 <td style="text-align:center;">
@@ -560,7 +997,7 @@ CMN
 </tbody>
 </table>
 </div>
-<div id="top-10-releases" class="section level3">
+<div id="top-10-releases-1" class="section level3">
 <h3>Top 10 Releases</h3>
 <table class="table table-condensed">
 <thead>
@@ -693,13 +1130,13 @@ WeatherPower
 38
 </td>
 <td style="text-align:right;">
-11
+12
 </td>
 <td style="text-align:right;">
 8
 </td>
 <td style="text-align:right;">
-57
+58
 </td>
 </tr>
 <tr>
@@ -756,7 +1193,7 @@ The Inequality of City Heat
 </tbody>
 </table>
 </div>
-<div id="hits-by-region" class="section level3">
+<div id="hits-by-region-1" class="section level3">
 <h3>Hits by Region</h3>
 <table class="table table-condensed">
 <thead>
@@ -790,10 +1227,10 @@ Southwest
 53
 </td>
 <td style="text-align:center;">
-120
+144.0
 </td>
 <td style="text-align:center;">
-269
+293.0
 </td>
 </tr>
 <tr>
@@ -807,10 +1244,10 @@ Northeast
 58
 </td>
 <td style="text-align:center;">
-48
+57.6
 </td>
 <td style="text-align:center;">
-237
+246.6
 </td>
 </tr>
 <tr>
@@ -824,10 +1261,10 @@ Southeast
 40
 </td>
 <td style="text-align:center;">
-46
+55.2
 </td>
 <td style="text-align:center;">
-218
+227.2
 </td>
 </tr>
 <tr>
@@ -841,10 +1278,10 @@ Midwest
 32
 </td>
 <td style="text-align:center;">
-28
+33.6
 </td>
 <td style="text-align:center;">
-114
+119.6
 </td>
 </tr>
 <tr>
@@ -858,10 +1295,10 @@ Great Plains
 9
 </td>
 <td style="text-align:center;">
-18
+21.6
 </td>
 <td style="text-align:center;">
-71
+74.6
 </td>
 </tr>
 <tr>
@@ -875,10 +1312,10 @@ Northwest
 6
 </td>
 <td style="text-align:center;">
-7
+8.4
 </td>
 <td style="text-align:center;">
-23
+24.4
 </td>
 </tr>
 <tr>
@@ -892,10 +1329,10 @@ Alaska
 1
 </td>
 <td style="text-align:center;">
-2
+2.4
 </td>
 <td style="text-align:center;">
-3
+3.4
 </td>
 </tr>
 <tr>
@@ -909,10 +1346,10 @@ Hawaii
 1
 </td>
 <td style="text-align:center;">
-0
+0.0
 </td>
 <td style="text-align:center;">
-1
+1.0
 </td>
 </tr>
 </tbody>
@@ -956,7 +1393,7 @@ Market Penetration (%)
 Local Television Stations
 </td>
 <td style="text-align:right;">
-474
+473
 </td>
 </tr>
 <tr>
@@ -978,15 +1415,14 @@ Journalists Receiving CMN
 </tbody>
 </table>
 </div>
-<div id="hits-by-program-1" class="section level3">
+<div id="hits-by-program-2" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
 <thead>
 <tr>
 <th style="text-align:left;">
-Program
 </th>
-<th style="text-align:center;">
+<th style="text-align:left;">
 Twitter
 </th>
 <th style="text-align:center;">
@@ -1011,40 +1447,40 @@ TV
 <td style="text-align:left;">
 CC
 </td>
-<td style="text-align:center;">
-119
+<td style="text-align:left;">
+444
 </td>
 <td style="text-align:center;">
-13
+158
 </td>
 <td style="text-align:center;">
-2
+6
 </td>
 <td style="text-align:center;">
-39
+229
 </td>
 <td style="text-align:center;">
-33
+47
 </td>
 <td style="text-align:center;">
-4
+271
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 CM
 </td>
-<td style="text-align:center;">
-269
+<td style="text-align:left;">
+325
 </td>
 <td style="text-align:center;">
-135
+145
 </td>
 <td style="text-align:center;">
-3
+4
 </td>
 <td style="text-align:center;">
-153
+190
 </td>
 <td style="text-align:center;">
 14
@@ -1057,7 +1493,7 @@ CM
 <td style="text-align:left;">
 CMN
 </td>
-<td style="text-align:center;">
+<td style="text-align:left;">
 56
 </td>
 <td style="text-align:center;">
@@ -1079,7 +1515,7 @@ CMN
 </tbody>
 </table>
 </div>
-<div id="top-10-releases-1" class="section level3">
+<div id="top-10-releases-2" class="section level3">
 <h3>Top 10 Releases</h3>
 <table class="table table-condensed">
 <thead>
@@ -1275,7 +1711,7 @@ WeatherPower
 </tbody>
 </table>
 </div>
-<div id="hits-by-region-1" class="section level3">
+<div id="hits-by-region-2" class="section level3">
 <h3>Hits by Region</h3>
 <table class="table table-condensed">
 <thead>
@@ -1309,10 +1745,10 @@ Southwest
 55
 </td>
 <td style="text-align:center;">
-93
+111.6
 </td>
 <td style="text-align:center;">
-302
+320.6
 </td>
 </tr>
 <tr>
@@ -1326,10 +1762,10 @@ Northeast
 67
 </td>
 <td style="text-align:center;">
-28
+33.6
 </td>
 <td style="text-align:center;">
-213
+218.6
 </td>
 </tr>
 <tr>
@@ -1343,10 +1779,10 @@ Southeast
 25
 </td>
 <td style="text-align:center;">
-28
+33.6
 </td>
 <td style="text-align:center;">
-167
+172.6
 </td>
 </tr>
 <tr>
@@ -1360,10 +1796,10 @@ Midwest
 30
 </td>
 <td style="text-align:center;">
-43
+51.6
 </td>
 <td style="text-align:center;">
-137
+145.6
 </td>
 </tr>
 <tr>
@@ -1377,10 +1813,10 @@ Great Plains
 16
 </td>
 <td style="text-align:center;">
-23
+27.6
 </td>
 <td style="text-align:center;">
-75
+79.6
 </td>
 </tr>
 <tr>
@@ -1394,10 +1830,10 @@ Northwest
 0
 </td>
 <td style="text-align:center;">
-0
+0.0
 </td>
 <td style="text-align:center;">
-6
+6.0
 </td>
 </tr>
 </tbody>

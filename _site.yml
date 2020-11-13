@@ -2,12 +2,12 @@ name: "cm-tracking"
 navbar:
   title: "Climate Matters Tracking"
   left:
-    - text: "Seasonal Evaluations"
-      href: index.html
     - text: "Monthly Numbers"
       href: MonthlyReports.html
     - text: "Content Use Highlights"
       href: Links.html
     - text: "Year-To-Date"
-      href: YearToDate.html     
+      href: YearToDate.html 
+    - text: "Seasonal Evaluations"
+      href: index.html
 output_dir: "docs"
