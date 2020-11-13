@@ -10,9 +10,6 @@ output:
     toc_depth: 2
 ---
 
-<div class="row" style="padding-top: 30px;">
-<div class="col-sm-14">
-
 ```{css, echo=FALSE}
 h1 {
   text-align: center;

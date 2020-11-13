@@ -4,6 +4,12 @@ output: html_document
 date: "Last updated: 11/12/2020"
 ---
 
+```{css, echo=FALSE}
+h1 {
+  text-align: center;
+}
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 data <- read.csv("October2020trackingData.csv")
