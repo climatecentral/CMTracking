@@ -198,12 +198,12 @@ hitsbyregion <- function(dat){
   hits.regions <- hits.regions[,c("ID", "location", "region", "rt", "tw", "fb", 
                                   "other", "online.article", "radio", "tv")]
   hits.byregion <- subset(hits.regions, select=-c(ID, location))
+  library("dplyr")
   hits.byregion <- hits.byregion %>%
     group_by(region) %>%
     summarise(rt=sum(rt), tw=sum(tw), fb=sum(fb), other=sum(other), 
-              online.article=sum(online.article), radio=sum(radio), tv=sum(tv)*1.2)
+              online.article=sum(online.article), radio=sum(radio), tv=round(sum(tv)*1.2, digits=0))
   #make a condensed format
-  library("dplyr")
   condensed.hits.byregion <- hits.byregion %>%
     as_tibble() %>%
     mutate(

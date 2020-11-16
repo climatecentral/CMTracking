@@ -66,7 +66,7 @@ aggregated.hits.formatted.October2020 <- formattable(aggregated.hits.CMprograms.
 aggregated.hits.formatted.October2020
 ```
 
-### Top 10 Releases
+### Top Releases
 ```{r, October 2020 Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
 rankedreleases.October2020 <- rankReleases(tracking.data.October2020)
 top10releases.October2020 <-rankedreleases.October2020[c(1:10),]
@@ -75,7 +75,7 @@ names(top10releases.October2020) <- c("Release", "Social", "Stories", "TV", "Tot
 formattable(top10releases.October2020)
 ```
 
-### Top 5 Releases
+### Top Releases
 ```{r, October 2020 Top 5 Releases, echo = FALSE, warning=FALSE, message=FALSE}
 rankedreleases.October2020 <- rankReleases(tracking.data.October2020)
 top10releases.October2020 <-rankedreleases.October2020[c(1:10),]
@@ -127,7 +127,7 @@ aggregated.hits.formatted.September2020 <- formattable(aggregated.hits.CMprogram
 aggregated.hits.formatted.September2020
 ```
 
-### Top 10 Releases
+### Top Releases
 ```{r, September Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
 rankedreleases.September2020 <- rankReleases(tracking.data.September2020)
 top10releases.September2020 <-rankedreleases.September2020[c(1:10),]
@@ -187,7 +187,7 @@ aggregated.hits.formatted.August2020 <- formattable(aggregated.hits.CMprograms.A
 aggregated.hits.formatted.August2020
 ```
 
-### Top 10 Releases
+### Top Releases
 ```{r August Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
 rankedreleases.August2020 <- rankReleases(tracking.data.August2020)
 top10releases.August2020 <-rankedreleases.August2020[c(1:10),]
