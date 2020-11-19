@@ -1,6 +1,6 @@
 ---
 title: "Monthly Numbers"
-date: "Last updated: 11/12/2020"
+date: "Last updated: 11/19/2020"
 output:
   html_document:
     toc: true
@@ -17,6 +17,7 @@ h1 {
 ```
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
 source("monthlyreport_functions.R")
 data <- read.csv('October2020trackingdata.csv')
 tracking.data <-reformat_googlesheet(data)

@@ -1,10 +1,11 @@
 ---
 title: "Year-To-Date"
 output: html_document
-date: "Last updated: 11/12/2020"
+date: "Last updated: 11/19/2020"
 ---
 
 ```{r setup, include=FALSE}
+knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
 data <- read.csv("October2020trackingData.csv")
 #load pre-written evaluation functions
 source("monthlyreport_functions.R")
@@ -23,7 +24,7 @@ previousYear(YTDdata2020, YTDdata2019)
 
 # TV
 
-```{r, TV Goals, warning=FALSE, message=FALSE}
+```{r, TV Goals, echo=FALSE, warning=FALSE, message=FALSE}
 #subset 2020 data
   data2020 <-dataReformatted[which(dataReformatted$year==2020),]
   #replace NAs in tv column with 0s
@@ -76,7 +77,7 @@ tvgoalschart
 
 # Articles
 
-```{r, Article Goals, warning=FALSE, message=FALSE}
+```{r, Article Goals, echo=FALSE, warning=FALSE, message=FALSE}
 #subset 2020 data
   data2020 <-dataReformatted[which(dataReformatted$year==2020),]
   #summarize articles by month
@@ -125,7 +126,7 @@ theme(legend.title = element_blank()) +
 
 # Program Hits
 
-```{r, Program Hits, warning=FALSE, message=FALSE}
+```{r, Program Hits, echo=FALSE, warning=FALSE, message=FALSE}
 #subset 2020 data
   data2020 <-dataReformatted[which(dataReformatted$year==2020),]
   #summarize program hits by month

@@ -307,7 +307,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Year-To-Date</h1>
-<h4 class="date">Last updated: 11/12/2020</h4>
+<h4 class="date">Last updated: 11/19/2020</h4>
 
 </div>
 
@@ -421,140 +421,14 @@ TV
 </div>
 <div id="tv" class="section level1">
 <h1>TV</h1>
-<pre class="r"><code>#subset 2020 data
-  data2020 &lt;-dataReformatted[which(dataReformatted$year==2020),]
-  #replace NAs in tv column with 0s
-  #data2020$tv[is.na(data2020$tv)] &lt;- 0
-  #summarize tv by month
-  library(&quot;dplyr&quot;)
-  tvbymonth &lt;- data2020 %&gt;%
-    group_by(month) %&gt;%
-    summarise(tv=sum(tv))
-  #add 20% to tv
-  tvbymonth$tv &lt;- tvbymonth$tv*1.2
-  #order data by month
-  library(&quot;dplyr&quot;)
-  tvbymonth$month &lt;- factor(tvbymonth$month, levels=month.name)
-  #c(&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;, &quot;May&quot;, &quot;June&quot;, &quot;July&quot;, &quot;August&quot;, &quot;September&quot;, &quot;October&quot;, &quot;November&quot;, &quot;December&quot;)
-  library(&quot;tidyverse&quot;)
-  tvbymonth$month &lt;- sort(tvbymonth$month)
-  #add column for cumulative sum of tv airings
-  tvbymonth$cumulative.tv &lt;- cumsum(tvbymonth$tv)
-  tvbymonth &lt;- as.data.frame(tvbymonth)
-  #tv goals
-  tv.goals &lt;- c(500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000)
-  month &lt;- month.name
-  tvgoals.bymonth &lt;- data.frame(month, tv.goals)
-  #merge hits and goals
-  tvgoalsandhits &lt;- merge(tvbymonth, tvgoals.bymonth, by=&quot;month&quot;, all.y = TRUE)
-  #remove tv column
-  tvgoalsandhits &lt;- subset(tvgoalsandhits, select=-tv)
-  #reorder columns
-  tvgoalsandhits &lt;- tvgoalsandhits[,c(1,3,2)]
-  names(tvgoalsandhits) &lt;- c(&quot;Month&quot;, &quot;Goals&quot;, &quot;Airings&quot;)
-  #melt dataframe
-  library(&quot;reshape2&quot;)
-  melted.tvgoalsandhits &lt;- melt(tvgoalsandhits)
-  #make variable a factor
-  melted.tvgoalsandhits$variable &lt;- factor(melted.tvgoalsandhits$variable, levels = c(&quot;Goals&quot;, &quot;Airings&quot;))
-  melted.tvgoalsandhits$variable &lt;- sort(melted.tvgoalsandhits$variable)
-  #plot chart
-  library(&quot;ggplot2&quot;)
-  
-tvgoalschart &lt;- ggplot(melted.tvgoalsandhits, aes(Month, value, group=variable, colour=variable, linetype=variable)) + 
-    theme(axis.text.x = element_text(angle=45, vjust=0.7)) +
-    geom_line(aes(color=variable)) +
-    scale_linetype_manual(values=c(&quot;dashed&quot;, &quot;solid&quot;)) +
-labs(y=&quot;TV Airings&quot;, x=&quot;&quot;) +
-theme(legend.title = element_blank())+
-    geom_text(data=melted.tvgoalsandhits %&gt;% filter(variable==&quot;Airings&quot; &amp; Month==&quot;October&quot;), aes(label = value), nudge_x = 0.75, color=&quot;black&quot;)
-tvgoalschart</code></pre>
 <p><img src="YearToDate_files/figure-html/TV%20Goals-1.png" width="672" /></p>
 </div>
 <div id="articles" class="section level1">
 <h1>Articles</h1>
-<pre class="r"><code>#subset 2020 data
-  data2020 &lt;-dataReformatted[which(dataReformatted$year==2020),]
-  #summarize articles by month
-  library(&quot;dplyr&quot;)
-  articlesbymonth &lt;- data2020 %&gt;%
-    group_by(month) %&gt;%
-    summarise(articles=sum(online.article))
-  #order data by month
-  library(&quot;dplyr&quot;)
-  articlesbymonth$month &lt;- factor(articlesbymonth$month, levels=month.name)
-  #c(&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;, &quot;May&quot;, &quot;June&quot;, &quot;July&quot;, &quot;August&quot;, &quot;September&quot;, &quot;October&quot;, &quot;November&quot;, &quot;December&quot;)
-  library(&quot;tidyverse&quot;)
-  articlesbymonth$month &lt;- sort(articlesbymonth$month)
-  #add column for cumulative sum of articles
-  articlesbymonth$cumulative.articles &lt;- cumsum(articlesbymonth$articles)
-  articlesbymonth &lt;- as.data.frame(articlesbymonth)
-  #articles goals
-  articles.goals &lt;- c(521,1042,1563,2083,2604,3125,3646,4167,4688,5208,5729,6250)
-  month &lt;- month.name
-  articlesgoals.bymonth &lt;- data.frame(month, articles.goals)
-  #merge hits and goals
-  articlesgoalsandhits &lt;- merge(articlesbymonth, articlesgoals.bymonth, by=&quot;month&quot;, all.y = TRUE)
-  #remove articles column
-  articlesgoalsandhits &lt;- subset(articlesgoalsandhits, select=-articles)
-  #reorder columns
-  articlesgoalsandhits &lt;- articlesgoalsandhits[,c(1,3,2)]
-  names(articlesgoalsandhits) &lt;- c(&quot;Month&quot;, &quot;Goals&quot;, &quot;Articles&quot;)
-  #melt dataframe
-  library(&quot;reshape2&quot;)
-  melted.articlesgoalsandhits &lt;- melt(articlesgoalsandhits)
-  #make variable a factor
-  melted.articlesgoalsandhits$variable &lt;- factor(melted.articlesgoalsandhits$variable, levels = c(&quot;Goals&quot;, &quot;Articles&quot;))
-  melted.articlesgoalsandhits$variable &lt;- sort(melted.articlesgoalsandhits$variable)
-  #plot chart
-  library(&quot;ggplot2&quot;)
-  articlesgoalschart &lt;- ggplot(melted.articlesgoalsandhits, aes(Month, value, group=variable, colour=variable, linetype=variable)) + 
-    theme(axis.text.x = element_text(angle=45, vjust=0.7)) +
-    geom_line(aes(color=variable)) +
-    scale_linetype_manual(values=c(&quot;dashed&quot;, &quot;solid&quot;)) +
-labs(y=&quot;Articles&quot;, x=&quot;&quot;) +
-theme(legend.title = element_blank()) +
-    geom_text(data=melted.articlesgoalsandhits %&gt;% filter(variable==&quot;Articles&quot; &amp; Month==&quot;October&quot;), aes(label = value), nudge_x = 0.75, color=&quot;black&quot;)
-  articlesgoalschart</code></pre>
 <p><img src="YearToDate_files/figure-html/Article%20Goals-1.png" width="672" /></p>
 </div>
 <div id="program-hits" class="section level1">
 <h1>Program Hits</h1>
-<pre class="r"><code>#subset 2020 data
-  data2020 &lt;-dataReformatted[which(dataReformatted$year==2020),]
-  #summarize program hits by month
-  library(&quot;dplyr&quot;)
-  programsbymonth &lt;- data2020 %&gt;%
-    group_by(month) %&gt;%
-    summarise(CC=sum(cc.hits), CM=sum(cm.hits), CMN=sum(cmn.hits))
-  #order data by month
-  library(&quot;dplyr&quot;)
-  programsbymonth$month &lt;- factor(programsbymonth$month, levels=month.name)
-  #c(&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;, &quot;May&quot;, &quot;June&quot;, &quot;July&quot;, &quot;August&quot;, &quot;September&quot;, &quot;October&quot;, &quot;November&quot;, &quot;December&quot;)
-  library(&quot;tidyverse&quot;)
-  programsbymonth$month &lt;- sort(programsbymonth$month)
-  #add column for cumulative sum of program hits
-  programsbymonth$cc &lt;- cumsum(programsbymonth$CC)
-  programsbymonth$cm &lt;- cumsum(programsbymonth$CM)
-  programsbymonth$cmn &lt;- cumsum(programsbymonth$CMN)
-  programsbymonth &lt;- as.data.frame(programsbymonth)
-  #remove non-cumulative columns
-  programsbymonth &lt;- programsbymonth[,c(1,5:7)]
-  #rename columns
-  names(programsbymonth) &lt;- c(&quot;Month&quot;, &quot;CC&quot;, &quot;CM&quot;, &quot;CMN&quot;)
-  #melt dataframe
-  library(&quot;reshape2&quot;)
-  melted.programshits &lt;- melt(programsbymonth)
-  #make variable a factor
-melted.programshits$variable &lt;- factor(melted.programshits$variable, levels = c(&quot;CC&quot;, &quot;CM&quot;, &quot;CMN&quot;))
-names(melted.programshits)[2] &lt;- &quot;Program&quot;
-  #plot chart
-  library(&quot;ggplot2&quot;)
-  programhitschart &lt;- ggplot(melted.programshits, aes(x=Month, y=value, group=Program, fill=Program)) +
-  geom_area()+
-  theme(axis.text.x = element_text(angle=45, vjust=0.7))+
-  labs(y=&quot;Program Hits&quot;, x=&quot;&quot;)
-programhitschart</code></pre>
 <p><img src="YearToDate_files/figure-html/Program%20Hits-1.png" width="672" /></p>
 </div>
 
