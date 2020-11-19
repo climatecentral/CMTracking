@@ -10,18 +10,16 @@ output:
     toc_depth: 1
 ---
 
-
 ```{css, echo=FALSE}
 h1 {
   text-align: center;
 }
 ```
 
-```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
 source("monthlyreport_functions.R")
 data <- read.csv('October2020trackingdata.csv')
 tracking.data <-reformat_googlesheet(data)
-tracking.data.October2020 <- tracking.data[which(tracking.data$month=="October" & tracking.data$year=="2020"),]
 ```
 
 Repository for CM/N Programs Monthly Tracking reports.
@@ -30,8 +28,7 @@ Repository for CM/N Programs Monthly Tracking reports.
 
 # **October 2020**
 
-### Enrollment
-```{r, October Enrollment, echo = FALSE, warning=FALSE, message=FALSE}
+```{r October Enrollment, eval=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
 rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
 values <- c(968, 92, 483, 55, 702)
 enrollment <- as.data.frame(cbind(rows, values))
@@ -42,7 +39,8 @@ formattable(enrollment)
 
 
 ### Hits by Program
-```{r, October Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+```{r October Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.October2020 <- tracking.data[which(tracking.data$month=="October" & tracking.data$year=="2020"),]
 #expanded view
 library("tidyr")
 expanded.hits.draft.October2020 <- hitsbyprogram(tracking.data.October2020)
@@ -66,17 +64,18 @@ aggregated.hits.formatted.October2020 <- formattable(aggregated.hits.CMprograms.
 aggregated.hits.formatted.October2020
 ```
 
-### Top Releases
-```{r, October 2020 Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
-rankedreleases.October2020 <- rankReleases(tracking.data.October2020)
-top10releases.October2020 <-rankedreleases.October2020[c(1:10),]
-library("formattable")
-names(top10releases.October2020) <- c("Release", "Social", "Stories", "TV", "Total")
-formattable(top10releases.October2020)
+### Comparison with Last Year
+```{r October Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.October2020 <- tracking.data[which(tracking.data$month=="October" & tracking.data$year=="2020"),]
+tracking.data.October2019 <- tracking.data[which(tracking.data$month=="October" & tracking.data$year=="2019"),]
+previousYear(tracking.data.October2020, tracking.data.October2019)
 ```
 
 ### Top Releases
-```{r, October 2020 Top 5 Releases, echo = FALSE, warning=FALSE, message=FALSE}
+
+Most-used releases this month (including content released before this month).
+
+```{r October Top Releases, warning=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
 rankedreleases.October2020 <- rankReleases(tracking.data.October2020)
 top10releases.October2020 <-rankedreleases.October2020[c(1:10),]
 names(top10releases.October2020) <- c("Release", "Social", "Stories", "TV", "Total")
@@ -87,7 +86,7 @@ datatable(top10releases.October2020, fillContainer=FALSE, options = list(scrollX
 ```
 
 ### Hits by Region
-```{r October Hits by Region, echo = FALSE, warning=FALSE, message=FALSE}
+```{r October Hits by Region, echo=FALSE, warning=FALSE, message=FALSE}
 #compute hits by regions
 month.hitsbyregion.October2020 <- hitsbyregion(tracking.data.October2020)
 month.hitsbyregion.October2020
@@ -103,7 +102,7 @@ tracking.data.September2020 <- tracking.data[which(tracking.data$month=="Septemb
 
 
 ### Hits by Program
-```{r, September Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+```{r September Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
 #expanded view
 library("tidyr")
 expanded.hits.draft.September2020 <- hitsbyprogram(tracking.data.September2020)
@@ -127,13 +126,25 @@ aggregated.hits.formatted.September2020 <- formattable(aggregated.hits.CMprogram
 aggregated.hits.formatted.September2020
 ```
 
+### Comparison with Last Year
+```{r September Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.September2020 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2020"),]
+tracking.data.September2019 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2019"),]
+previousYear(tracking.data.September2020, tracking.data.September2019)
+```
+
 ### Top Releases
-```{r, September Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
+
+Most-used releases this month (including content released before this month).
+
+```{r September 2020 Top 5 Releases, echo = FALSE, warning=FALSE, message=FALSE}
 rankedreleases.September2020 <- rankReleases(tracking.data.September2020)
 top10releases.September2020 <-rankedreleases.September2020[c(1:10),]
-library("formattable")
 names(top10releases.September2020) <- c("Release", "Social", "Stories", "TV", "Total")
-formattable(top10releases.September2020)
+top5releases.September2020 <-rankedreleases.September2020[c(1:5),]
+names(top5releases.September2020) <- c("Release", "Social", "Stories", "TV", "Total")
+library(DT)
+datatable(top10releases.September2020, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
 ```
 
 
@@ -148,8 +159,7 @@ month.hitsbyregion.September2020
 
 # **August 2020**
 
-### Enrollment
-```{r, August Enrollment, echo = FALSE, warning=FALSE, message=FALSE}
+```{r August Enrollment, include=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
 rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
 values <- c(945, 92, 473, 54, 696)
 enrollment <- as.data.frame(cbind(rows, values))
@@ -163,7 +173,7 @@ tracking.data.August2020 <- tracking.data[which(tracking.data$month=="August" & 
 ```
 
 ### Hits by Program
-```{r, August Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+```{r August Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
 #expanded view
 library("tidyr")
 expanded.hits.draft.August2020 <- hitsbyprogram(tracking.data.August2020)
@@ -187,19 +197,34 @@ aggregated.hits.formatted.August2020 <- formattable(aggregated.hits.CMprograms.A
 aggregated.hits.formatted.August2020
 ```
 
+
+### Comparison with Last Year
+```{r August Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.August2020 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2020"),]
+tracking.data.August2019 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2019"),]
+previousYear(tracking.data.August2020, tracking.data.August2019)
+```
+
 ### Top Releases
-```{r August Top 10 Releases, echo = FALSE, warning=FALSE, message=FALSE}
+
+Most-used releases this month (including content released before this month).
+
+```{r August 2020 Top 5 Releases, echo = FALSE, warning=FALSE, message=FALSE}
 rankedreleases.August2020 <- rankReleases(tracking.data.August2020)
 top10releases.August2020 <-rankedreleases.August2020[c(1:10),]
-library("formattable")
 names(top10releases.August2020) <- c("Release", "Social", "Stories", "TV", "Total")
-formattable(top10releases.August2020)
+top5releases.August2020 <-rankedreleases.August2020[c(1:5),]
+names(top5releases.August2020) <- c("Release", "Social", "Stories", "TV", "Total")
+library(DT)
+datatable(top10releases.August2020, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
 ```
 
 ### Hits by Region
-```{r, August Hits By Region, echo = FALSE, warning=FALSE, message=FALSE}
+```{r August Hits By Region, echo = FALSE, warning=FALSE, message=FALSE}
 #compute hits by regions
 month.hitsbyregion.August2020 <- hitsbyregion(tracking.data.August2020)
+month.hitsbyregion.August2020$TV <- round(month.hitsbyregion.August2020$TV, digits=0)
+month.hitsbyregion.August2020$Total <- round(month.hitsbyregion.August2020$Total, digits=0)
 month.hitsbyregion.August2020
 ```
 

@@ -27,7 +27,7 @@ reformat_googlesheet <- function(data) {
   #trimws(lastnames, which='both')
   #tracking.data$name <- paste(firstnames, '', lastnames)
   #add hit_ID column
-  #tracking.data$date <- as.Date(tracking.data$date, format="%m/%d/%Y")
+  tracking.data$date <- as.Date(tracking.data$date, format="%m/%d/%Y")
   #tracking.data$ID <- paste(tracking.data$name, "_", tracking.data$date)
   #add row IDs
   tracking.data$ID <- seq.int(nrow(tracking.data))
@@ -198,12 +198,12 @@ hitsbyregion <- function(dat){
   hits.regions <- hits.regions[,c("ID", "location", "region", "rt", "tw", "fb", 
                                   "other", "online.article", "radio", "tv")]
   hits.byregion <- subset(hits.regions, select=-c(ID, location))
-  library("dplyr")
   hits.byregion <- hits.byregion %>%
     group_by(region) %>%
     summarise(rt=sum(rt), tw=sum(tw), fb=sum(fb), other=sum(other), 
-              online.article=sum(online.article), radio=sum(radio), tv=round(sum(tv)*1.2, digits=0))
+              online.article=sum(online.article), radio=sum(radio), tv=sum(tv))
   #make a condensed format
+  library("dplyr")
   condensed.hits.byregion <- hits.byregion %>%
     as_tibble() %>%
     mutate(
@@ -247,16 +247,13 @@ tvheatmap.withAJFox <- function(dat){
 tvheatmap.withoutAJFox <- function(dat){
   #subset data
   tv.data.woAJFOX <- tracking.data[,c("name", "location", "program.content", "tv")]
-  tv.data.woAJFOX <- tv.data.woAJFOX[-which(tv.data.woAJFOX$name=="A.J. Fox"),]
+  tv.data.woAJFOX <- tv.data.woAJFOX[-which(tv.data.woAJFOX$name=="A.J. - Fox"),]
   #aggregate tracking data to TV hits by state
   tvhits.bystate.woAJFOX <- aggregate(tv.data.woAJFOX$tv, by=list(states=tv.data.woAJFOX$location), FUN=sum)
   #eliminate non-states from "location" column
   tvhits.bystate.woAJFOX <- tvhits.bystate.woAJFOX[which(tvhits.bystate.woAJFOX$states %in% state.abb),]
   names(tvhits.bystate.woAJFOX) <- c("state", "hits")
   #plot hits by state
-  library("usmap")
-  library("ggplot2")
-  library("dplyr")
   tvhits.plot.withoutAJFOX <- plot_usmap(data=tvhits.bystate.woAJFOX, values="hits", color="black", labels=TRUE) + 
     scale_fill_continuous(name="TV Hits", label=scales::comma, high="dark blue", low="white", na.value="white") + 
     labs(title="TV hits by State (excluding AJ Fox)") + 
@@ -273,8 +270,8 @@ hitsbyprogram <- function(dat){
   #separate into one source per row
   library("tidyr")
   hits.sepsource <- separate_rows(hits.data, source, sep = ",")
-  #remove white space from sources
-  hits.sepsource$source <- trimws(hits.sepsource$source, which='both')
+  #trim whitespace
+  hits.sepsource$source <- trimws(hits.sepsource$source, which = 'both')
   #sum hits by source/program
   library("dplyr")
   hits.bysource <- hits.sepsource %>%
@@ -301,6 +298,31 @@ hitsbyprogram <- function(dat){
       Twitter=rt+tw,
     )
   return(expanded.hits.draft)
+}
+
+#compute total cc hits by program
+cchitsbyprogram <- function(dat){
+  hits.data <- dat[,c("ID", "source", 
+                      "cc.hits")]
+  #separate into one source per row
+  library("tidyr")
+  hits.sepsource <- separate_rows(hits.data, source, sep = ",")
+  #trim whitespace
+  hits.sepsource$source <- trimws(hits.sepsource$source, which = 'both')
+  #sum hits by source/program
+  library("dplyr")
+  hits.bysource <- hits.sepsource %>%
+    group_by(source) %>%
+    summarise(cc.hits=sum(cc.hits))
+  library("reshape2")
+  hits.melt <- melt(hits.sepsource, id=c("ID","source"))
+  recasted.hits <- dcast(hits.melt, ID+source~variable, sum)
+  #sum hits by column
+  recasted.hits.noID <- recasted.hits[,-1]
+  summary.data <- recasted.hits.noID %>%
+    group_by(source) %>%
+    summarise(cc.hits=sum(cc.hits))
+  return(summary.data)
 }
 
 #YTD TV chart
@@ -385,4 +407,52 @@ hitsbyprogram <- function(dat){
       Twitter=rt+tw,
     )
   return(expanded.hits.draft)
+}
+
+#previous year comparison (i.e. month to month comparison)
+previousYear <- function(ThisYear, LastYear){
+#2020 month data
+ThisYear.programhits <- hitsbyprogram(ThisYear)
+ThisYear.CMprogramhits <- subset(ThisYear.programhits, source=="CC"|source=="CM"|source=="CMN")
+library("janitor")
+ThisYear.CMprogramhits <- adorn_totals(ThisYear.CMprogramhits, where = "row", fill = "-", na.rm = TRUE, name = "Total")
+#2019 month data
+LastYear.programhits <- hitsbyprogram(LastYear)
+LastYear.CMprogramhits <- subset(LastYear.programhits, source=="CC"|source=="CM"|source=="CMN")
+LastYear.CMprogramhits <- adorn_totals(LastYear.CMprogramhits, where = "row", fill = "-", na.rm = TRUE, name = "Total")
+#rearrange 2020 dataframe
+ThisYear.CMTotals <- as.data.frame(ThisYear.CMprogramhits[,c(1,9,4:8)])
+library('data.table')
+t.ThisYear.programhits <- transpose(ThisYear.CMTotals,keep.names='Hit Type')
+colnames(t.ThisYear.programhits) <- t.ThisYear.programhits[1,]
+t.ThisYear.totalhits <- t.ThisYear.programhits[-1,c(1,5)]
+names(t.ThisYear.totalhits)[2] <- "now"
+t.ThisYear.totalhits$now <- as.numeric(t.ThisYear.totalhits$now)
+#rearrange 2019 dataframe
+LastYear.CMTotals <- as.data.frame(LastYear.CMprogramhits[,c(1,9,4:8)])
+library('data.table')
+t.LastYear.programhits <- transpose(LastYear.CMTotals,keep.names='Hit Type')
+colnames(t.LastYear.programhits) <- t.LastYear.programhits[1,]
+t.LastYear.totalhits <- t.LastYear.programhits[-1,c(1,5)]
+names(t.LastYear.totalhits)[2] <- "then"
+t.LastYear.totalhits$then <- as.numeric(t.LastYear.totalhits$then)
+monthcomp <- merge(t.ThisYear.totalhits, t.LastYear.totalhits, by="source")
+monthcomp$now <- as.numeric(monthcomp$now)
+monthcomp$then <- as.numeric(monthcomp$then)
+library('dplyr')
+monthcomp$percent.change <- round(((monthcomp$now-monthcomp$then)/monthcomp$now)*100, digits=0)
+colnames(monthcomp) <- c("Platform", "2020", "2019", "Percent Change (%)")
+monthcomp <- monthcomp[c(6,1,3,2,4,5),]
+monthcomp$Platform <- c("Twitter", "Facebook", "Other Social", "Online Articles", "Radio", "TV")
+rownames(monthcomp) <- NULL
+library('formattable')
+customGreen = "#71CA97"
+customRed = "#ff7f7f"
+improvement_formatter <- 
+  formatter("span", 
+            style = x ~ style(
+              font.weight = "bold", 
+              color = ifelse(x > 0, customGreen, ifelse(x < 0, customRed, "black"))))
+previousyeartable <- formattable(monthcomp, list("Percent Change (%)"=improvement_formatter))
+return(previousyeartable)
 }

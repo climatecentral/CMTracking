@@ -4,19 +4,22 @@ output: html_document
 date: "Last updated: 11/12/2020"
 ---
 
-```{css, echo=FALSE}
-h1 {
-  text-align: center;
-}
-```
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
 data <- read.csv("October2020trackingData.csv")
 #load pre-written evaluation functions
 source("monthlyreport_functions.R")
 dataReformatted <- reformat_googlesheet(data)
 ```
+
+# Hit Type
+
+```{r YTD Hit Type, echo=FALSE, warning=FALSE, message=FALSE}
+library('openair')
+YTDdata2019 <- selectByDate(dataReformatted, start="2019/01/01", end="2019/10/31")
+YTDdata2020 <- selectByDate(dataReformatted, start="2020/01/01", end="2020/10/31")
+previousYear(YTDdata2020, YTDdata2019)
+```
+
 
 # TV
 

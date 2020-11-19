@@ -9,5 +9,5 @@ navbar:
     - text: "Year-To-Date"
       href: YearToDate.html 
     - text: "Seasonal Evaluations"
-      href: SeasonalEvaluations.html      
+      href: SeasonalEvaluations.html    
 output_dir: "docs"
