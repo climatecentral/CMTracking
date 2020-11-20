@@ -27,15 +27,18 @@ previousYear(YTDdata2020, YTDdata2019)
 ```{r, TV Goals, echo=FALSE, warning=FALSE, message=FALSE}
 #subset 2020 data
   data2020 <-dataReformatted[which(dataReformatted$year==2020),]
+  #one source per row
+  data2020.sepsource <- separate_rows(data2020, source, sep = ",")
+  data2020.sepsource <- subset(data2020.sepsource, source=="CC"|source=="CM"|source=="CMN")
   #replace NAs in tv column with 0s
-  #data2020$tv[is.na(data2020$tv)] <- 0
+  data2020.sepsource$tv[is.na(data2020.sepsource$tv)] <- 0
   #summarize tv by month
   library("dplyr")
-  tvbymonth <- data2020 %>%
+  tvbymonth <- data2020.sepsource %>%
     group_by(month) %>%
     summarise(tv=sum(tv))
   #add 20% to tv
-  tvbymonth$tv <- tvbymonth$tv*1.2
+  tvbymonth$tv <- round(tvbymonth$tv*1.2, digits=0)
   #order data by month
   library("dplyr")
   tvbymonth$month <- factor(tvbymonth$month, levels=month.name)
@@ -80,9 +83,12 @@ tvgoalschart
 ```{r, Article Goals, echo=FALSE, warning=FALSE, message=FALSE}
 #subset 2020 data
   data2020 <-dataReformatted[which(dataReformatted$year==2020),]
+#one source per row
+  data2020.sepsource <- separate_rows(data2020, source, sep = ",")
+  data2020.sepsource <- subset(data2020.sepsource, source=="CC"|source=="CM"|source=="CMN")
   #summarize articles by month
   library("dplyr")
-  articlesbymonth <- data2020 %>%
+  articlesbymonth <- data2020.sepsource %>%
     group_by(month) %>%
     summarise(articles=sum(online.article))
   #order data by month

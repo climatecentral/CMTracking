@@ -48,7 +48,7 @@ expanded.hits.draft.October2020 <- hitsbyprogram(tracking.data.October2020)
 expanded.hits.October2020 <- expanded.hits.draft.October2020[,c("source", "Twitter", "fb", "other",
                                   "online.article", "radio", "tv")]
 #restrict data to CC, CM, CMN sources
-expanded.hits.CMprograms.October2020 <- subset(expanded.hits.October2020, source=="CC"|source=="CM"|source=="CMN"|source=="Total")
+expanded.hits.CMprograms.October2020 <- subset(expanded.hits.October2020, source=="CC"|source=="CM"|source=="CMN")
 #aggregate hits according to nest program model
 CMN.October2020 <- expanded.hits.CMprograms.October2020[3,2:7]
 CM.October2020 <- CMN.October2020 + expanded.hits.CMprograms.October2020[2,2:7]
@@ -181,7 +181,7 @@ expanded.hits.draft.August2020 <- hitsbyprogram(tracking.data.August2020)
 expanded.hits.August2020 <- expanded.hits.draft.August2020[,c("source", "Twitter", "fb", "other",
                                   "online.article", "radio", "tv")]
 #restrict data to CC, CM, CMN sources
-expanded.hits.CMprograms.August2020 <- subset(expanded.hits.August2020, source=="CC"|source=="CM"|source=="CMN"|source=="Total")
+expanded.hits.CMprograms.August2020 <- subset(expanded.hits.August2020, source=="CC"|source=="CM"|source=="CMN")
 #aggregate hits according to nest program model
 CMN.August2020 <- expanded.hits.CMprograms.August2020[3,2:7]
 CM.August2020 <- CMN.August2020 + expanded.hits.CMprograms.August2020[2,2:7]

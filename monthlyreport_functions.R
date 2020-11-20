@@ -420,7 +420,7 @@ ThisYear.CMprogramhits <- adorn_totals(ThisYear.CMprogramhits, where = "row", fi
 LastYear.programhits <- hitsbyprogram(LastYear)
 LastYear.CMprogramhits <- subset(LastYear.programhits, source=="CC"|source=="CM"|source=="CMN")
 LastYear.CMprogramhits <- adorn_totals(LastYear.CMprogramhits, where = "row", fill = "-", na.rm = TRUE, name = "Total")
-#rearrange 2020 dataframe
+#rearrange 2020 data frame
 ThisYear.CMTotals <- as.data.frame(ThisYear.CMprogramhits[,c(1,9,4:8)])
 library('data.table')
 t.ThisYear.programhits <- transpose(ThisYear.CMTotals,keep.names='Hit Type')
