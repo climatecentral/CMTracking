@@ -4,6 +4,12 @@ output: html_document
 date: "Last updated: 11/19/2020"
 ---
 
+```{css, echo=FALSE}
+h1 {
+  text-align: center;
+}
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
 data <- read.csv("October2020trackingData.csv")
@@ -12,7 +18,9 @@ source("monthlyreport_functions.R")
 dataReformatted <- reformat_googlesheet(data)
 ```
 
-# Hit Type
+# Year-To-Date: October
+
+## Hit Type
 
 ```{r YTD Hit Type, echo=FALSE, warning=FALSE, message=FALSE}
 library('openair')
@@ -22,7 +30,7 @@ previousYear(YTDdata2020, YTDdata2019)
 ```
 
 
-# TV
+## TV
 
 ```{r, TV Goals, echo=FALSE, warning=FALSE, message=FALSE}
 #subset 2020 data
@@ -78,7 +86,7 @@ theme(legend.title = element_blank())+
 tvgoalschart
 ```
 
-# Articles
+## Articles
 
 ```{r, Article Goals, echo=FALSE, warning=FALSE, message=FALSE}
 #subset 2020 data
@@ -130,7 +138,7 @@ theme(legend.title = element_blank()) +
 ```
 
 
-# Program Hits
+## Program Hits
 
 ```{r, Program Hits, echo=FALSE, warning=FALSE, message=FALSE}
 #subset 2020 data
@@ -169,3 +177,35 @@ names(melted.programshits)[2] <- "Program"
   labs(y="Program Hits", x="")
 programhitschart
 ```
+
+
+```{r, TV Goals, echo=FALSE, warning=FALSE, message=FALSE}
+#subset 2019 data
+  data2019 <-dataReformatted[which(dataReformatted$year==2019),]
+  #one source per row
+library('tidyr')
+  data2019.sepsource <- separate_rows(data2019, source, sep = ",")
+  data2019.sepsource <- subset(data2019.sepsource, source=="CC"|source=="CM"|source=="CMN")
+  #replace NAs in tv column with 0s
+  data2019.sepsource$tv[is.na(data2019.sepsource$tv)] <- 0
+  #summarize tv by month
+  library("dplyr")
+  tvbymonth2019 <- data2019.sepsource %>%
+    group_by(month) %>%
+    summarise(tv=sum(tv))
+  #add 20% to tv
+  tvbymonth2019$tv <- round(tvbymonth2019$tv*1.2, digits=0)
+  #remove na row
+  tvbymonth2019 <- tvbymonth2019[!is.na(tvbymonth2019$month),]
+  #order data by month
+  library("dplyr")
+  tvbymonth2019$month <- factor(tvbymonth2019$month, levels=month.name)
+  #c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+  library("tidyverse")
+  tvbymonth2019$month <- sort(tvbymonth2019$month)
+  #add column for cumulative sum of tv airings
+  tvbymonth2019$cumulative.tv <- cumsum(tvbymonth2019$tv)
+  tvbymonth2019 <- as.data.frame(tvbymonth2019)
+  tvbymonth2019
+```
+  
