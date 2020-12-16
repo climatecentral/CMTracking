@@ -1,7 +1,7 @@
 ---
 title: "Year-To-Date"
 output: html_document
-date: "Last updated: 11/19/2020"
+date: "Last updated: 12/15/2020"
 ---
 
 ```{css, echo=FALSE}
@@ -12,21 +12,71 @@ h1 {
 
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
-data <- read.csv("October2020trackingData.csv")
+data <- read.csv("November2020TrackingData.csv")
 #load pre-written evaluation functions
 source("monthlyreport_functions.R")
 dataReformatted <- reformat_googlesheet(data)
 ```
 
-# Year-To-Date: October
+# Year-To-Date: November
 
 ## Hit Type
 
 ```{r YTD Hit Type, echo=FALSE, warning=FALSE, message=FALSE}
 library('openair')
-YTDdata2019 <- selectByDate(dataReformatted, start="2019/01/01", end="2019/10/31")
-YTDdata2020 <- selectByDate(dataReformatted, start="2020/01/01", end="2020/10/31")
+YTDdata2019 <- selectByDate(dataReformatted, start="2019/01/01", end="2019/11/30")
+YTDdata2020 <- selectByDate(dataReformatted, start="2020/01/01", end="2020/11/30")
 previousYear(YTDdata2020, YTDdata2019)
+```
+```{r}
+ThisYear <- YTDdata2020
+LastYear <- YTDdata2019
+#2020 month data
+ThisYear.sep <- separate_rows(ThisYear, source, sep = ",")
+ThisYear.sep$source <- trimws(ThisYear.sep$source, which='both')
+ThisYear.programhits <- hitsbyprogram(ThisYear.sep)
+ThisYear.CMprogramhits <- subset(ThisYear.programhits, source=="CC"|source=="CM"|source=="CMN")
+library("janitor")
+ThisYear.CMprogramhits <- adorn_totals(ThisYear.CMprogramhits, where = "row", fill = "-", na.rm = TRUE, name = "Total")
+#2019 month data
+LastYear.programhits <- hitsbyprogram(LastYear)
+LastYear.CMprogramhits <- subset(LastYear.programhits, source=="CC"|source=="CM"|source=="CMN")
+LastYear.CMprogramhits <- adorn_totals(LastYear.CMprogramhits, where = "row", fill = "-", na.rm = TRUE, name = "Total")
+#rearrange 2020 data frame
+ThisYear.CMTotals <- as.data.frame(ThisYear.CMprogramhits[,c(1,9,4:8)])
+library('data.table')
+t.ThisYear.programhits <- transpose(ThisYear.CMTotals,keep.names='Hit Type')
+colnames(t.ThisYear.programhits) <- t.ThisYear.programhits[1,]
+t.ThisYear.totalhits <- t.ThisYear.programhits[-1,c(1,5)]
+names(t.ThisYear.totalhits)[2] <- "now"
+t.ThisYear.totalhits$now <- as.numeric(t.ThisYear.totalhits$now)
+#rearrange 2019 dataframe
+LastYear.CMTotals <- as.data.frame(LastYear.CMprogramhits[,c(1,9,4:8)])
+library('data.table')
+t.LastYear.programhits <- transpose(LastYear.CMTotals,keep.names='Hit Type')
+colnames(t.LastYear.programhits) <- t.LastYear.programhits[1,]
+t.LastYear.totalhits <- t.LastYear.programhits[-1,c(1,5)]
+names(t.LastYear.totalhits)[2] <- "then"
+t.LastYear.totalhits$then <- as.numeric(t.LastYear.totalhits$then)
+monthcomp <- merge(t.ThisYear.totalhits, t.LastYear.totalhits, by="source")
+monthcomp$now <- as.numeric(monthcomp$now)
+monthcomp$then <- as.numeric(monthcomp$then)
+library('dplyr')
+monthcomp$percent.change <- round(((monthcomp$now-monthcomp$then)/monthcomp$now)*100, digits=0)
+colnames(monthcomp) <- c("Platform", "2020", "2019", "Percent Change (%)")
+monthcomp <- monthcomp[c(6,1,3,2,4,5),]
+monthcomp$Platform <- c("Twitter", "Facebook", "Other Social", "Online Articles", "Radio", "TV")
+rownames(monthcomp) <- NULL
+library('formattable')
+customGreen = "#71CA97"
+customRed = "#ff7f7f"
+improvement_formatter <- 
+  formatter("span", 
+            style = x ~ style(
+              font.weight = "bold", 
+              color = ifelse(x > 0, customGreen, ifelse(x < 0, customRed, "black"))))
+previousyeartable <- formattable(monthcomp, list("Percent Change (%)"=improvement_formatter))
+previousyeartable
 ```
 
 
@@ -48,11 +98,8 @@ previousYear(YTDdata2020, YTDdata2019)
   #add 20% to tv
   tvbymonth$tv <- round(tvbymonth$tv*1.2, digits=0)
   #order data by month
-  library("dplyr")
-  tvbymonth$month <- factor(tvbymonth$month, levels=month.name)
-  #c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
-  library("tidyverse")
-  tvbymonth$month <- sort(tvbymonth$month)
+  library('dplyr')
+  tvbymonth <- tvbymonth %>% arrange(match(month, month.name))
   #add column for cumulative sum of tv airings
   tvbymonth$cumulative.tv <- cumsum(tvbymonth$tv)
   tvbymonth <- as.data.frame(tvbymonth)
@@ -82,7 +129,8 @@ tvgoalschart <- ggplot(melted.tvgoalsandhits, aes(Month, value, group=variable, 
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="TV Airings", x="") +
 theme(legend.title = element_blank())+
-    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="October"), aes(label = value), nudge_x = 0.75, color="black")
+    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="November"), aes(label = value), nudge_x = 0.75, color="black") +
+    scale_x_discrete(limits = month.name)
 tvgoalschart
 ```
 
@@ -101,10 +149,8 @@ tvgoalschart
     summarise(articles=sum(online.article))
   #order data by month
   library("dplyr")
-  articlesbymonth$month <- factor(articlesbymonth$month, levels=month.name)
+  articlesbymonth <- articlesbymonth %>% arrange(match(month, month.name))
   #c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
-  library("tidyverse")
-  articlesbymonth$month <- sort(articlesbymonth$month)
   #add column for cumulative sum of articles
   articlesbymonth$cumulative.articles <- cumsum(articlesbymonth$articles)
   articlesbymonth <- as.data.frame(articlesbymonth)
@@ -133,7 +179,8 @@ tvgoalschart
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="Articles", x="") +
 theme(legend.title = element_blank()) +
-    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="October"), aes(label = value), nudge_x = 0.75, color="black")
+    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="November"), aes(label = value), nudge_x = 0.75, color="black") +
+    scale_x_discrete(limits = month.name)
   articlesgoalschart
 ```
 
@@ -150,10 +197,8 @@ theme(legend.title = element_blank()) +
     summarise(CC=sum(cc.hits), CM=sum(cm.hits), CMN=sum(cmn.hits))
   #order data by month
   library("dplyr")
-  programsbymonth$month <- factor(programsbymonth$month, levels=month.name)
+  programsbymonth <- programsbymonth %>% arrange(match(month, month.name))
   #c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
-  library("tidyverse")
-  programsbymonth$month <- sort(programsbymonth$month)
   #add column for cumulative sum of program hits
   programsbymonth$cc <- cumsum(programsbymonth$CC)
   programsbymonth$cm <- cumsum(programsbymonth$CM)
@@ -174,17 +219,20 @@ names(melted.programshits)[2] <- "Program"
   programhitschart <- ggplot(melted.programshits, aes(x=Month, y=value, group=Program, fill=Program)) +
   geom_area()+
   theme(axis.text.x = element_text(angle=45, vjust=0.7))+
-  labs(y="Program Hits", x="")
+  labs(y="Program Hits", x="") + scale_x_discrete(limits = month.name)
 programhitschart
 ```
 
 
-```{r, TV Goals, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, 2019, eval=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
 #subset 2019 data
   data2019 <-dataReformatted[which(dataReformatted$year==2019),]
   #one source per row
 library('tidyr')
   data2019.sepsource <- separate_rows(data2019, source, sep = ",")
+  #trim white space
+  data2019.sepsource$source <- trimws(data2019.sepsource$source, which='both')
+  #subset to only CC, CM and CMN
   data2019.sepsource <- subset(data2019.sepsource, source=="CC"|source=="CM"|source=="CMN")
   #replace NAs in tv column with 0s
   data2019.sepsource$tv[is.na(data2019.sepsource$tv)] <- 0
@@ -195,17 +243,14 @@ library('tidyr')
     summarise(tv=sum(tv))
   #add 20% to tv
   tvbymonth2019$tv <- round(tvbymonth2019$tv*1.2, digits=0)
-  #remove na row
-  tvbymonth2019 <- tvbymonth2019[!is.na(tvbymonth2019$month),]
-  #order data by month
+  #remove rows with zeroes
+  tvbymonth2019 <- tvbymonth2019[which(tvbymonth$month!=0),]
   library("dplyr")
-  tvbymonth2019$month <- factor(tvbymonth2019$month, levels=month.name)
+  sorted.tvbymonth2019 <- tvbymonth2019 %>% arrange(match(month, month.name))
   #c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
-  library("tidyverse")
-  tvbymonth2019$month <- sort(tvbymonth2019$month)
   #add column for cumulative sum of tv airings
-  tvbymonth2019$cumulative.tv <- cumsum(tvbymonth2019$tv)
-  tvbymonth2019 <- as.data.frame(tvbymonth2019)
-  tvbymonth2019
+  sorted.tvbymonth2019$cumulative.tv <- cumsum(sorted.tvbymonth2019$tv)
+  sorted.tvbymonth2019 <- as.data.frame(sorted.tvbymonth2019)
+  sorted.tvbymonth2019
 ```
   

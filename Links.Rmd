@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 11/19/2020"
+date: "Last updated: 12/15/2020"
 output: 
   html_document:
     toc: true
@@ -15,6 +15,22 @@ h1 {
   text-align: center;
 }
 ```
+
+***
+
+# November 2020
+
+**Amelia Draper** (WRC, DC) is a Climate Matters superstar! In November she produced 14 on-air climate change segments, 9 of which used our content. One [example](https://www.iqmediacorp.com/ClipPlayer/?ClipID=34225850-e5f2-4ef8-845f-21f32467fd22&ps=2) is her piece on shorter winter cold snaps. You can find more examples on the NBC ‘Changing Climate’ [site](https://www.nbcwashington.com/news/local/changing-climate/).
+
+**Ryan Hanrahan** (WVIT, CT) [explains](https://www.iqmediacorp.com/ClipPlayer/?ClipID=894fb4b5-248d-4074-827c-be8916cc42d3&ps=2) how Hartford, CT, has warmed since the 1970s, using a graphic he received the previous day in an RtC alert.
+
+For The Guardian, **Nina Lakhani** [reports](https://www.theguardian.com/environment/2020/nov/12/scorching-tucson-bucks-us-trend-to-put-climate-justice-at-centre-of-plans) on the mounting efforts to introduce renewables to Tucson, Ariz. and fight climate change.
+
+For WRGB/CBS, **Steve LaPointe** [details](https://cbs6albany.com/weather/weather-extra/winters-are-warming-and-climate-change-is-the-driver) how climate change is a main driver of the warming winters in New York and New England. 
+
+For the Arizonia Republic, **Emily Wilder** [connects](https://www.azcentral.com/story/news/local/phoenix-weather/2020/11/17/phoenix-again-breaks-record-latest-90-plus-degree-heat-year/6327151002/) the record heat in Phoenix to climate change and the urban heat island effect.
+
+**David Dickson** (WCBD, SC) uses a range of Climate Matters resources in his news segment, ‘A Moment of Science’, to [explain](https://www.iqmediacorp.com/ClipPlayer/?ClipID=e4af31c8-87aa-489a-8643-ca0e3394d413&ps=2) the science of climate change and its impacts.
 
 ***
 
