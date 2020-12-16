@@ -24,61 +24,10 @@ dataReformatted <- reformat_googlesheet(data)
 
 ```{r YTD Hit Type, echo=FALSE, warning=FALSE, message=FALSE}
 library('openair')
-YTDdata2019 <- selectByDate(dataReformatted, start="2019/01/01", end="2019/11/30")
-YTDdata2020 <- selectByDate(dataReformatted, start="2020/01/01", end="2020/11/30")
+YTDdata2019 <- dataReformatted[which(dataReformatted$year==2019),]
+YTDdata2020 <- dataReformatted[which(dataReformatted$year==2020),]
 previousYear(YTDdata2020, YTDdata2019)
 ```
-```{r}
-ThisYear <- YTDdata2020
-LastYear <- YTDdata2019
-#2020 month data
-ThisYear.sep <- separate_rows(ThisYear, source, sep = ",")
-ThisYear.sep$source <- trimws(ThisYear.sep$source, which='both')
-ThisYear.programhits <- hitsbyprogram(ThisYear.sep)
-ThisYear.CMprogramhits <- subset(ThisYear.programhits, source=="CC"|source=="CM"|source=="CMN")
-library("janitor")
-ThisYear.CMprogramhits <- adorn_totals(ThisYear.CMprogramhits, where = "row", fill = "-", na.rm = TRUE, name = "Total")
-#2019 month data
-LastYear.programhits <- hitsbyprogram(LastYear)
-LastYear.CMprogramhits <- subset(LastYear.programhits, source=="CC"|source=="CM"|source=="CMN")
-LastYear.CMprogramhits <- adorn_totals(LastYear.CMprogramhits, where = "row", fill = "-", na.rm = TRUE, name = "Total")
-#rearrange 2020 data frame
-ThisYear.CMTotals <- as.data.frame(ThisYear.CMprogramhits[,c(1,9,4:8)])
-library('data.table')
-t.ThisYear.programhits <- transpose(ThisYear.CMTotals,keep.names='Hit Type')
-colnames(t.ThisYear.programhits) <- t.ThisYear.programhits[1,]
-t.ThisYear.totalhits <- t.ThisYear.programhits[-1,c(1,5)]
-names(t.ThisYear.totalhits)[2] <- "now"
-t.ThisYear.totalhits$now <- as.numeric(t.ThisYear.totalhits$now)
-#rearrange 2019 dataframe
-LastYear.CMTotals <- as.data.frame(LastYear.CMprogramhits[,c(1,9,4:8)])
-library('data.table')
-t.LastYear.programhits <- transpose(LastYear.CMTotals,keep.names='Hit Type')
-colnames(t.LastYear.programhits) <- t.LastYear.programhits[1,]
-t.LastYear.totalhits <- t.LastYear.programhits[-1,c(1,5)]
-names(t.LastYear.totalhits)[2] <- "then"
-t.LastYear.totalhits$then <- as.numeric(t.LastYear.totalhits$then)
-monthcomp <- merge(t.ThisYear.totalhits, t.LastYear.totalhits, by="source")
-monthcomp$now <- as.numeric(monthcomp$now)
-monthcomp$then <- as.numeric(monthcomp$then)
-library('dplyr')
-monthcomp$percent.change <- round(((monthcomp$now-monthcomp$then)/monthcomp$now)*100, digits=0)
-colnames(monthcomp) <- c("Platform", "2020", "2019", "Percent Change (%)")
-monthcomp <- monthcomp[c(6,1,3,2,4,5),]
-monthcomp$Platform <- c("Twitter", "Facebook", "Other Social", "Online Articles", "Radio", "TV")
-rownames(monthcomp) <- NULL
-library('formattable')
-customGreen = "#71CA97"
-customRed = "#ff7f7f"
-improvement_formatter <- 
-  formatter("span", 
-            style = x ~ style(
-              font.weight = "bold", 
-              color = ifelse(x > 0, customGreen, ifelse(x < 0, customRed, "black"))))
-previousyeartable <- formattable(monthcomp, list("Percent Change (%)"=improvement_formatter))
-previousyeartable
-```
-
 
 ## TV
 
@@ -86,7 +35,9 @@ previousyeartable
 #subset 2020 data
   data2020 <-dataReformatted[which(dataReformatted$year==2020),]
   #one source per row
+  library('tidyr')
   data2020.sepsource <- separate_rows(data2020, source, sep = ",")
+  data2020.sepsource$source <- trimws(data2020.sepsource$source, which='both')
   data2020.sepsource <- subset(data2020.sepsource, source=="CC"|source=="CM"|source=="CMN")
   #replace NAs in tv column with 0s
   data2020.sepsource$tv[is.na(data2020.sepsource$tv)] <- 0

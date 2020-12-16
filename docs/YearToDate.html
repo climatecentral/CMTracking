@@ -347,10 +347,10 @@ Twitter
 4598
 </td>
 <td style="text-align:right;">
-4699
+5008
 </td>
 <td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-2</span>
+<span style="font-weight: bold; color: #ff7f7f">-9</span>
 </td>
 </tr>
 <tr>
@@ -358,13 +358,13 @@ Twitter
 Facebook
 </td>
 <td style="text-align:right;">
-1721
+1742
 </td>
 <td style="text-align:right;">
-1681
+1846
 </td>
 <td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">2</span>
+<span style="font-weight: bold; color: #ff7f7f">-6</span>
 </td>
 </tr>
 <tr>
@@ -375,10 +375,10 @@ Other Social
 157
 </td>
 <td style="text-align:right;">
-185
+191
 </td>
 <td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-18</span>
+<span style="font-weight: bold; color: #ff7f7f">-22</span>
 </td>
 </tr>
 <tr>
@@ -386,13 +386,13 @@ Other Social
 Online Articles
 </td>
 <td style="text-align:right;">
-2179
+2200
 </td>
 <td style="text-align:right;">
-2275
+2411
 </td>
 <td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-4</span>
+<span style="font-weight: bold; color: #ff7f7f">-10</span>
 </td>
 </tr>
 <tr>
@@ -403,10 +403,10 @@ Radio
 108
 </td>
 <td style="text-align:right;">
-315
+342
 </td>
 <td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-192</span>
+<span style="font-weight: bold; color: #ff7f7f">-217</span>
 </td>
 </tr>
 <tr>
@@ -414,196 +414,13 @@ Radio
 TV
 </td>
 <td style="text-align:right;">
-3417
+3509
 </td>
 <td style="text-align:right;">
-3142
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">8</span>
-</td>
-</tr>
-</tbody>
-</table>
-<pre class="r"><code>ThisYear &lt;- YTDdata2020
-LastYear &lt;- YTDdata2019
-#2020 month data
-ThisYear.sep &lt;- separate_rows(ThisYear, source, sep = &quot;,&quot;)
-ThisYear.sep$source &lt;- trimws(ThisYear.sep$source, which=&#39;both&#39;)
-ThisYear.programhits &lt;- hitsbyprogram(ThisYear.sep)</code></pre>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<pre><code>## Warning in melt(hits.sepsource, id = c(&quot;ID&quot;, &quot;source&quot;)): The melt generic in
-## data.table has been passed a tbl_df and will attempt to redirect to the relevant
-## reshape2 method; please note that reshape2 is deprecated, and this redirection
-## is now deprecated as well. To continue using melt methods from reshape2 while
-## both libraries are attached, e.g. melt.list, you can prepend the namespace like
-## reshape2::melt(hits.sepsource). In the next version, this warning will become an
-## error.</code></pre>
-<pre><code>## Warning in dcast(hits.melt, ID + source ~ variable, sum): The dcast generic
-## in data.table has been passed a data.frame and will attempt to redirect
-## to the reshape2::dcast; please note that reshape2 is deprecated, and this
-## redirection is now deprecated as well. Please do this redirection yourself like
-## reshape2::dcast(hits.melt). In the next version, this warning will become an
-## error.</code></pre>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<pre class="r"><code>ThisYear.CMprogramhits &lt;- subset(ThisYear.programhits, source==&quot;CC&quot;|source==&quot;CM&quot;|source==&quot;CMN&quot;)
-library(&quot;janitor&quot;)
-ThisYear.CMprogramhits &lt;- adorn_totals(ThisYear.CMprogramhits, where = &quot;row&quot;, fill = &quot;-&quot;, na.rm = TRUE, name = &quot;Total&quot;)
-#2019 month data
-LastYear.programhits &lt;- hitsbyprogram(LastYear)</code></pre>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<pre><code>## Warning in melt(hits.sepsource, id = c(&quot;ID&quot;, &quot;source&quot;)): The melt generic in
-## data.table has been passed a tbl_df and will attempt to redirect to the relevant
-## reshape2 method; please note that reshape2 is deprecated, and this redirection
-## is now deprecated as well. To continue using melt methods from reshape2 while
-## both libraries are attached, e.g. melt.list, you can prepend the namespace like
-## reshape2::melt(hits.sepsource). In the next version, this warning will become an
-## error.
-
-## Warning in melt(hits.sepsource, id = c(&quot;ID&quot;, &quot;source&quot;)): The dcast generic
-## in data.table has been passed a data.frame and will attempt to redirect
-## to the reshape2::dcast; please note that reshape2 is deprecated, and this
-## redirection is now deprecated as well. Please do this redirection yourself like
-## reshape2::dcast(hits.melt). In the next version, this warning will become an
-## error.</code></pre>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<pre class="r"><code>LastYear.CMprogramhits &lt;- subset(LastYear.programhits, source==&quot;CC&quot;|source==&quot;CM&quot;|source==&quot;CMN&quot;)
-LastYear.CMprogramhits &lt;- adorn_totals(LastYear.CMprogramhits, where = &quot;row&quot;, fill = &quot;-&quot;, na.rm = TRUE, name = &quot;Total&quot;)
-#rearrange 2020 data frame
-ThisYear.CMTotals &lt;- as.data.frame(ThisYear.CMprogramhits[,c(1,9,4:8)])
-library(&#39;data.table&#39;)
-t.ThisYear.programhits &lt;- transpose(ThisYear.CMTotals,keep.names=&#39;Hit Type&#39;)
-colnames(t.ThisYear.programhits) &lt;- t.ThisYear.programhits[1,]
-t.ThisYear.totalhits &lt;- t.ThisYear.programhits[-1,c(1,5)]
-names(t.ThisYear.totalhits)[2] &lt;- &quot;now&quot;
-t.ThisYear.totalhits$now &lt;- as.numeric(t.ThisYear.totalhits$now)
-#rearrange 2019 dataframe
-LastYear.CMTotals &lt;- as.data.frame(LastYear.CMprogramhits[,c(1,9,4:8)])
-library(&#39;data.table&#39;)
-t.LastYear.programhits &lt;- transpose(LastYear.CMTotals,keep.names=&#39;Hit Type&#39;)
-colnames(t.LastYear.programhits) &lt;- t.LastYear.programhits[1,]
-t.LastYear.totalhits &lt;- t.LastYear.programhits[-1,c(1,5)]
-names(t.LastYear.totalhits)[2] &lt;- &quot;then&quot;
-t.LastYear.totalhits$then &lt;- as.numeric(t.LastYear.totalhits$then)
-monthcomp &lt;- merge(t.ThisYear.totalhits, t.LastYear.totalhits, by=&quot;source&quot;)
-monthcomp$now &lt;- as.numeric(monthcomp$now)
-monthcomp$then &lt;- as.numeric(monthcomp$then)
-library(&#39;dplyr&#39;)
-monthcomp$percent.change &lt;- round(((monthcomp$now-monthcomp$then)/monthcomp$now)*100, digits=0)
-colnames(monthcomp) &lt;- c(&quot;Platform&quot;, &quot;2020&quot;, &quot;2019&quot;, &quot;Percent Change (%)&quot;)
-monthcomp &lt;- monthcomp[c(6,1,3,2,4,5),]
-monthcomp$Platform &lt;- c(&quot;Twitter&quot;, &quot;Facebook&quot;, &quot;Other Social&quot;, &quot;Online Articles&quot;, &quot;Radio&quot;, &quot;TV&quot;)
-rownames(monthcomp) &lt;- NULL
-library(&#39;formattable&#39;)
-customGreen = &quot;#71CA97&quot;
-customRed = &quot;#ff7f7f&quot;
-improvement_formatter &lt;- 
-  formatter(&quot;span&quot;, 
-            style = x ~ style(
-              font.weight = &quot;bold&quot;, 
-              color = ifelse(x &gt; 0, customGreen, ifelse(x &lt; 0, customRed, &quot;black&quot;))))
-previousyeartable &lt;- formattable(monthcomp, list(&quot;Percent Change (%)&quot;=improvement_formatter))
-previousyeartable</code></pre>
-<table class="table table-condensed">
-<thead>
-<tr>
-<th style="text-align:right;">
-Platform
-</th>
-<th style="text-align:right;">
-2020
-</th>
-<th style="text-align:right;">
-2019
-</th>
-<th style="text-align:right;">
-Percent Change (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-Twitter
-</td>
-<td style="text-align:right;">
-4599
-</td>
-<td style="text-align:right;">
-4699
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-2</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Facebook
-</td>
-<td style="text-align:right;">
-1721
-</td>
-<td style="text-align:right;">
-1681
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">2</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Other Social
-</td>
-<td style="text-align:right;">
-157
-</td>
-<td style="text-align:right;">
-185
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-18</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Online Articles
-</td>
-<td style="text-align:right;">
-2182
-</td>
-<td style="text-align:right;">
-2275
+3634
 </td>
 <td style="text-align:right;">
 <span style="font-weight: bold; color: #ff7f7f">-4</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Radio
-</td>
-<td style="text-align:right;">
-163
-</td>
-<td style="text-align:right;">
-315
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-93</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-TV
-</td>
-<td style="text-align:right;">
-3417
-</td>
-<td style="text-align:right;">
-3142
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">8</span>
 </td>
 </tr>
 </tbody>

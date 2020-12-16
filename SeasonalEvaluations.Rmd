@@ -376,7 +376,7 @@ Content usage that was tracked during the summer but but was published earlier.
 
 **WeatherPower** was the top evergreen graphic, largely because of AJ Fox's continued sponsored segment. 
 
-After that, the top three 'Evergreen' releases were [20202019EOYGlobalTemps](https://medialibrary.climatecentral.org/resources/2019-in-review-global-temperature-rankings), [2017SummerHeatPrepPackage	](https://medialibrary.climatecentral.org/resources/the-season-of-extreme-heat), and [2019HeatIndex](https://medialibrary.climatecentral.org/resources/climate-matters-extreme-heat-index-threatening-outdoor-sports).
+After that, the top three 'Evergreen' releases were [2020DaysAbove](https://medialibrary.climatecentral.org/resources/2020-days-above-thresholds), [2020Hurricanes](https://medialibrary.climatecentral.org/resources/2020-hurricane-season) and [2019Warming](https://medialibrary.climatecentral.org/resources/earth-day-fastest-warming-cities-and-states-2019) [20202019EOYGlobalTemps](https://medialibrary.climatecentral.org/resources/2019-in-review-global-temperature-rankings), [2017SummerHeatPrepPackage	](https://medialibrary.climatecentral.org/resources/the-season-of-extreme-heat), and [2019HeatIndex](https://medialibrary.climatecentral.org/resources/climate-matters-extreme-heat-index-threatening-outdoor-sports).
 
 
 ```{r Previous content used Summer 2020, echo = FALSE, warning=FALSE, message=FALSE}
@@ -385,7 +385,7 @@ seasonData.sep <- separate_rows(seasonData, program.content, sep=", ")
 nonSeasonReleases <- seasonData.sep[-which(seasonData.sep$program.content %in% releases$title),]
 
 evergreen.rank <- rankReleases(nonSeasonReleases)
-evergreen.rank.tidy <- evergreen.rank[-c(4),]
+evergreen.rank.tidy <- evergreen.rank[-c(2),]
 names(evergreen.rank.tidy) <- c("Release", "Social", "Stories", "TV", "Total Hits")
 library(DT)
 datatable(evergreen.rank.tidy, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
