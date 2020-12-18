@@ -107,71 +107,11 @@ library(DT)
 datatable(seasonsGraphicsByHits, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
 ```
 
-## Graphic Popularity by Release
-
-Graphics are ordered by publication date then by popularity, to show the popularity of each graphic in a given release.
-
-```{r, Graphic Popularity by Release Fall 2020, echo=FALSE}
-graphicType <- read.csv('fall2020releasesandgraphicstype.csv')
-popularGraphicTypes <- merge(graphicPopularity, graphicType, by.x = "graphic.used", by.y = "graphic")
-popularGraphicType <- popularGraphicTypes[,c("date", "title", "graphic.used", "total")]
-popularGraphicType$date <- as.Date(popularGraphicType$date, format="%m/%d/%Y")
-
-#sort for most popular graphics in each release
-popularByRelease <- popularGraphicType[order(popularGraphicType$date, -popularGraphicType$total),]
-names(popularByRelease) <- c("Date Published", "Release", "Graphic Name", "Total Hits")
-library(DT)
-datatable(popularByRelease, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
-```
-
-## Graphic Popularity by Attribute
-
-'Attribute' is used to describe two characteristics of a graphic: the geographic resolution, and the type of graphic. Graphic popularity is calculated as the number of hits per graphic of that attribute.
-
-Graphic 'type' is classified as: chart, map, explainer, gif or other. Graphic 'geo' is classified as: local/state, regional, national, global or n/a.
-
-```{r Graphic Popularity by Type and Geo Fall 2020, echo = FALSE, warning=FALSE, message=FALSE}
-graphicSort <- tapply(popularGraphicTypes$total, popularGraphicTypes$type, sum)
-graphicDistribution <- tapply(popularGraphicTypes$total, popularGraphicTypes$distribution, sum)
-
-graphicSortProduced <- graphicType %>%
-  group_by(type) %>%
-  summarize(n())
-graphicSortProduced <- as.data.frame(graphicSortProduced)
-graphicGeoProduced <- graphicType %>%
-  group_by(distribution) %>%
-  summarize(n())
-graphicGeoProduced <- as.data.frame(graphicGeoProduced)
-
-graphicDistribution.df <- as.data.frame(graphicDistribution)
-graphicDistribution.df$distribution <- rownames(graphicDistribution.df)
-names(graphicDistribution.df)[1] <- "hits" 
-names(graphicGeoProduced)[2] <- "count"
-graphicGeoPopularity <- merge(graphicDistribution.df, graphicGeoProduced, by="distribution")
-graphicGeoPopularity$hitsPerGraphic <- graphicGeoPopularity$hits/graphicGeoPopularity$count
-ggp.forpie <- graphicGeoPopularity[,c("distribution", "hitsPerGraphic")]
-
-graphicSort.df <- as.data.frame(graphicSort)
-graphicSort.df$type <- rownames(graphicSort.df)
-names(graphicSort.df)[1] <- "hits"
-names(graphicSortProduced)[2] <- "count"
-graphicTypePopularity <- merge(graphicSort.df, graphicSortProduced, by="type")
-graphicTypePopularity$hitsPerGraphic <- graphicTypePopularity$hits/graphicTypePopularity$count
-gtp.forpie <- graphicTypePopularity[,c("type", "hitsPerGraphic")]
-
-par(mfrow=c(1,2))
-pie(ggp.forpie$hitsPerGraphic,ggp.forpie$distribution, main="Geography")
-pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type")
-```
-
 ## Previous Content Used
 
-Content usage that was tracked during the summer but but was published earlier.
+Content usage that was tracked during the fall but was published before the fall (i.e. content that subscribers have gone back to look for). 
 
-**WeatherPower** was the top evergreen graphic, largely because of AJ Fox's continued sponsored segment. 
-
-After that, the top three 'Evergreen' releases were [20202019EOYGlobalTemps](https://medialibrary.climatecentral.org/resources/2019-in-review-global-temperature-rankings), [2017SummerHeatPrepPackage	](https://medialibrary.climatecentral.org/resources/the-season-of-extreme-heat), and [2019HeatIndex](https://medialibrary.climatecentral.org/resources/climate-matters-extreme-heat-index-threatening-outdoor-sports).
-
+The top three pieces of content that subscribers pulled out of the archives were: [2020DistanceEmissions](https://medialibrary.climatecentral.org/resources/travel-and-air-pollution-during-covid-19), WeatherPower (largely due to A.J Fox's ongoing sponsored segment), and [2020CO2Peak](https://medialibrary.climatecentral.org/resources/co2-and-the-climate-curve).
 
 ```{r Previous content used Fall 2020, echo = FALSE, warning=FALSE, message=FALSE}
 #remove rows which have hits from current season
@@ -269,109 +209,9 @@ library(DT)
 datatable(seasonsGraphicsByHits, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
 ```
 
-## Graphic Popularity by Release
-```{r, Graphic Popularity by Release Summer 2020, echo=FALSE}
-graphicType <- read.csv('summer2020releasesandgraphicstype.csv')
-popularGraphicTypes <- merge(graphicPopularity, graphicType, by.x = "graphic.used", by.y = "graphic")
-popularGraphicType <- popularGraphicTypes[,c("date", "title", "graphic.used", "total")]
-popularGraphicType$date <- as.Date(popularGraphicType$date, format="%m/%d/%Y")
-
-#sort for most popular graphics in each release
-popularByRelease <- popularGraphicType[order(popularGraphicType$date, -popularGraphicType$total),]
-names(popularByRelease) <- c("Date Published", "Release", "Graphic Name", "Total Hits")
-library(DT)
-datatable(popularByRelease, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
-```
-
-## Graphic Popularity by Attribute
-
-'Attribute' is used to describe two characteristics of a graphic: the geographic resolution, and the type of graphic. Graphic popularity is calculated as the number of hits per graphic of that attribute.
-
-Graphic 'type' is classified as: chart, map, explainer, gif or other. Graphic 'geo' is classified as: local/state, regional, national, global or n/a.
-
-Warming Stripes campaign included two graphics: a "local other" and a "local gif".
-
-```{r Graphic Popularity by Type and Geo Summer 2020, echo = FALSE, warning=FALSE, message=FALSE}
-graphicSort <- tapply(popularGraphicTypes$total, popularGraphicTypes$type, sum)
-graphicDistribution <- tapply(popularGraphicTypes$total, popularGraphicTypes$distribution, sum)
-
-graphicSortProduced <- graphicType %>%
-  group_by(type) %>%
-  summarize(n())
-graphicSortProduced <- as.data.frame(graphicSortProduced)
-graphicGeoProduced <- graphicType %>%
-  group_by(distribution) %>%
-  summarize(n())
-graphicGeoProduced <- as.data.frame(graphicGeoProduced)
-
-graphicDistribution.df <- as.data.frame(graphicDistribution)
-graphicDistribution.df$distribution <- rownames(graphicDistribution.df)
-names(graphicDistribution.df)[1] <- "hits" 
-names(graphicGeoProduced)[2] <- "count"
-graphicGeoPopularity <- merge(graphicDistribution.df, graphicGeoProduced, by="distribution")
-graphicGeoPopularity$hitsPerGraphic <- graphicGeoPopularity$hits/graphicGeoPopularity$count
-ggp.forpie <- graphicGeoPopularity[,c("distribution", "hitsPerGraphic")]
-
-graphicSort.df <- as.data.frame(graphicSort)
-graphicSort.df$type <- rownames(graphicSort.df)
-names(graphicSort.df)[1] <- "hits"
-names(graphicSortProduced)[2] <- "count"
-graphicTypePopularity <- merge(graphicSort.df, graphicSortProduced, by="type")
-graphicTypePopularity$hitsPerGraphic <- graphicTypePopularity$hits/graphicTypePopularity$count
-gtp.forpie <- graphicTypePopularity[,c("type", "hitsPerGraphic")]
-
-par(mfrow=c(1,2))
-pie(ggp.forpie$hitsPerGraphic,ggp.forpie$distribution, main="Geography")
-pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type")
-```
-
-### Excluding 'Warming Stripes' campaign
-
-```{r Graphic Popularity by Type and Geo (without WS) Summer 2020, echo = FALSE, warning=FALSE, message=FALSE}
-
-#remove Warming Stripes campaign
-popularGraphicTypes.woWS <- popularGraphicTypes[-which(popularGraphicTypes$title=="2020WarmingStripes"),]
-
-graphicType.woWS <- graphicType[-which(graphicType$title=="2020WarmingStripes"),]
-
-
-graphicSort <- tapply(popularGraphicTypes.woWS$total, popularGraphicTypes.woWS$type, sum)
-graphicDistribution <- tapply(popularGraphicTypes.woWS$total, popularGraphicTypes.woWS$distribution, sum)
-
-graphicSortProduced <- graphicType.woWS %>%
-  group_by(type) %>%
-  summarize(n())
-graphicSortProduced <- as.data.frame(graphicSortProduced)
-graphicGeoProduced <- graphicType.woWS %>%
-  group_by(distribution) %>%
-  summarize(n())
-graphicGeoProduced <- as.data.frame(graphicGeoProduced)
-
-graphicDistribution.df <- as.data.frame(graphicDistribution)
-graphicDistribution.df$distribution <- rownames(graphicDistribution.df)
-names(graphicDistribution.df)[1] <- "hits" 
-names(graphicGeoProduced)[2] <- "count"
-graphicGeoPopularity <- merge(graphicDistribution.df, graphicGeoProduced, by="distribution")
-graphicGeoPopularity$hitsPerGraphic <- graphicGeoPopularity$hits/graphicGeoPopularity$count
-ggp.forpie <- graphicGeoPopularity[,c("distribution", "hitsPerGraphic")]
-
-graphicSort.df <- as.data.frame(graphicSort)
-graphicSort.df$type <- rownames(graphicSort.df)
-names(graphicSort.df)[1] <- "hits"
-names(graphicSortProduced)[2] <- "count"
-graphicTypePopularity <- merge(graphicSort.df, graphicSortProduced, by="type")
-graphicTypePopularity$hitsPerGraphic <- graphicTypePopularity$hits/graphicTypePopularity$count
-gtp.forpie <- graphicTypePopularity[,c("type", "hitsPerGraphic")]
-
-par(mfrow=c(1,2))
-pie(ggp.forpie$hitsPerGraphic,ggp.forpie$distribution, main="Geography")
-pie(gtp.forpie$hitsPerGraphic, gtp.forpie$type, main = "Type")
-```
-
-
 ## Previous Content Used
 
-Content usage that was tracked during the summer but but was published earlier.
+Content usage that was tracked during the summer but was published before the summer (i.e. content that subscribers have gone back to look for). 
 
 **WeatherPower** was the top evergreen graphic, largely because of AJ Fox's continued sponsored segment. 
 
