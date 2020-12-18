@@ -20,9 +20,8 @@ dataReformatted <- reformat_googlesheet(data)
 
 # Year-To-Date: November
 
+```{r YTD Hit Type, eval=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
 ## Hit Type
-
-```{r YTD Hit Type, echo=FALSE, warning=FALSE, message=FALSE}
 library('openair')
 YTDdata2019 <- dataReformatted[which(dataReformatted$year==2019),]
 YTDdata2020 <- dataReformatted[which(dataReformatted$year==2020),]
