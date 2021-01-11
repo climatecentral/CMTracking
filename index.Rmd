@@ -26,7 +26,7 @@ tracking.data <-reformat_googlesheet(data)
 Repository for CM/N Programs Monthly Tracking reports.
 
 
-# **December 2020**
+# December 2020
 
 ```{r December Enrollment, eval=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
 rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
@@ -94,7 +94,7 @@ month.hitsbyregion.December2020
 
 ***
 
-# **November 2020**
+# November 2020
 
 ```{r November Enrollment, eval=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
 rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
@@ -162,7 +162,7 @@ month.hitsbyregion.November2020
 
 ***
 
-# **October 2020**
+# October 2020
 
 ```{r October Enrollment, eval=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
 rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
@@ -230,7 +230,7 @@ month.hitsbyregion.October2020
 
 ***
 
-# **September 2020**
+# September 2020
 
 ```{r September setup, echo = FALSE, warning=FALSE, message=FALSE}
 tracking.data.September2020 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2020"),]
@@ -293,7 +293,7 @@ month.hitsbyregion.September2020
 
 ***
 
-# **August 2020**
+# August 2020
 
 ```{r August Enrollment, include=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
 rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
