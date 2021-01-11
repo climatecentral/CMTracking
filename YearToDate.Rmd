@@ -1,7 +1,7 @@
 ---
 title: "Year-To-Date"
 output: html_document
-date: "Last updated: 12/15/2020"
+date: "Last updated: 1/11/2021"
 ---
 
 ```{css, echo=FALSE}
@@ -12,13 +12,13 @@ h1 {
 
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
-data <- read.csv("November2020TrackingData.csv")
+data <- read.csv("December2020TrackingData.csv")
 #load pre-written evaluation functions
 source("monthlyreport_functions.R")
 dataReformatted <- reformat_googlesheet(data)
 ```
 
-# Year-To-Date: November
+# Year-To-Date: December
 
 ```{r YTD Hit Type, eval=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
 ## Hit Type
@@ -79,7 +79,7 @@ tvgoalschart <- ggplot(melted.tvgoalsandhits, aes(Month, value, group=variable, 
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="TV Airings", x="") +
 theme(legend.title = element_blank())+
-    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="November"), aes(label = "3509"), nudge_x = 0.75, color="black") +
+    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="December"), aes(label = "3799"), nudge_x = 0.2, nudge_y = 200, color="black") +
     scale_x_discrete(limits = month.name)
 tvgoalschart
 ```
@@ -129,7 +129,7 @@ tvgoalschart
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="Articles", x="") +
 theme(legend.title = element_blank()) +
-    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="November"), aes(label = value), nudge_x = 0.75, color="black") +
+    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="December"), aes(label = value), nudge_x = 0.2, nudge_y = 200, color="black") +
     scale_x_discrete(limits = month.name)
   articlesgoalschart
 ```

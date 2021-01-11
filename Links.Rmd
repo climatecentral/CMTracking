@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 12/15/2020"
+date: "Last updated: 1/11/2021"
 output: 
   html_document:
     toc: true
@@ -15,6 +15,24 @@ h1 {
   text-align: center;
 }
 ```
+
+# December 2020
+
+**James Bruggers** [outlines](https://insideclimatenews.org/news/09122020/georgia-senate-ossoff-perdue-warnock-loeffler-climate-hurricane-drought-sea-level-rise/) how climate change is on the ballot in Georgia, and features an interview with Climate Central's Sean Sublette, for InsideClimate News.
+
+For The Guardian, **Oliver Milman** [discusses](https://www.theguardian.com/environment/2020/dec/01/climate-crisis-triple-flooding-threat-low-income-us-homes-by-2050) Climate Central’s recent affordable housing and sea level rise paper and its implications across the different coastal states. 
+
+**Kristen Kirchhaine** for WTMJ, [interviews](https://www.tmj4.com/news/local-news/warming-winters-how-climate-change-is-affecting-southeast-wisconsin) one of our recommended experts Dr. Michael Notaro to explain how climate change is impacting winter in Southeast Wisconsin.
+
+**Allen Best** [investigates](https://mountaintownnews.net/2020/12/10/colorado-icebox-notably-warmer/) why average winter temperatures over the decades in Denver are not as pronounced as the state of Colorado, for Mountain Town News. 
+
+**Adam Epstein** (KTXL/FOX, CA) [explains](https://www.iqmediacorp.com/ClipPlayer/?ClipID=8305f00a-5cc1-4111-ba61-c8616bcfe290&ps=2) the concept of “getting to Net Zero” and how we might go about lowering our carbon emissions.
+
+**Al Roker** (WNBC/NBC, National) [covers](https://www.iqmediacorp.com/ClipPlayer/?ClipID=5829b5ef-5dfe-4837-af8f-f0b904e684c2&ps=2) western wildfires, a “rare December threat”, explaining how climate change is leading to drier conditions and extending the fire season.
+
+**Carl Parker** (The Weather Channel, National) [discusses](https://www.iqmediacorp.com/ClipPlayer/?ClipID=ede23fd2-4e9f-42db-a0a9-fcdf050927e9&ps=2) billion-dollar disasters, and how these extreme weather events are taking a severe toll on American farmers.
+
+**Kenton Gewecke** (KOMU/NBC) [continues](https://www.komu.com/weather/showmeclimate/warm-december-days-are-becoming-more-common/article_706dd2b2-3b47-11eb-b1c9-b39366de3047.html?fbclid=IwAR302CeW9-YzL107D2wf7C7wa8hepg8dtqtzLhhfdRehqNWnVQm6EC9QVwE) his ‘Show me Climate’ segment by using an RtC graphic he received in order to discuss how climate change is making warm December days more common.
 
 ***
 
