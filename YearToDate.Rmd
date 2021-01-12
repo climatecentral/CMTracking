@@ -79,7 +79,7 @@ tvgoalschart <- ggplot(melted.tvgoalsandhits, aes(Month, value, group=variable, 
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="TV Airings", x="") +
 theme(legend.title = element_blank())+
-    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="December"), aes(label = "3799"), nudge_x = 0.2, nudge_y = 200, color="black") +
+    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="December"), aes(label = "3792"), nudge_x = 0.2, nudge_y = 200, color="black") +
     scale_x_discrete(limits = month.name)
 tvgoalschart
 ```
@@ -129,7 +129,7 @@ tvgoalschart
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="Articles", x="") +
 theme(legend.title = element_blank()) +
-    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="December"), aes(label = value), nudge_x = 0.2, nudge_y = 200, color="black") +
+    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="December"), aes(label = 2432), nudge_x = 0.2, nudge_y = 200, color="black") +
     scale_x_discrete(limits = month.name)
   articlesgoalschart
 ```
