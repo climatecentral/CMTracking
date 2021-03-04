@@ -1,7 +1,7 @@
 ---
 title: "Year-To-Date"
 output: html_document
-date: "Last updated: 1/11/2021"
+date: "Last updated: 3/2/2021"
 ---
 
 ```{css, echo=FALSE}
@@ -10,39 +10,41 @@ h1 {
 }
 ```
 
+Note: Year-to-date data is not yet viewable for 2021.
+
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
-data <- read.csv("December2020TrackingData.csv")
+data <- read.csv("January2021TrackingData.csv")
 #load pre-written evaluation functions
 source("monthlyreport_functions.R")
 dataReformatted <- reformat_googlesheet(data)
 ```
 
-# Year-To-Date: December
+# Year-To-Date: January
 
 ```{r YTD Hit Type, eval=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
 ## Hit Type
 library('openair')
-YTDdata2019 <- dataReformatted[which(dataReformatted$year==2019),]
-YTDdata2020 <- dataReformatted[which(dataReformatted$year==2020),]
-previousYear(YTDdata2020, YTDdata2019)
+YTDdata2020 <- dataReformatted[which(dataReformatted$month=="January" & dataReformatted$year=="2020"),]
+YTDdata2021 <- dataReformatted[which(tracking.data$month=="January" & tracking.data$year=="2021"),]
+previousYear(YTDdata2021, YTDdata2020)
 ```
 
 ## TV
 
 ```{r, TV Goals, echo=FALSE, warning=FALSE, message=FALSE}
-#subset 2020 data
-  data2020 <-dataReformatted[which(dataReformatted$year==2020),]
+#subset 2021 data
+  data2021 <-dataReformatted[which(dataReformatted$year==2021),]
   #one source per row
   library('tidyr')
-  data2020.sepsource <- separate_rows(data2020, source, sep = ",")
-  data2020.sepsource$source <- trimws(data2020.sepsource$source, which='both')
-  data2020.sepsource <- subset(data2020.sepsource, source=="CC"|source=="CM"|source=="CMN")
+  data2021.sepsource <- separate_rows(data2021, source, sep = ",")
+  data2021.sepsource$source <- trimws(data2021.sepsource$source, which='both')
+  data2021.sepsource <- subset(data2021.sepsource, source=="CC"|source=="CM"|source=="CMN")
   #replace NAs in tv column with 0s
-  data2020.sepsource$tv[is.na(data2020.sepsource$tv)] <- 0
+  data2021.sepsource$tv[is.na(data2021.sepsource$tv)] <- 0
   #summarize tv by month
   library("dplyr")
-  tvbymonth <- data2020.sepsource %>%
+  tvbymonth <- data2021.sepsource %>%
     group_by(month) %>%
     summarise(tv=sum(tv))
   #add 20% to tv
@@ -54,7 +56,7 @@ previousYear(YTDdata2020, YTDdata2019)
   tvbymonth$cumulative.tv <- cumsum(tvbymonth$tv)
   tvbymonth <- as.data.frame(tvbymonth)
   #tv goals
-  tv.goals <- c(500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000)
+  tv.goals <- c(400, 800, 1200, 1600, 2000, 2400, 2800, 3200, 3600, 4000, 4400, 4800)
   month <- month.name
   tvgoals.bymonth <- data.frame(month, tv.goals)
   #merge hits and goals
@@ -79,7 +81,7 @@ tvgoalschart <- ggplot(melted.tvgoalsandhits, aes(Month, value, group=variable, 
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="TV Airings", x="") +
 theme(legend.title = element_blank())+
-    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="December"), aes(label = "3792"), nudge_x = 0.2, nudge_y = 200, color="black") +
+    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="December"), aes(label = "368"), nudge_x = 0.2, nudge_y = 200, color="black") +
     scale_x_discrete(limits = month.name)
 tvgoalschart
 ```
@@ -87,14 +89,14 @@ tvgoalschart
 ## Articles
 
 ```{r, Article Goals, echo=FALSE, warning=FALSE, message=FALSE}
-#subset 2020 data
-  data2020 <-dataReformatted[which(dataReformatted$year==2020),]
+#subset 2021 data
+  data2021 <-dataReformatted[which(dataReformatted$year==2021),]
 #one source per row
-  data2020.sepsource <- separate_rows(data2020, source, sep = ",")
-  data2020.sepsource <- subset(data2020.sepsource, source=="CC"|source=="CM"|source=="CMN")
+  data2021.sepsource <- separate_rows(data2021, source, sep = ",")
+  data2021.sepsource <- subset(data2021.sepsource, source=="CC"|source=="CM"|source=="CMN")
   #summarize articles by month
   library("dplyr")
-  articlesbymonth <- data2020.sepsource %>%
+  articlesbymonth <- data2021.sepsource %>%
     group_by(month) %>%
     summarise(articles=sum(online.article))
   #order data by month
@@ -105,7 +107,7 @@ tvgoalschart
   articlesbymonth$cumulative.articles <- cumsum(articlesbymonth$articles)
   articlesbymonth <- as.data.frame(articlesbymonth)
   #articles goals
-  articles.goals <- c(521,1042,1563,2083,2604,3125,3646,4167,4688,5208,5729,6250)
+  articles.goals <- c(317, 634, 951, 1268, 1585, 1902, 2219, 2536, 2853, 3170, 3487, 3804)
   month <- month.name
   articlesgoals.bymonth <- data.frame(month, articles.goals)
   #merge hits and goals
@@ -129,7 +131,7 @@ tvgoalschart
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="Articles", x="") +
 theme(legend.title = element_blank()) +
-    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="December"), aes(label = 2432), nudge_x = 0.2, nudge_y = 200, color="black") +
+    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="December"), aes(label = 213), nudge_x = 0.2, nudge_y = 200, color="black") +
     scale_x_discrete(limits = month.name)
   articlesgoalschart
 ```
@@ -137,12 +139,12 @@ theme(legend.title = element_blank()) +
 
 ## Program Hits
 
-```{r, Program Hits, echo=FALSE, warning=FALSE, message=FALSE}
-#subset 2020 data
-  data2020 <-dataReformatted[which(dataReformatted$year==2020),]
+```{r, Program Hits, eval=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
+#subset 2021 data
+  data2021 <-dataReformatted[which(dataReformatted$year==2021),]
   #summarize program hits by month
   library("dplyr")
-  programsbymonth <- data2020 %>%
+  programsbymonth <- data2021 %>%
     group_by(month) %>%
     summarise(CC=sum(cc.hits), CM=sum(cm.hits), CMN=sum(cmn.hits))
   #order data by month

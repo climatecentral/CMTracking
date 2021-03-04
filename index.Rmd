@@ -1,6 +1,6 @@
 ---
 title: "Monthly Numbers"
-date: "Last updated: 1/11/2021"
+date: "Last updated: 3/3/2021"
 output:
   html_document:
     toc: true
@@ -19,12 +19,79 @@ h1 {
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
 source("monthlyreport_functions.R")
-data <- read.csv('December2020TrackingData.csv')
+data <- read.csv('January2021TrackingData.csv')
 tracking.data <-reformat_googlesheet(data)
 ```
 
 Repository for CM/N Programs Monthly Tracking reports.
 
+# January 2021
+
+```{r January 2021 Enrollment, eval=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
+values <- c(968, 92, 483, 55, 702)
+enrollment <- as.data.frame(cbind(rows, values))
+names(enrollment) <- c(" ", "Enrollment")
+library("formattable")
+formattable(enrollment)
+```
+
+
+### Hits by Program
+```{r January 2021 Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.January2021 <- tracking.data[which(tracking.data$month=="January" & tracking.data$year=="2021"),]
+#expanded view
+library("tidyr")
+expanded.hits.draft.January2021 <- hitsbyprogram(tracking.data.January2021)
+expanded.hits.January2021 <- expanded.hits.draft.January2021[,c("source", "Twitter", "fb", "other",
+                                  "online.article", "radio", "tv")]
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.January2021 <- subset(expanded.hits.January2021, source=="CC"|source=="CM"|source=="CMN")
+#aggregate hits according to nest program model
+CMN.January2021 <- expanded.hits.CMprograms.January2021[3,2:7]
+CM.January2021 <- CMN.January2021 + expanded.hits.CMprograms.January2021[2,2:7]
+CC.January2021 <- CM.January2021 + expanded.hits.CMprograms.January2021[1,2:7]
+aggregated.hits.CMprograms.January2021 <- rbind(CC.January2021, CM.January2021, CMN.January2021)
+rownames(aggregated.hits.CMprograms.January2021) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.January2021) <- c("Twitter", "Facebook", "Other ",
+                          "Online Articles", "Radio", "TV")
+library("formattable")
+aggregated.hits.formatted.January2021 <- formattable(aggregated.hits.CMprograms.January2021,
+                                       align=c("l", "c", "c", "c", "c", "c", "c"),
+                                       list(''))
+aggregated.hits.formatted.January2021
+```
+
+### Comparison with Last Year
+```{r January 2021 Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.January2021 <- tracking.data[which(tracking.data$month=="January" & tracking.data$year=="2021"),]
+tracking.data.January2020 <- tracking.data[which(tracking.data$month=="January" & tracking.data$year=="2020"),]
+previousYear(tracking.data.January2021, tracking.data.January2020)
+```
+
+### Top Releases
+
+Most-used releases this month (including content released before this month).
+
+```{r January 2021 Top Releases, warning=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+rankedreleases.January2021 <- rankReleases(tracking.data.January2021)
+top10releases.January2021 <-rankedreleases.January2021[c(1:10),]
+names(top10releases.January2021) <- c("Release", "Social", "Stories", "TV", "Total")
+top5releases.January2021 <-rankedreleases.January2021[c(1:5),]
+names(top5releases.January2021) <- c("Release", "Social", "Stories", "TV", "Total")
+library(DT)
+datatable(top10releases.January2021, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
+```
+
+### Hits by Region
+```{r January 2021 Hits by Region, echo=FALSE, warning=FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.January2021 <- hitsbyregion(tracking.data.January2021)
+month.hitsbyregion.January2021
+```
+
+***
 
 # December 2020
 

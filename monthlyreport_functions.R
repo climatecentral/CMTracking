@@ -412,16 +412,16 @@ hitsbyprogram <- function(dat){
 
 #previous year comparison (i.e. month to month comparison)
 previousYear <- function(ThisYear, LastYear){
-#2020 month data
+#2021 month data
 ThisYear.programhits <- hitsbyprogram(ThisYear)
 ThisYear.CMprogramhits <- subset(ThisYear.programhits, source=="CC"|source=="CM"|source=="CMN")
 library("janitor")
 ThisYear.CMprogramhits <- adorn_totals(ThisYear.CMprogramhits, where = "row", fill = "-", na.rm = TRUE, name = "Total")
-#2019 month data
+#2020 month data
 LastYear.programhits <- hitsbyprogram(LastYear)
 LastYear.CMprogramhits <- subset(LastYear.programhits, source=="CC"|source=="CM"|source=="CMN")
 LastYear.CMprogramhits <- adorn_totals(LastYear.CMprogramhits, where = "row", fill = "-", na.rm = TRUE, name = "Total")
-#rearrange 2020 data frame
+#rearrange 2021 data frame
 ThisYear.CMTotals <- as.data.frame(ThisYear.CMprogramhits[,c(1,9,4:8)])
 library('data.table')
 t.ThisYear.programhits <- transpose(ThisYear.CMTotals,keep.names='Hit Type')
@@ -429,7 +429,7 @@ colnames(t.ThisYear.programhits) <- t.ThisYear.programhits[1,]
 t.ThisYear.totalhits <- t.ThisYear.programhits[-1,c(1,5)]
 names(t.ThisYear.totalhits)[2] <- "now"
 t.ThisYear.totalhits$now <- as.numeric(t.ThisYear.totalhits$now)
-#rearrange 2019 dataframe
+#rearrange 2020 dataframe
 LastYear.CMTotals <- as.data.frame(LastYear.CMprogramhits[,c(1,9,4:8)])
 library('data.table')
 t.LastYear.programhits <- transpose(LastYear.CMTotals,keep.names='Hit Type')
@@ -442,7 +442,7 @@ monthcomp$now <- as.numeric(monthcomp$now)
 monthcomp$then <- as.numeric(monthcomp$then)
 library('dplyr')
 monthcomp$percent.change <- round(((monthcomp$now-monthcomp$then)/monthcomp$now)*100, digits=0)
-colnames(monthcomp) <- c("Platform", "2020", "2019", "Percent Change (%)")
+colnames(monthcomp) <- c("Platform", "2021", "2020", "Percent Change (%)")
 monthcomp <- monthcomp[c(6,1,3,2,4,5),]
 monthcomp$Platform <- c("Twitter", "Facebook", "Other Social", "Online Articles", "Radio", "TV")
 rownames(monthcomp) <- NULL

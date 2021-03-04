@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 1/11/2021"
+date: "Last updated: 3/3/2021"
 output: 
   html_document:
     toc: true
@@ -15,6 +15,20 @@ h1 {
   text-align: center;
 }
 ```
+
+# January 2021
+
+**Judy Fahys** [reports](https://climatecentral.createsend1.com/t/y-l-olikiyk-l-jr/) on the record-breaking number of billion-dollar disasters in 2020, for Inside Climate News.
+
+**Kevin Janison** (KSNV/NBC, NV) [covers](https://www.iqmediacorp.com/ClipPlayer/?ClipID=51cb7742-20fb-46ff-b00c-c95d3e2301b7&ps=2) 2020 heat records in Nevada and globally.
+
+**Jessica Meszaros** [describes](https://climatecentral.createsend1.com/t/y-l-olikiyk-l-jy/) the findings of a new Climate Central research paper on the vulnerability of affordable housing in Florida to flooding due to global sea level rise, for WUSF Public Media.
+
+**Raphael Miranda** (WNBC/NBC, NY) [explains](https://www.iqmediacorp.com/ClipPlayer/?ClipID=21c35067-7ac3-488b-894d-b7e1eb4217cd&ps=2) the trend of fewer colder nights in the city, as a result of climate change.
+
+**Ezra David Romero**, for Capital Public Radio writes a well-rounded piece on equitable climate solutions in the Stockton, Calif. community and [interviews](https://climatecentral.createsend1.com/t/y-l-oldhjil-l-yh/) our CEO Ben Strauss on the threat of sea-level rise. 
+
+For The Press of Atlantic City, **Buzz Keough** [highlights](https://climatecentral.createsend1.com/t/y-l-oldhjil-l-yk/) our sea-level rise and affordable housing study in regard to the challenges that Atlantic City and Ocean City, NJ will face.
 
 # December 2020
 
