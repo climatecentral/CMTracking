@@ -14,19 +14,19 @@ Note: Year-to-date data is not yet viewable for 2021.
 
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
-data <- read.csv("January2021TrackingData.csv")
+data <- read.csv('February2021TrackingData.csv')
 #load pre-written evaluation functions
 source("monthlyreport_functions.R")
 dataReformatted <- reformat_googlesheet(data)
 ```
 
-# Year-To-Date: January
+# Year-To-Date: February
 
 ```{r YTD Hit Type, eval=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
 ## Hit Type
 library('openair')
-YTDdata2020 <- dataReformatted[which(dataReformatted$month=="January" & dataReformatted$year=="2020"),]
-YTDdata2021 <- dataReformatted[which(tracking.data$month=="January" & tracking.data$year=="2021"),]
+YTDdata2020 <- dataReformatted[which(dataReformatted$month==c("January", "February") & dataReformatted$year=="2020"),]
+YTDdata2021 <- dataReformatted[which(tracking.data$month==c("January", "February") & tracking.data$year=="2021"),]
 previousYear(YTDdata2021, YTDdata2020)
 ```
 

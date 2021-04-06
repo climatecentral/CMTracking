@@ -21,14 +21,14 @@ reformat_googlesheet <- function(data) {
   #firstnames <- sapply(fullnames.split, function(x) x[1])
   #lastnames <- sapply(fullnames.split, function(x) x[length(x)])
   #replace blank cells with 0
-  #firstnames[is.na(firstnames)] = 0
+  #firstnames[is.na(firstnames)] = 0s
   #lastnames[is.na(lastnames)] = 0
   #trimws(firstnames, which='both')
   #trimws(lastnames, which='both')
   #tracking.data$name <- paste(firstnames, '', lastnames)
   tracking.data$month <- trimws(tracking.data$month, which="both")
   #add hit_ID column
-  tracking.data$date <- as.Date(tracking.data$date, format="%m/%d/%y")
+  #tracking.data$date <- as.Date(tracking.data$date)
   #tracking.data$ID <- paste(tracking.data$name, "_", tracking.data$date)
   #add row IDs
   tracking.data$ID <- seq.int(nrow(tracking.data))
