@@ -22,6 +22,117 @@ If you're unsure about release or graphic names, [click here](https://docs.googl
 
 ***
 
+# **Winter 2020/21**
+
+Winter 2020/21 content is considered to be all weekly releases and graphics published between '2020WinterPackage' and '2021ReturnToCOP', inclusive. 
+
+```{r Read in Data Fall 2020, echo = FALSE, warning=TRUE, message=FALSE}
+#read in tracking data from Master Tracking Google Spreadsheet
+data <- read.csv('February2021TrackingData.csv')
+
+#load pre-written evaluation functions
+source("monthlyreport_functions.R")
+
+#reformat
+dataReformatted <- reformat_googlesheet(data)
+dataReformatted$year <- as.numeric(dataReformatted$year)
+dataReformatted$date <- as.Date(dataReformatted$date, format = "%m/%d/%Y")
+
+#extract data for season
+start_date <- as.POSIXct("2020/11/31")
+end_date <- as.Date("01/01/2021", format = "%m/%d/%Y")
+start_date < end_date
+seasonData <- dataReformatted[which(dataReformatted$date > as.Date("11/31/2020", format = "%m/%d/%Y")),]
+
+#read in csv of season's releases
+releases <- read.csv("fall2020releases.csv")
+releases <- na.omit(releases)
+releases$date <- as.Date(releases$date, format="%m/%d/%Y")
+require('tidyr')
+releases.sep <- separate_rows(releases, graphic, sep=",")
+#remove blank space from release and graphic columns
+releases.sep$title <- trimws(releases.sep$title, which="both")
+releases.sep$graphic <- trimws(releases.sep$graphic, which="both")
+#cast date column as date
+releases.sep$date <- as.Date(releases.sep$date, format="%m/%d/%Y")
+write.csv(releases.sep, "fall2020releasesandgraphics.csv")
+```
+
+## Ranked Releases
+
+```{r Ranked Releases Fall 2020, include = FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+releasePopularity <- rankReleases(seasonData)
+#format table
+library(formattable)
+countedSortedReleases.formatted <- formattable(releasePopularity, align=c("r", "c", "c", "c", "c"))
+#add rank column
+countedSortedReleases.formatted$rank <- seq.int(nrow(countedSortedReleases.formatted))
+#reorder columns
+countedSortedReleases.formatted <- countedSortedReleases.formatted[,c(6,1,2,3,4,5)]
+#rename columns
+#names(countedSortedReleases.formatted) <- c("Rank", "Release", "Social", "Stories", "TV", "Total Hits")
+```
+
+```{r Releases Fall 2020, echo = FALSE, warning=FALSE, message=FALSE}
+#merge tracking data with list of Fall 2020 releases
+seasonReleasesHits <- merge(releasePopularity, releases, by.x="program.content", by.y="title", all.y=TRUE)
+#reformat
+seasonsReleasesByHits <- seasonReleasesHits[,c(6,1,2,3,4,5)]
+seasonsReleasesByHits <- seasonsReleasesByHits[order(-seasonsReleasesByHits$total),]
+names(seasonsReleasesByHits) <- c("Date Published", "Release", "Social", "Stories", "TV", "Total Hits")
+#format using HTML widget
+library(DT)
+datatable(seasonsReleasesByHits, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
+```
+
+
+## Ranked Graphics
+ 
+```{r Ranked Graphics Fall 2020, include=FALSE}
+graphicPopularity <- rankGraphics(seasonData)
+#format table
+library(formattable)
+countedSortedGraphics.formatted <- formattable(releasePopularity, align=c("r", "c", "c", "c", "c"))
+#add rank column
+countedSortedGraphics.formatted$rank <- seq.int(nrow(countedSortedGraphics.formatted))
+#reorder columns
+countedSortedGraphics.formatted <- countedSortedGraphics.formatted[,c(6,1,2,3,4,5)]
+#rename columns
+names(countedSortedGraphics.formatted) <- c("Rank", "Graphic", "Social", "Stories", "TV", "Total Hits")
+```
+
+```{r Fall Graphics Fall 2020, echo=FALSE}
+#merge tracking data with list of Fall 2020 Graphics
+seasonGraphicsHits <- merge(graphicPopularity, releases.sep, by.x="graphic.used", by.y="graphic", all.y=TRUE)
+#reformat
+seasonsGraphicsByHits <- seasonGraphicsHits[,c(6,1,2,3,4,5)]
+seasonsGraphicsByHits <- seasonsGraphicsByHits[order(seasonsGraphicsByHits$total, decreasing=TRUE),]
+names(seasonsGraphicsByHits) <- c("Date Published", "Graphic Name", "Social", "Stories", "TV", "Total Hits")
+#format using HTML widget
+library(DT)
+datatable(seasonsGraphicsByHits, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
+```
+
+## Previous Content Used
+
+Content usage that was tracked during the fall but was published before the fall (i.e. content that subscribers have gone back to look for). 
+
+The top three pieces of content that subscribers pulled out of the archives were: [2020DistanceEmissions](https://medialibrary.climatecentral.org/resources/travel-and-air-pollution-during-covid-19), WeatherPower (largely due to A.J Fox's ongoing sponsored segment), and [2020CO2Peak](https://medialibrary.climatecentral.org/resources/co2-and-the-climate-curve).
+
+```{r Previous content used Fall 2020, echo = FALSE, warning=FALSE, message=FALSE}
+#remove rows which have hits from current season
+seasonData.sep <- separate_rows(seasonData, program.content, sep=", ")
+nonSeasonReleases <- seasonData.sep[-which(seasonData.sep$program.content %in% releases$title),]
+
+evergreen.rank <- rankReleases(nonSeasonReleases)
+evergreen.rank.tidy <- evergreen.rank[-c(4),]
+names(evergreen.rank.tidy) <- c("Release", "Social", "Stories", "TV", "Total Hits")
+library(DT)
+datatable(evergreen.rank.tidy, fillContainer=TRUE, options = list(scrollX="70px", scrollY="400px", pageLength = 10), rownames=FALSE)
+```
+
+***
+
 # **Fall 2020**
 
 Fall content is considered to be all weekly releases and graphics published between '2020FallPackage' and '2020SeasonalWarming', inclusive. 
