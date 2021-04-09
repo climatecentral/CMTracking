@@ -25,8 +25,9 @@ dataReformatted <- reformat_googlesheet(data)
 ```{r YTD Hit Type, eval=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
 ## Hit Type
 library('openair')
-YTDdata2020 <- dataReformatted[which(dataReformatted$month==c("January", "February") & dataReformatted$year=="2020"),]
-YTDdata2021 <- dataReformatted[which(tracking.data$month==c("January", "February") & tracking.data$year=="2021"),]
+YTDdata2020 <- dataReformatted[which(dataReformatted$month %in% c("January", "February") & dataReformatted$year=="2020"),]
+YTDdata2021 <- dataReformatted[which(tracking.data$month %in% c("January", "February") & tracking.data$year=="2021"),]
+
 previousYear(YTDdata2021, YTDdata2020)
 ```
 
@@ -56,7 +57,7 @@ previousYear(YTDdata2021, YTDdata2020)
   tvbymonth$cumulative.tv <- cumsum(tvbymonth$tv)
   tvbymonth <- as.data.frame(tvbymonth)
   #tv goals
-  tv.goals <- c(400, 800, 1200, 1600, 2000, 2400, 2800, 3200, 3600, 4000, 4400, 4800)
+  tv.goals <- c(396, 792, 1188, 1584, 1980, 2376, 2772, 3168, 3564, 3960, 4356, 4752)
   month <- month.name
   tvgoals.bymonth <- data.frame(month, tv.goals)
   #merge hits and goals
@@ -81,7 +82,7 @@ tvgoalschart <- ggplot(melted.tvgoalsandhits, aes(Month, value, group=variable, 
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="TV Airings", x="") +
 theme(legend.title = element_blank())+
-    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="December"), aes(label = "368"), nudge_x = 0.2, nudge_y = 200, color="black") +
+    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="February"), aes(label = value), nudge_x = 0.4, nudge_y = 50, color="black") +
     scale_x_discrete(limits = month.name)
 tvgoalschart
 ```
@@ -131,13 +132,12 @@ tvgoalschart
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="Articles", x="") +
 theme(legend.title = element_blank()) +
-    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="December"), aes(label = 213), nudge_x = 0.2, nudge_y = 200, color="black") +
+    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="February"), aes(label = value), nudge_x = 0.5, nudge_y = 50, color="black") +
     scale_x_discrete(limits = month.name)
   articlesgoalschart
 ```
 
 
-## Program Hits
 
 ```{r, Program Hits, eval=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
 #subset 2021 data
