@@ -1,7 +1,7 @@
 ---
 title: "Year-To-Date"
 output: html_document
-date: "Last updated: 3/2/2021"
+date: "Last updated: 5/4/2021"
 ---
 
 ```{css, echo=FALSE}
@@ -10,23 +10,21 @@ h1 {
 }
 ```
 
-Note: Year-to-date data is not yet viewable for 2021.
-
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
-data <- read.csv('February2021TrackingData.csv')
+data <- read.csv('March2021TrackingData.csv')
 #load pre-written evaluation functions
 source("monthlyreport_functions.R")
 dataReformatted <- reformat_googlesheet(data)
 ```
 
-# Year-To-Date: February
+# Year-To-Date: March 2021
 
-```{r YTD Hit Type, eval=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
+```{r YTD Hit Type, echo=FALSE, warning=FALSE, message=FALSE}
 ## Hit Type
 library('openair')
-YTDdata2020 <- dataReformatted[which(dataReformatted$month %in% c("January", "February") & dataReformatted$year=="2020"),]
-YTDdata2021 <- dataReformatted[which(tracking.data$month %in% c("January", "February") & tracking.data$year=="2021"),]
+YTDdata2020 <- dataReformatted[which(dataReformatted$month %in% c("January", "February", "March") & dataReformatted$year=="2020"),]
+YTDdata2021 <- dataReformatted[which(dataReformatted$month %in% c("January", "February", "March") & dataReformatted$year=="2021"),]
 
 previousYear(YTDdata2021, YTDdata2020)
 ```
@@ -82,7 +80,7 @@ tvgoalschart <- ggplot(melted.tvgoalsandhits, aes(Month, value, group=variable, 
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="TV Airings", x="") +
 theme(legend.title = element_blank())+
-    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="February"), aes(label = value), nudge_x = 0.4, nudge_y = 50, color="black") +
+    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="March"), aes(label = value), nudge_x = 0.4, nudge_y = 50, color="black") +
     scale_x_discrete(limits = month.name)
 tvgoalschart
 ```
@@ -132,77 +130,9 @@ tvgoalschart
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="Articles", x="") +
 theme(legend.title = element_blank()) +
-    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="February"), aes(label = value), nudge_x = 0.5, nudge_y = 50, color="black") +
+    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="March"), aes(label = value), nudge_x = 0.5, nudge_y = 50, color="black") +
     scale_x_discrete(limits = month.name)
   articlesgoalschart
 ```
 
-
-
-```{r, Program Hits, eval=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
-#subset 2021 data
-  data2021 <-dataReformatted[which(dataReformatted$year==2021),]
-  #summarize program hits by month
-  library("dplyr")
-  programsbymonth <- data2021 %>%
-    group_by(month) %>%
-    summarise(CC=sum(cc.hits), CM=sum(cm.hits), CMN=sum(cmn.hits))
-  #order data by month
-  library("dplyr")
-  programsbymonth <- programsbymonth %>% arrange(match(month, month.name))
-  #c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
-  #add column for cumulative sum of program hits
-  programsbymonth$cc <- cumsum(programsbymonth$CC)
-  programsbymonth$cm <- cumsum(programsbymonth$CM)
-  programsbymonth$cmn <- cumsum(programsbymonth$CMN)
-  programsbymonth <- as.data.frame(programsbymonth)
-  #remove non-cumulative columns
-  programsbymonth <- programsbymonth[,c(1,5:7)]
-  #rename columns
-  names(programsbymonth) <- c("Month", "CC", "CM", "CMN")
-  #melt dataframe
-  library("reshape2")
-  melted.programshits <- melt(programsbymonth)
-  #make variable a factor
-melted.programshits$variable <- factor(melted.programshits$variable, levels = c("CC", "CM", "CMN"))
-names(melted.programshits)[2] <- "Program"
-  #plot chart
-  library("ggplot2")
-  programhitschart <- ggplot(melted.programshits, aes(x=Month, y=value, group=Program, fill=Program)) +
-  geom_area()+
-  theme(axis.text.x = element_text(angle=45, vjust=0.7))+
-  labs(y="Program Hits", x="") + scale_x_discrete(limits = month.name)
-programhitschart
-```
-
-
-```{r, 2019, eval=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
-#subset 2019 data
-  data2019 <-dataReformatted[which(dataReformatted$year==2019),]
-  #one source per row
-library('tidyr')
-  data2019.sepsource <- separate_rows(data2019, source, sep = ",")
-  #trim white space
-  data2019.sepsource$source <- trimws(data2019.sepsource$source, which='both')
-  #subset to only CC, CM and CMN
-  data2019.sepsource <- subset(data2019.sepsource, source=="CC"|source=="CM"|source=="CMN")
-  #replace NAs in tv column with 0s
-  data2019.sepsource$tv[is.na(data2019.sepsource$tv)] <- 0
-  #summarize tv by month
-  library("dplyr")
-  tvbymonth2019 <- data2019.sepsource %>%
-    group_by(month) %>%
-    summarise(tv=sum(tv))
-  #add 20% to tv
-  tvbymonth2019$tv <- round(tvbymonth2019$tv*1.2, digits=0)
-  #remove rows with zeroes
-  tvbymonth2019 <- tvbymonth2019[which(tvbymonth$month!=0),]
-  library("dplyr")
-  sorted.tvbymonth2019 <- tvbymonth2019 %>% arrange(match(month, month.name))
-  #c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
-  #add column for cumulative sum of tv airings
-  sorted.tvbymonth2019$cumulative.tv <- cumsum(sorted.tvbymonth2019$tv)
-  sorted.tvbymonth2019 <- as.data.frame(sorted.tvbymonth2019)
-  sorted.tvbymonth2019
-```
   

@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 4/6/2021"
+date: "Last updated: 5/5/2021"
 output: 
   html_document:
     toc: true
@@ -15,6 +15,18 @@ h1 {
   text-align: center;
 }
 ```
+
+# March 2021
+
+**Tracey Butler**, for WLS in Chicago, [explains](https://climatecentral.createsend1.com/t/y-l-oxihid-l-g/) how extreme heat is just as deadly and dangerous as the cold or storms with Climate Central’s Sean Sublette.
+
+**Peta Sheerwood** (WRAL/NBC, NC) [explains](https://www.iqmediacorp.com/ClipPlayer/?ClipID=d2f36f12-9910-4977-9e99-9bdb8ce2326c&ps=2) how climate change is making for more days of above-average spring temperatures in Raleigh.
+
+**Deitra Tate**, for Spectrum News 1, [gives examples](https://climatecentral.createsend1.com/t/y-l-oxihid-l-w/) of how a warming climate can disrupt phenology, or the timing of natural events, across the U.S.
+
+**Weather.com** [highlights](https://climatecentral.createsend1.com/t/y-l-oxjhtk-l-yh/) that summers are trending hotter along with their 2021 summer temperature outlook.
+
+**Chris Easlick** (WNEM/CBS, MI), for WNEM in Michigan, [investigates](https://www.iqmediacorp.com/ClipPlayer/?ClipID=11d98e76-0e90-4da7-9b6d-fbb22cf4a3fe&ps=2) the declining ice coverage of the Great Lakes by interviewing fishing locals and academic experts
 
 # February 2021
 
