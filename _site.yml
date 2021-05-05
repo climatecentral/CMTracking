@@ -6,6 +6,8 @@ navbar:
       href: index.html
     - text: "Content Use Highlights"
       href: Links.html
+    - text: "Year-to-Date"
+      href: YearToDate.html
     #- text: "Seasonal Evaluations"
       #href: SeasonalEvaluations.html    
 output_dir: "docs"
