@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 5/5/2021"
+date: "Last updated: 5/15/2021"
 output: 
   html_document:
     toc: true
@@ -15,6 +15,20 @@ h1 {
   text-align: center;
 }
 ```
+
+# April 2021
+
+**Zoe Nicholson**, for Greenville News, [reports](https://climatecentral.cmail19.com/t/y-l-oyucdl-tumitljkk-jj/) on the many climate change impacts that South Carolinians already face today.  
+In an ‘Impact Earth’ segment, **Amber Sullins** (KNXV/ABC, AZ) [explains](https://www.iqmediacorp.com/ClipPlayer/?ClipID=caa41d5e-298d-4a07-9b14-c69a83fff546&ps=2) how climate change is causing drought to last longer in the western United States.
+
+**Justin Ballard**, for WREX in Illinois, [explains](https://climatecentral.cmail19.com/t/y-l-oyucdl-tumitljkk-jt/) how a warming climate can affect the emergence of cicadas.
+
+**Janice Huff** [informs](https://www.iqmediacorp.com/ClipPlayer/?ClipID=b4e51cd1-78cd-439c-9130-783e3d3549eb&ps=2) her audience about the impending emergence of Brood X cicadas, and why warmer temperatures leads to earlier emergence.
+
+For the Chesapeake Bay Magazine, **Emma Johnson** [reports](https://climatecentral.cmail19.com/t/y-l-oydhutd-tumitljkk-ji/) on earlier spring temperatures and the impact on the life cycle of the local Baltimore oriole species.
+
+For Earth Day, **Matt Cavanaugh** [discusses](https://climatecentral.cmail19.com/t/y-l-oydhutd-tumitljkk-jd/) warming in Colorado Springs and how it exacerbates drought and wildfires in the area, for KRCC.
+
 
 # March 2021
 
