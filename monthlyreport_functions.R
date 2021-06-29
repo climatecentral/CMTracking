@@ -26,6 +26,11 @@ reformat_googlesheet <- function(data) {
   #trimws(firstnames, which='both')
   #trimws(lastnames, which='both')
   #tracking.data$name <- paste(firstnames, '', lastnames)
+  #separate into one source per row
+  library("tidyr")
+  tracking.data <- separate_rows(tracking.data, source, sep = ",")
+  #trim whitespace
+  tracking.data$source <- trimws(tracking.data$source, which = 'both')
   tracking.data$month <- trimws(tracking.data$month, which="both")
   #add hit_ID column
   #tracking.data$date <- as.Date(tracking.data$date)

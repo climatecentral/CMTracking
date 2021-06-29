@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 5/15/2021"
+date: "Last updated: 6/29/2021"
 output: 
   html_document:
     toc: true
@@ -18,12 +18,21 @@ h1 {
 
 # May 2021
 
-**Zoe Nicholson**, for Greenville News, [reports](https://climatecentral.cmail19.com/t/y-l-oyucdl-tumitljkk-jj/) on the many climate change impacts that South Carolinians already face today.  
-In an ‘Impact Earth’ segment, **Amber Sullins** (KNXV/ABC, AZ) [explains](https://www.iqmediacorp.com/ClipPlayer/?ClipID=caa41d5e-298d-4a07-9b14-c69a83fff546&ps=2) how climate change is causing drought to last longer in the western United States.
+Meteorologists **Kyle Kiel**, **Brandon Libby**, and **Joie Bettenhausen**, for KWWL, [illustrate](https://climatecentral.createsend1.com/t/y-l-ojrttn-l-jd/) how new climate normals have changed in Iowa City. 
+
+**Tom Davis**, for The Patch, [updates](https://climatecentral.createsend1.com/t/y-l-ojrttn-l-jh/) New Jerseyans on the Brood X cicadas, and how climate change can affect the timing of their emergence.
+For the Cape May County Herald, **Shay Roddy** uses Climate Central’s Risk Finder tool to [illustrate](https://climatecentral.createsend1.com/t/y-l-ojtldtk-l-v/) how sea level rise is expected to impact Cape May’s coastal communities.
+
+For Grist, **Shannon Osaka** [explains](https://climatecentral.createsend1.com/t/y-l-ojtldtk-l-e/) why warming temperatures due to climate change may be causing cicadas to emerge earlier.
+
+**Bobby Deskins** (WTSP/CBS, FL) [shows](https://www.iqmediacorp.com/ClipPlayer/?ClipID=396d4cc4-340d-44ed-9997-dda9c021bb06&ps=2) how the new climate normals illustrate a warming trend across the country and in Tampa.
+
+From the beach, **Elisa Raffa** [reports](https://www.iqmediacorp.com/ClipPlayer/?ClipID=a8f4a2ab-2c19-4390-b831-bff052d714e2&ps=2) on the impact of warming ocean temperatures.
 
 # April 2021
 
-**Zoe Nicholson**, for Greenville News, [reports](https://climatecentral.cmail19.com/t/y-l-oyucdl-tumitljkk-jj/) on the many climate change impacts that South Carolinians already face today.  
+**Zoe Nicholson**, for Greenville News, [reports](https://climatecentral.cmail19.com/t/y-l-oyucdl-tumitljkk-jj/) on the many climate change impacts that South Carolinians already face today.
+
 In an ‘Impact Earth’ segment, **Amber Sullins** (KNXV/ABC, AZ) [explains](https://www.iqmediacorp.com/ClipPlayer/?ClipID=caa41d5e-298d-4a07-9b14-c69a83fff546&ps=2) how climate change is causing drought to last longer in the western United States.
 
 **Justin Ballard**, for WREX in Illinois, [explains](https://climatecentral.cmail19.com/t/y-l-oyucdl-tumitljkk-jt/) how a warming climate can affect the emergence of cicadas.
