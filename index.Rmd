@@ -81,7 +81,8 @@ previousYear(tracking.data.May2021, tracking.data.May2020)
 Most-used releases this month (including content released before this month).
 
 ```{r May 2021 Top Releases, warning=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
-rankedreleases.May2021 <- rankReleases(tracking.data.May2021)
+tracking.data.May2021.subsetted <- subset(tracking.data.May2021, source=="CC"|source=="CM"|source=="CMN")
+rankedreleases.May2021 <- rankReleases(tracking.data.May2021.subsetted)
 top10releases.May2021 <-rankedreleases.May2021[c(1:10),]
 names(top10releases.May2021) <- c("Release", "Social", "Stories", "TV", "Total")
 top5releases.May2021 <-rankedreleases.May2021[c(1:5),]
@@ -93,7 +94,7 @@ datatable(top10releases.May2021, fillContainer=FALSE, options = list(scrollX="70
 ### Hits by Region
 ```{r May 2021 Hits by Region, echo=FALSE, warning=FALSE, message=FALSE}
 #compute hits by regions
-month.hitsbyregion.May2021 <- hitsbyregion(tracking.data.May2021)
+month.hitsbyregion.May2021 <- hitsbyregion(tracking.data.May2021.subsetted)
 month.hitsbyregion.May2021
 ```
 
