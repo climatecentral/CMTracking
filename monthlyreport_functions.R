@@ -201,8 +201,8 @@ hitsbyregion <- function(dat){
   #add regions to subsetted data
   hits.regions <- merge(hits.forregions, regions.states, by.x="location", by.y="state", all.x=FALSE)
   #reorder columns
-  hits.regions <- hits.regions[,c("ID", "location", "region", "rt", "tw", "fb", 
-                                  "other", "online.article", "radio", "tv")]
+  hits.regions <- hits.regions[,c("ID","location","region","rt","tw","fb", 
+                                  "other","online.article","radio","tv")]
   hits.byregion <- subset(hits.regions, select=-c(ID, location))
   hits.byregion <- hits.byregion %>%
     group_by(region) %>%
