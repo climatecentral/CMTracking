@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 7/6/2021"
+date: "Last updated: 7/16/2021"
 output: 
   html_document:
     toc: true
@@ -15,7 +15,7 @@ h1 {
   text-align: center;
 }
 ```
-#June 2021
+# June 2021
 
 **Ashton Altieri**, for KCNC, 
 [discusses](https://denver.cbslocal.com/2021/06/14/denver-seven-years-since-hot-temperatures-early/) the recent heatwave and record-breaking temperatures in Denver, Colorado. 
