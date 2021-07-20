@@ -1,6 +1,6 @@
 ---
 title: "Monthly Numbers"
-date: "Last updated: 7/13/2021"
+date: "Last updated: 7/20/2021"
 output:
   html_document:
     toc: true
@@ -92,7 +92,7 @@ datatable(top10releases.June2021, fillContainer=FALSE, options = list(scrollX="7
 ```
 
 ### Hits by Region
-```{r June 2021 Hits by Region, eval=FALSE, warning=FALSE, message=FALSE}
+```{r June 2021 Hits by Region, warning=FALSE, echo = FALSE, message=FALSE}
 #compute hits by regions
 month.hitsbyregion.June2021 <- hitsbyregion(tracking.data.June2021.subsetted)
 month.hitsbyregion.June2021
@@ -162,7 +162,7 @@ datatable(top10releases.May2021, fillContainer=FALSE, options = list(scrollX="70
 ```
 
 ### Hits by Region
-```{r May 2021 Hits by Region, eval=FALSE, warning=FALSE, message=FALSE}
+```{r May 2021 Hits by Region, warning=FALSE, echo = FALSE, message=FALSE}
 #compute hits by regions
 month.hitsbyregion.May2021 <- hitsbyregion(tracking.data.May2021.subsetted)
 month.hitsbyregion.May2021
@@ -483,7 +483,7 @@ aggregated.hits.formatted.December2020
 ```
 
 ### Comparison with Last Year
-```{r December Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+```{r December Last Year Comparison, echo = FALSE, eval = FALSE, warning=FALSE, message=FALSE}
 tracking.data.December2020 <- tracking.data[which(tracking.data$month=="December" & tracking.data$year=="2020"),]
 tracking.data.December2019 <- tracking.data[which(tracking.data$month=="December" & tracking.data$year=="2019"),]
 previousYear(tracking.data.December2020, tracking.data.December2019)
@@ -551,7 +551,7 @@ aggregated.hits.formatted.November2020
 ```
 
 ### Comparison with Last Year
-```{r November Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+```{r November Last Year Comparison, echo = FALSE, eval = FALSE, warning=FALSE, message=FALSE}
 tracking.data.November2020 <- tracking.data[which(tracking.data$month=="November" & tracking.data$year=="2020"),]
 tracking.data.November2019 <- tracking.data[which(tracking.data$month=="November" & tracking.data$year=="2019"),]
 previousYear(tracking.data.November2020, tracking.data.November2019)
@@ -619,7 +619,7 @@ aggregated.hits.formatted.October2020
 ```
 
 ### Comparison with Last Year
-```{r October Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+```{r October Last Year Comparison, echo = FALSE, eval = FALSE, warning=FALSE, message=FALSE}
 tracking.data.October2020 <- tracking.data[which(tracking.data$month=="October" & tracking.data$year=="2020"),]
 tracking.data.October2019 <- tracking.data[which(tracking.data$month=="October" & tracking.data$year=="2019"),]
 previousYear(tracking.data.October2020, tracking.data.October2019)
@@ -681,7 +681,7 @@ aggregated.hits.formatted.September2020
 ```
 
 ### Comparison with Last Year
-```{r September Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+```{r September Last Year Comparison, echo = FALSE, eval = FALSE, warning=FALSE, message=FALSE}
 tracking.data.September2020 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2020"),]
 tracking.data.September2019 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2019"),]
 previousYear(tracking.data.September2020, tracking.data.September2019)
@@ -753,7 +753,7 @@ aggregated.hits.formatted.August2020
 
 
 ### Comparison with Last Year
-```{r August Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+```{r August Last Year Comparison, echo = FALSE, eval = FALSE, warning=FALSE, message=FALSE}
 tracking.data.August2020 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2020"),]
 tracking.data.August2019 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2019"),]
 previousYear(tracking.data.August2020, tracking.data.August2019)

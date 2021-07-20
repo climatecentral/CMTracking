@@ -13,28 +13,36 @@
 
 <title>Monthly Numbers</title>
 
-<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
-<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="site_libs/datatables-binding-0.15.6/datatables.js"></script>
+<script src="site_libs/datatables-binding-0.18/datatables.js"></script>
 <link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="site_libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -46,11 +54,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -63,32 +66,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -98,10 +76,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -118,40 +92,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -179,7 +126,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -191,7 +138,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -202,10 +149,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -217,7 +177,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -343,7 +302,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -383,12 +342,12 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
 <h1 class="title toc-ignore">Monthly Numbers</h1>
-<h4 class="date">Last updated: 6/30/2021</h4>
+<h4 class="date">Last updated: 7/20/2021</h4>
 
 </div>
 
@@ -399,9 +358,371 @@ h1 {
 }
 </style>
 <p>Repository for CM/N Programs Monthly Tracking reports.</p>
+<div id="june-2021" class="section level1">
+<h1>June 2021</h1>
+<div id="hits-by-program" class="section level3">
+<h3>Hits by Program</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Twitter
+</th>
+<th style="text-align:center;">
+Facebook
+</th>
+<th style="text-align:center;">
+Other
+</th>
+<th style="text-align:center;">
+Online Articles
+</th>
+<th style="text-align:center;">
+Radio
+</th>
+<th style="text-align:center;">
+TV
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+CC
+</td>
+<td style="text-align:left;">
+247
+</td>
+<td style="text-align:center;">
+22
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+297
+</td>
+<td style="text-align:center;">
+107
+</td>
+<td style="text-align:center;">
+367
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CM
+</td>
+<td style="text-align:left;">
+247
+</td>
+<td style="text-align:center;">
+22
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+101
+</td>
+<td style="text-align:center;">
+88
+</td>
+<td style="text-align:center;">
+313
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CMN
+</td>
+<td style="text-align:left;">
+37
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+33
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="comparison-with-last-year" class="section level3">
+<h3>Comparison with Last Year</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+Platform
+</th>
+<th style="text-align:right;">
+2021
+</th>
+<th style="text-align:right;">
+2020
+</th>
+<th style="text-align:right;">
+Percent Change (%)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+Twitter
+</td>
+<td style="text-align:right;">
+247
+</td>
+<td style="text-align:right;">
+773
+</td>
+<td style="text-align:right;">
+<span style="font-weight: bold; color: #ff7f7f">-213</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Facebook
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+297
+</td>
+<td style="text-align:right;">
+<span style="font-weight: bold; color: #ff7f7f">-1250</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Other Social
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+<span style="font-weight: bold; color: #ff7f7f">-Inf</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Online Articles
+</td>
+<td style="text-align:right;">
+297
+</td>
+<td style="text-align:right;">
+128
+</td>
+<td style="text-align:right;">
+<span style="font-weight: bold; color: #71CA97">57</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Radio
+</td>
+<td style="text-align:right;">
+107
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+<span style="font-weight: bold; color: #71CA97">95</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+TV
+</td>
+<td style="text-align:right;">
+367
+</td>
+<td style="text-align:right;">
+232
+</td>
+<td style="text-align:right;">
+<span style="font-weight: bold; color: #71CA97">37</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="top-releases" class="section level3">
+<h3>Top Releases</h3>
+<p>Most-used releases this month (including content released before this month).</p>
+<div id="htmlwidget-5b91cb5ff6d8c8014771" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5b91cb5ff6d8c8014771">{"x":{"filter":"none","fillContainer":false,"data":[["","WeatherPower","2020CDD","2021SummerPackage","2021WarmingStripes","2021Tropics","2020HurricanesII","2020FirstDayAbove","2021Drought","2018HeavyRain"],[247,22,0,0,0,0,0,0,0,0],[294,22,85,0,1,0,0,0,0,0],[54,145,0,70,20,20,11,10,8,7],[595,189,85,70,21,20,11,10,8,7]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="hits-by-region" class="section level3">
+<h3>Hits by Region</h3>
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+Region
+</th>
+<th style="text-align:center;">
+Social Media
+</th>
+<th style="text-align:center;">
+Stories
+</th>
+<th style="text-align:center;">
+TV
+</th>
+<th style="text-align:center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+Southwest
+</td>
+<td style="text-align:center;">
+55
+</td>
+<td style="text-align:center;">
+58
+</td>
+<td style="text-align:center;">
+137
+</td>
+<td style="text-align:center;">
+250
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Northeast
+</td>
+<td style="text-align:center;">
+74
+</td>
+<td style="text-align:center;">
+90
+</td>
+<td style="text-align:center;">
+33
+</td>
+<td style="text-align:center;">
+197
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Southeast
+</td>
+<td style="text-align:center;">
+88
+</td>
+<td style="text-align:center;">
+29
+</td>
+<td style="text-align:center;">
+56
+</td>
+<td style="text-align:center;">
+173
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Midwest
+</td>
+<td style="text-align:center;">
+22
+</td>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+27
+</td>
+<td style="text-align:center;">
+81
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Great Plains
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+42
+</td>
+<td style="text-align:center;">
+68
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Northwest
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Hawaii
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+</div>
 <div id="may-2021" class="section level1">
 <h1>May 2021</h1>
-<div id="hits-by-program" class="section level3">
+<div id="hits-by-program-1" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
 <thead>
@@ -446,7 +767,7 @@ CC
 563
 </td>
 <td style="text-align:center;">
-10
+975
 </td>
 <td style="text-align:center;">
 456
@@ -469,7 +790,7 @@ CM
 93
 </td>
 <td style="text-align:center;">
-10
+0
 </td>
 <td style="text-align:center;">
 382
@@ -501,7 +822,7 @@ CMN
 </tbody>
 </table>
 </div>
-<div id="comparison-with-last-year" class="section level3">
+<div id="comparison-with-last-year-1" class="section level3">
 <h3>Comparison with Last Year</h3>
 <table class="table table-condensed">
 <thead>
@@ -582,7 +903,7 @@ Online Articles
 Radio
 </td>
 <td style="text-align:right;">
-10
+975
 </td>
 <td style="text-align:right;">
 0
@@ -608,13 +929,13 @@ TV
 </tbody>
 </table>
 </div>
-<div id="top-releases" class="section level3">
+<div id="top-releases-1" class="section level3">
 <h3>Top Releases</h3>
 <p>Most-used releases this month (including content released before this month).</p>
-<div id="htmlwidget-3fe0753722ea61d21eed" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3fe0753722ea61d21eed">{"x":{"filter":"none","fillContainer":false,"data":[["WeatherPower","2021NewNormals","Hurricane Sandy Paper","2021SLRSeniors","2021CO2Peak","2021Tropics","2019AirQuality1","2019AirQuality2","2018Downpours","2019Warming"],[31,0,0,0,0,0,0,0,0,0],[31,10,0,0,0,0,0,0,0,0],[125,66,58,30,19,19,17,17,16,16],[187,76,58,30,19,19,17,17,16,16]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-783b4833f519b25058ad" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-783b4833f519b25058ad">{"x":{"filter":"none","fillContainer":false,"data":[["Zillow Report","","WeatherPower","2021NewNormals","Hurricane Sandy Paper","2021SLRSeniors","2021CO2Peak","2021Tropics","2019AirQuality1","2019AirQuality2"],[0,297,31,0,0,0,0,0,0,0],[975,532,31,0,0,0,0,0,0,0],[2,8,125,66,58,30,19,19,17,17],[977,837,187,66,58,30,19,19,17,17]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="hits-by-region" class="section level3">
+<div id="hits-by-region-1" class="section level3">
 <h3>Hits by Region</h3>
 <table class="table table-condensed">
 <thead>
@@ -639,70 +960,36 @@ Total
 <tbody>
 <tr>
 <td style="text-align:right;">
-Northeast
-</td>
-<td style="text-align:center;">
-62
-</td>
-<td style="text-align:center;">
-403
-</td>
-<td style="text-align:center;">
-63
-</td>
-<td style="text-align:center;">
-528
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Southwest
-</td>
-<td style="text-align:center;">
-63
-</td>
-<td style="text-align:center;">
-38
-</td>
-<td style="text-align:center;">
-139
-</td>
-<td style="text-align:center;">
-240
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
 Southeast
 </td>
 <td style="text-align:center;">
 122
 </td>
 <td style="text-align:center;">
-16
+607
 </td>
 <td style="text-align:center;">
 91
 </td>
 <td style="text-align:center;">
-229
+820
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-Midwest
+Northeast
 </td>
 <td style="text-align:center;">
-23
+62
 </td>
 <td style="text-align:center;">
-13
+423
 </td>
 <td style="text-align:center;">
-25
+63
 </td>
 <td style="text-align:center;">
-61
+548
 </td>
 </tr>
 <tr>
@@ -713,13 +1000,47 @@ Great Plains
 4
 </td>
 <td style="text-align:center;">
-1
+324
 </td>
 <td style="text-align:center;">
 15
 </td>
 <td style="text-align:center;">
-20
+343
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Southwest
+</td>
+<td style="text-align:center;">
+63
+</td>
+<td style="text-align:center;">
+57
+</td>
+<td style="text-align:center;">
+139
+</td>
+<td style="text-align:center;">
+259
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+Midwest
+</td>
+<td style="text-align:center;">
+23
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+23
+</td>
+<td style="text-align:center;">
+67
 </td>
 </tr>
 <tr>
@@ -730,13 +1051,13 @@ Northwest
 4
 </td>
 <td style="text-align:center;">
-2
+4
 </td>
 <td style="text-align:center;">
 5
 </td>
 <td style="text-align:center;">
-11
+13
 </td>
 </tr>
 <tr>
@@ -763,7 +1084,7 @@ Alaska
 </div>
 <div id="april-2021" class="section level1">
 <h1>April 2021</h1>
-<div id="hits-by-program-1" class="section level3">
+<div id="hits-by-program-2" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
 <thead>
@@ -863,7 +1184,7 @@ CMN
 </tbody>
 </table>
 </div>
-<div id="comparison-with-last-year-1" class="section level3">
+<div id="comparison-with-last-year-2" class="section level3">
 <h3>Comparison with Last Year</h3>
 <table class="table table-condensed">
 <thead>
@@ -970,13 +1291,13 @@ TV
 </tbody>
 </table>
 </div>
-<div id="top-releases-1" class="section level3">
+<div id="top-releases-2" class="section level3">
 <h3>Top Releases</h3>
 <p>Most-used releases this month (including content released before this month).</p>
-<div id="htmlwidget-d3fad49fe3f86298e7b6" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d3fad49fe3f86298e7b6">{"x":{"filter":"none","fillContainer":false,"data":[["2021EarthDay","2021Pollen","WeatherPower","Zillow Report","2021Baseball","2021Cicadas","Historic Harriet Tubman Sites at Risk of Rising Seas on Eastern Shore","2021Drought","2018NewNormals","2021SpringPackage"],[172,70,32,0,63,40,36,42,2,21],[28,37,25,26,29,20,21,11,64,6],[166,71,110,98,16,25,25,19,0,30],[366,178,167,124,108,85,82,72,66,57]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c40135db857dc65c9a81" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c40135db857dc65c9a81">{"x":{"filter":"none","fillContainer":false,"data":[["2021EarthDay","2021Pollen","WeatherPower","Zillow Report","","2021Baseball","2021Cicadas","Historic Harriet Tubman Sites at Risk of Rising Seas on Eastern Shore","2021Drought","2018NewNormals"],[172,70,32,0,55,63,40,36,42,2],[28,37,25,26,53,29,20,21,11,64],[166,71,110,98,0,16,25,25,19,0],[366,178,167,124,108,108,85,82,72,66]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="hits-by-region-1" class="section level3">
+<div id="hits-by-region-2" class="section level3">
 <h3>Hits by Region</h3>
 <table class="table table-condensed">
 <thead>
@@ -1125,7 +1446,7 @@ Hawaii
 </div>
 <div id="march-2021" class="section level1">
 <h1>March 2021</h1>
-<div id="hits-by-program-2" class="section level3">
+<div id="hits-by-program-3" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
 <thead>
@@ -1225,7 +1546,7 @@ CMN
 </tbody>
 </table>
 </div>
-<div id="comparison-with-last-year-2" class="section level3">
+<div id="comparison-with-last-year-3" class="section level3">
 <h3>Comparison with Last Year</h3>
 <table class="table table-condensed">
 <thead>
@@ -1332,13 +1653,13 @@ TV
 </tbody>
 </table>
 </div>
-<div id="top-releases-2" class="section level3">
+<div id="top-releases-3" class="section level3">
 <h3>Top Releases</h3>
 <p>Most-used releases this month (including content released before this month).</p>
-<div id="htmlwidget-5a1a06f12da9ab467ead" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5a1a06f12da9ab467ead">{"x":{"filter":"none","fillContainer":false,"data":[["2021SpringPackage","WeatherPower","2021Pollen","2021SLRSeniors","2020PowerOutages","2021Baseball","2019Rainfall","2020SeasonalWarming","2021Solar","2021GreatLakesIce"],[84,51,63,36,11,23,11,16,17,3],[36,28,27,4,16,0,1,5,2,6],[91,126,85,0,0,2,10,1,2,10],[211,205,175,40,27,25,22,22,21,19]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8da9f093e2e0cbd690e2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8da9f093e2e0cbd690e2">{"x":{"filter":"none","fillContainer":false,"data":[["","2021SpringPackage","WeatherPower","2021Pollen","2021SLRSeniors","2020PowerOutages","2021Baseball","2019Rainfall","2020SeasonalWarming","2021Solar"],[82,84,51,63,36,11,23,11,16,17],[356,36,28,27,4,16,0,1,5,2],[6,91,126,85,0,0,2,10,1,2],[444,211,205,175,40,27,25,22,22,21]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="hits-by-region-2" class="section level3">
+<div id="hits-by-region-3" class="section level3">
 <h3>Hits by Region</h3>
 <table class="table table-condensed">
 <thead>
@@ -1487,7 +1808,7 @@ Alaska
 </div>
 <div id="february-2021" class="section level1">
 <h1>February 2021</h1>
-<div id="hits-by-program-3" class="section level3">
+<div id="hits-by-program-4" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
 <thead>
@@ -1587,7 +1908,7 @@ CMN
 </tbody>
 </table>
 </div>
-<div id="comparison-with-last-year-3" class="section level3">
+<div id="comparison-with-last-year-4" class="section level3">
 <h3>Comparison with Last Year</h3>
 <table class="table table-condensed">
 <thead>
@@ -1694,13 +2015,13 @@ TV
 </tbody>
 </table>
 </div>
-<div id="top-releases-3" class="section level3">
+<div id="top-releases-4" class="section level3">
 <h3>Top Releases</h3>
 <p>Most-used releases this month (including content released before this month).</p>
-<div id="htmlwidget-042bbdb022caac55397f" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-042bbdb022caac55397f">{"x":{"filter":"none","fillContainer":false,"data":[["2020PowerOutages","2021ColdestDay","WeatherPower","2021ColdNights","2021SpringPackage","2021GreatLakesIce","2021ReturnToCOP","2020ColdStreaks","2020WinterPackage","2020Snow"],[61,96,21,33,46,35,31,9,6,14],[179,26,21,12,7,12,3,7,7,9],[0,31,95,31,17,6,10,22,14,0],[240,153,137,76,70,53,44,38,27,23]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b32eb9df4883b0977760" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b32eb9df4883b0977760">{"x":{"filter":"none","fillContainer":false,"data":[["2020PowerOutages","2021ColdestDay","WeatherPower","2021ColdNights","2021SpringPackage","","2021GreatLakesIce","2021ReturnToCOP","2020ColdStreaks","2020WinterPackage"],[61,96,21,33,46,44,35,31,9,6],[179,26,21,12,7,11,12,3,7,7],[0,31,95,31,17,0,6,10,22,14],[240,153,137,76,70,55,53,44,38,27]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="hits-by-region-3" class="section level3">
+<div id="hits-by-region-4" class="section level3">
 <h3>Hits by Region</h3>
 <table class="table table-condensed">
 <thead>
@@ -1849,7 +2170,7 @@ Alaska
 </div>
 <div id="january-2021" class="section level1">
 <h1>January 2021</h1>
-<div id="hits-by-program-4" class="section level3">
+<div id="hits-by-program-5" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
 <thead>
@@ -1949,7 +2270,7 @@ CMN
 </tbody>
 </table>
 </div>
-<div id="comparison-with-last-year-4" class="section level3">
+<div id="comparison-with-last-year-5" class="section level3">
 <h3>Comparison with Last Year</h3>
 <table class="table table-condensed">
 <thead>
@@ -2056,13 +2377,13 @@ TV
 </tbody>
 </table>
 </div>
-<div id="top-releases-4" class="section level3">
+<div id="top-releases-5" class="section level3">
 <h3>Top Releases</h3>
 <p>Most-used releases this month (including content released before this month).</p>
-<div id="htmlwidget-d8e48c42fcd80736eabc" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d8e48c42fcd80736eabc">{"x":{"filter":"none","fillContainer":false,"data":[["2021BDDUSTemps","2021_2020EOYGlobalTemp","2021ColdestCold","Vanishing community: Island serves as warning sign for cities threatened by sea level rise","WeatherPower","2021ColdNights","2020AffordableHousing","2020WinterPackage","2020WarmingStripes","2020ColdStreaks"],[102,110,85,0,4,62,80,21,2,12],[42,34,59,0,0,11,13,14,34,5],[72,56,43,108,100,25,4,31,4,7],[216,200,187,108,104,98,97,66,40,24]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-7db76631a58e1665b5bd" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7db76631a58e1665b5bd">{"x":{"filter":"none","fillContainer":false,"data":[["2021BDDUSTemps","2021_2020EOYGlobalTemp","2021ColdestCold","Vanishing community: Island serves as warning sign for cities threatened by sea level rise","WeatherPower","2021ColdNights","2020AffordableHousing","","2020WinterPackage","2020WarmingStripes"],[102,110,85,0,4,62,80,64,21,2],[42,34,59,0,0,11,13,25,14,34],[72,56,43,108,100,25,4,1,31,4],[216,200,187,108,104,98,97,90,66,40]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="hits-by-region-4" class="section level3">
+<div id="hits-by-region-5" class="section level3">
 <h3>Hits by Region</h3>
 <table class="table table-condensed">
 <thead>
@@ -2194,7 +2515,7 @@ Northwest
 </div>
 <div id="december-2020" class="section level1">
 <h1>December 2020</h1>
-<div id="hits-by-program-5" class="section level3">
+<div id="hits-by-program-6" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
 <thead>
@@ -2294,120 +2615,16 @@ CMN
 </tbody>
 </table>
 </div>
-<div id="comparison-with-last-year-5" class="section level3">
+<div id="comparison-with-last-year-6" class="section level3">
 <h3>Comparison with Last Year</h3>
-<table class="table table-condensed">
-<thead>
-<tr>
-<th style="text-align:right;">
-Platform
-</th>
-<th style="text-align:right;">
-2021
-</th>
-<th style="text-align:right;">
-2020
-</th>
-<th style="text-align:right;">
-Percent Change (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-Twitter
-</td>
-<td style="text-align:right;">
-380
-</td>
-<td style="text-align:right;">
-309
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">19</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Facebook
-</td>
-<td style="text-align:right;">
-118
-</td>
-<td style="text-align:right;">
-165
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-40</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Other Social
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-50</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Online Articles
-</td>
-<td style="text-align:right;">
-238
-</td>
-<td style="text-align:right;">
-136
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">43</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Radio
-</td>
-<td style="text-align:right;">
-48
-</td>
-<td style="text-align:right;">
-27
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">44</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-TV
-</td>
-<td style="text-align:right;">
-297
-</td>
-<td style="text-align:right;">
-490
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-65</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<div id="top-releases-5" class="section level3">
+<div id="top-releases-6" class="section level3">
 <h3>Top Releases</h3>
 <p>Most-used releases this month (including content released before this month).</p>
-<div id="htmlwidget-f7949bb5e25cb5e31a80" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f7949bb5e25cb5e31a80">{"x":{"filter":"none","fillContainer":false,"data":[["2020AffordableHousing","WeatherPower","2020WinterPackage","2020BDD","2020SeasonalWarming","2017WhiteChristmas","Zillow Report","2020NetZero","2020Snow","2020ChristmasStripes"],[307,28,54,67,34,13,13,30,15,26],[255,23,27,19,12,5,16,5,12,7],[10,109,55,17,41,36,14,6,10,0],[572,160,136,103,87,54,43,41,37,33]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d92ce6ecfa97779cc131" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d92ce6ecfa97779cc131">{"x":{"filter":"none","fillContainer":false,"data":[["2020AffordableHousing","WeatherPower","2020WinterPackage","2020BDD","2020SeasonalWarming","2017WhiteChristmas","Zillow Report","","2020NetZero","2020Snow"],[307,28,54,67,34,13,13,35,30,15],[255,23,27,19,12,5,16,6,5,12],[10,109,55,17,41,36,14,0,6,10],[572,160,136,103,87,54,43,41,41,37]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="hits-by-region-5" class="section level3">
+<div id="hits-by-region-6" class="section level3">
 <h3>Hits by Region</h3>
 <table class="table table-condensed">
 <thead>
@@ -2539,7 +2756,7 @@ Northwest
 </div>
 <div id="november-2020" class="section level1">
 <h1>November 2020</h1>
-<div id="hits-by-program-6" class="section level3">
+<div id="hits-by-program-7" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
 <thead>
@@ -2639,120 +2856,16 @@ CMN
 </tbody>
 </table>
 </div>
-<div id="comparison-with-last-year-6" class="section level3">
+<div id="comparison-with-last-year-7" class="section level3">
 <h3>Comparison with Last Year</h3>
-<table class="table table-condensed">
-<thead>
-<tr>
-<th style="text-align:right;">
-Platform
-</th>
-<th style="text-align:right;">
-2021
-</th>
-<th style="text-align:right;">
-2020
-</th>
-<th style="text-align:right;">
-Percent Change (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-Twitter
-</td>
-<td style="text-align:right;">
-285
-</td>
-<td style="text-align:right;">
-298
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-5</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Facebook
-</td>
-<td style="text-align:right;">
-92
-</td>
-<td style="text-align:right;">
-122
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-33</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Other Social
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-300</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Online Articles
-</td>
-<td style="text-align:right;">
-181
-</td>
-<td style="text-align:right;">
-131
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">28</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Radio
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-104
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-10300</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-TV
-</td>
-<td style="text-align:right;">
-291
-</td>
-<td style="text-align:right;">
-209
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">28</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<div id="top-releases-6" class="section level3">
+<div id="top-releases-7" class="section level3">
 <h3>Top Releases</h3>
 <p>Most-used releases this month (including content released before this month).</p>
-<div id="htmlwidget-2abb0ec2eac3249e82ef" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2abb0ec2eac3249e82ef">{"x":{"filter":"none","fillContainer":false,"data":[["2020WinterPackage","WeatherPower","2020SeasonalWarming","2020FallPackage","2020Hurricanes","2020SpringRain","2020HurricanesII","2020DaysAbove","2020YaleClimateMaps","2019RecordsUpdate"],[57,21,71,26,21,28,22,0,32,11],[36,21,21,11,7,6,9,34,0,5],[52,92,23,18,25,11,6,0,1,11],[145,134,115,55,53,45,37,34,33,27]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-aef1e6bf274c6edf1a2c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-aef1e6bf274c6edf1a2c">{"x":{"filter":"none","fillContainer":false,"data":[["2020WinterPackage","WeatherPower","2020SeasonalWarming","","2020FallPackage","2020Hurricanes","2020SpringRain","2020HurricanesII","2020DaysAbove","2020YaleClimateMaps"],[57,21,71,54,26,21,28,22,0,32],[36,21,21,6,11,7,6,9,34,0],[52,92,23,4,18,25,11,6,0,1],[145,134,115,64,55,53,45,37,34,33]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="hits-by-region-6" class="section level3">
+<div id="hits-by-region-7" class="section level3">
 <h3>Hits by Region</h3>
 <table class="table table-condensed">
 <thead>
@@ -2901,7 +3014,7 @@ Alaska
 </div>
 <div id="october-2020" class="section level1">
 <h1>October 2020</h1>
-<div id="hits-by-program-7" class="section level3">
+<div id="hits-by-program-8" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
 <thead>
@@ -3001,120 +3114,16 @@ CMN
 </tbody>
 </table>
 </div>
-<div id="comparison-with-last-year-7" class="section level3">
+<div id="comparison-with-last-year-8" class="section level3">
 <h3>Comparison with Last Year</h3>
-<table class="table table-condensed">
-<thead>
-<tr>
-<th style="text-align:right;">
-Platform
-</th>
-<th style="text-align:right;">
-2021
-</th>
-<th style="text-align:right;">
-2020
-</th>
-<th style="text-align:right;">
-Percent Change (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-Twitter
-</td>
-<td style="text-align:right;">
-378
-</td>
-<td style="text-align:right;">
-455
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-20</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Facebook
-</td>
-<td style="text-align:right;">
-137
-</td>
-<td style="text-align:right;">
-144
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-5</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Other Social
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">11</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Online Articles
-</td>
-<td style="text-align:right;">
-228
-</td>
-<td style="text-align:right;">
-273
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-20</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Radio
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-79
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-3850</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-TV
-</td>
-<td style="text-align:right;">
-328
-</td>
-<td style="text-align:right;">
-221
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">33</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<div id="top-releases-7" class="section level3">
+<div id="top-releases-8" class="section level3">
 <h3>Top Releases</h3>
 <p>Most-used releases this month (including content released before this month).</p>
-<div id="htmlwidget-545abcf1949aa5a23a11" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-545abcf1949aa5a23a11">{"x":{"filter":"none","fillContainer":false,"data":[["WeatherPower","2020LastDayAbove","2020Halloween","2020PowerOutages","2020HurricanesII","Climate Change is Tipping Scales Toward More Wildfires","2020ConcurrentFloods","2020Drought","2020FallPackage","2020WesternWildfires"],[28,89,54,38,31,27,30,18,27,21],[29,11,7,11,15,33,8,9,5,8],[96,35,25,23,16,0,14,13,7,7],[153,135,86,72,62,60,52,40,39,36]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-81d8719155ebf28b83fc" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-81d8719155ebf28b83fc">{"x":{"filter":"none","fillContainer":false,"data":[["","WeatherPower","2020LastDayAbove","2020Halloween","2020PowerOutages","2020HurricanesII","Climate Change is Tipping Scales Toward More Wildfires","2020ConcurrentFloods","2020Drought","2020FallPackage"],[90,28,89,54,38,31,27,30,18,27],[59,29,11,7,11,15,33,8,9,5],[56,96,35,25,23,16,0,14,13,7],[205,153,135,86,72,62,60,52,40,39]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="hits-by-region-7" class="section level3">
+<div id="hits-by-region-8" class="section level3">
 <h3>Hits by Region</h3>
 <table class="table table-condensed">
 <thead>
@@ -3246,7 +3255,7 @@ Northwest
 </div>
 <div id="september-2020" class="section level1">
 <h1>September 2020</h1>
-<div id="hits-by-program-8" class="section level3">
+<div id="hits-by-program-9" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
 <thead>
@@ -3346,120 +3355,16 @@ CMN
 </tbody>
 </table>
 </div>
-<div id="comparison-with-last-year-8" class="section level3">
+<div id="comparison-with-last-year-9" class="section level3">
 <h3>Comparison with Last Year</h3>
-<table class="table table-condensed">
-<thead>
-<tr>
-<th style="text-align:right;">
-Platform
-</th>
-<th style="text-align:right;">
-2021
-</th>
-<th style="text-align:right;">
-2020
-</th>
-<th style="text-align:right;">
-Percent Change (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-Twitter
-</td>
-<td style="text-align:right;">
-454
-</td>
-<td style="text-align:right;">
-556
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-22</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Facebook
-</td>
-<td style="text-align:right;">
-108
-</td>
-<td style="text-align:right;">
-233
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-116</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Other Social
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-188</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Online Articles
-</td>
-<td style="text-align:right;">
-209
-</td>
-<td style="text-align:right;">
-199
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">5</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Radio
-</td>
-<td style="text-align:right;">
-62
-</td>
-<td style="text-align:right;">
-39
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">37</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-TV
-</td>
-<td style="text-align:right;">
-328
-</td>
-<td style="text-align:right;">
-263
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">20</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<div id="top-releases-8" class="section level3">
+<div id="top-releases-9" class="section level3">
 <h3>Top Releases</h3>
 <p>Most-used releases this month (including content released before this month).</p>
-<div id="htmlwidget-b19162ba12134a354660" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b19162ba12134a354660">{"x":{"filter":"none","fillContainer":false,"data":[["2020WesternWildfires","2020FallPackage","The Inequality of City Heat","WeatherPower","2020HurricanesII","2020Records","2020ArcticMin","2020OHW","2020DaysAbove","2020SmokeWaves"],[80,74,1,15,59,45,49,38,0,7],[33,22,110,15,12,16,6,12,35,1],[56,65,0,71,17,17,11,8,4,28],[169,161,111,101,88,78,66,58,39,36]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4c966a3953b54090e92f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4c966a3953b54090e92f">{"x":{"filter":"none","fillContainer":false,"data":[["2020WesternWildfires","2020FallPackage","The Inequality of City Heat","","WeatherPower","2020HurricanesII","2020Records","2020ArcticMin","2020OHW","2020DaysAbove"],[80,74,1,94,15,59,45,49,38,0],[33,22,110,15,15,12,16,6,12,35],[56,65,0,0,71,17,17,11,8,4],[169,161,111,109,101,88,78,66,58,39]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="hits-by-region-8" class="section level3">
+<div id="hits-by-region-9" class="section level3">
 <h3>Hits by Region</h3>
 <table class="table table-condensed">
 <thead>
@@ -3504,16 +3409,16 @@ Southwest
 Northeast
 </td>
 <td style="text-align:center;">
-131
+132
 </td>
 <td style="text-align:center;">
-69
+75
 </td>
 <td style="text-align:center;">
 48
 </td>
 <td style="text-align:center;">
-248
+255
 </td>
 </tr>
 <tr>
@@ -3625,7 +3530,7 @@ Hawaii
 </div>
 <div id="august-2020" class="section level1">
 <h1>August 2020</h1>
-<div id="hits-by-program-9" class="section level3">
+<div id="hits-by-program-10" class="section level3">
 <h3>Hits by Program</h3>
 <table class="table table-condensed">
 <thead>
@@ -3725,120 +3630,16 @@ CMN
 </tbody>
 </table>
 </div>
-<div id="comparison-with-last-year-9" class="section level3">
+<div id="comparison-with-last-year-10" class="section level3">
 <h3>Comparison with Last Year</h3>
-<table class="table table-condensed">
-<thead>
-<tr>
-<th style="text-align:right;">
-Platform
-</th>
-<th style="text-align:right;">
-2021
-</th>
-<th style="text-align:right;">
-2020
-</th>
-<th style="text-align:right;">
-Percent Change (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-Twitter
-</td>
-<td style="text-align:right;">
-448
-</td>
-<td style="text-align:right;">
-449
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: black">0</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Facebook
-</td>
-<td style="text-align:right;">
-161
-</td>
-<td style="text-align:right;">
-170
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-6</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Other Social
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-12
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-100</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Online Articles
-</td>
-<td style="text-align:right;">
-231
-</td>
-<td style="text-align:right;">
-258
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-12</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-Radio
-</td>
-<td style="text-align:right;">
-47
-</td>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #71CA97">77</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-TV
-</td>
-<td style="text-align:right;">
-271
-</td>
-<td style="text-align:right;">
-568
-</td>
-<td style="text-align:right;">
-<span style="font-weight: bold; color: #ff7f7f">-110</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<div id="top-releases-9" class="section level3">
+<div id="top-releases-10" class="section level3">
 <h3>Top Releases</h3>
 <p>Most-used releases this month (including content released before this month).</p>
-<div id="htmlwidget-f6606a105d82edcd8ff8" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f6606a105d82edcd8ff8">{"x":{"filter":"none","fillContainer":false,"data":[["2020CDD","2020Ticks","WeatherPower","2020SummerPackage","2020Mosquitoes","2020HeatStreaks","2020DaysAbove","2019Wildfire","2020OHW","2019Warming"],[135,78,26,34,34,43,19,19,36,22],[58,26,15,14,22,6,17,13,5,19],[41,31,71,38,24,14,19,19,1,0],[234,135,112,86,80,63,55,51,42,41]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-cb0a6c31417512c7e218" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cb0a6c31417512c7e218">{"x":{"filter":"none","fillContainer":false,"data":[["2020CDD","","2020Ticks","WeatherPower","2020SummerPackage","2020Mosquitoes","2020HeatStreaks","2020DaysAbove","2019Wildfire","2020OHW"],[135,136,78,26,34,34,43,19,19,36],[58,51,26,15,14,22,6,17,13,5],[41,5,31,71,38,24,14,19,19,1],[234,192,135,112,86,80,63,55,51,42]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Release<\/th>\n      <th>Social<\/th>\n      <th>Stories<\/th>\n      <th>TV<\/th>\n      <th>Total<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"70px","scrollY":"200px","pageLength":5,"dom":"ftp","columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="hits-by-region-9" class="section level3">
+<div id="hits-by-region-10" class="section level3">
 <h3>Hits by Region</h3>
 <table class="table table-condensed">
 <thead>
@@ -3998,7 +3799,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -4007,6 +3808,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
