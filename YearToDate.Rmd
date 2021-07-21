@@ -80,7 +80,7 @@ tvgoalschart <- ggplot(melted.tvgoalsandhits, aes(Month, value, group=variable, 
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="TV Airings", x="") +
 theme(legend.title = element_blank())+
-    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="June"), aes(label = 2466), nudge_x = 0.4, nudge_y = 50, color="black") +
+    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="June"), aes(label = value), nudge_x = 0.4, nudge_y = 50, color="black") +
     scale_x_discrete(limits = month.name)
 tvgoalschart
 ```
