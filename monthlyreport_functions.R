@@ -76,6 +76,32 @@ rankReleases <- function(dat){
   countedSortedReleases <- tracking.data_releases.summarized[order(tracking.data_releases.summarized$total, decreasing=TRUE),]
   return(countedSortedReleases)
 }
+#ranked releases, tv and radio only
+rankReleasesTVRadioOnly <- function(dat){
+tracking.data_releases <- dat[,c("name", "ID", "date", "year", "month", "location", "user.type",
+                                                              "program.content","rt", "tw", "fb", "other","online.article", "radio","tv")]
+#disaggregate 'program.content' column into one release per cell
+library("tidyr")
+tracking.data_releases.sep <- separate_rows(tracking.data_releases, program.content, sep = ",")
+#trim white space at the start and end of each release name
+tracking.data_releases.sep$program.content <- trimws(tracking.data_releases.sep$program.content, which="both")
+#count hits for each release
+library("dplyr")
+tracking.data_releases.count <- tracking.data_releases.sep %>%
+  group_by(program.content) %>%
+  summarise(rt=sum(rt), tw=sum(tw), fb=sum(fb), other=sum(other), 
+            online.article=sum(online.article), radio=sum(radio), tv=sum(tv))
+#subset for just tv and radio
+tracking.data_releases.summarized <- tracking.data_releases.count[,c("program.content", "radio", "tv")]
+#add 20% to TV
+tracking.data_releases.summarized$tv <- round((tracking.data_releases.summarized$tv*1.2), digits=0)
+tracking.data_releases.summarized <- tracking.data_releases.summarized[,c("program.content", "radio", "tv")]
+#add total hits column
+tracking.data_releases.summarized$total <- tracking.data_releases.summarized$radio + tracking.data_releases.summarized$tv
+#sort by most to least popular
+countedSortedReleases <- tracking.data_releases.summarized[order(tracking.data_releases.summarized$total, decreasing=TRUE),]
+return(countedSortedReleases)
+}
 
 #return data frame of most popular releases
 releases.popularity <- function(dat){

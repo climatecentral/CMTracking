@@ -78,15 +78,15 @@ previousYear(tracking.data.June2021, tracking.data.June2020)
 
 ### Top Releases
 
-Most-used releases this month (including content released before this month).
+Most-used releases this month on TV and Radio (including content released before this month).
 
 ```{r June 2021 Top Releases, warning=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
 tracking.data.June2021.subsetted <- subset(tracking.data.June2021, source=="CC"|source=="CM"|source=="CMN")
-rankedreleases.June2021 <- rankReleases(tracking.data.June2021.subsetted)
+rankedreleases.June2021 <- rankReleasesTVRadioOnly(tracking.data.June2021.subsetted)
 top10releases.June2021 <-rankedreleases.June2021[c(1:10),]
-names(top10releases.June2021) <- c("Release", "Social", "Stories", "TV", "Total")
+names(top10releases.June2021) <- c("Release", "Radio", "TV", "Total")
 top5releases.June2021 <-rankedreleases.June2021[c(1:5),]
-names(top5releases.June2021) <- c("Release", "Social", "Stories", "TV", "Total")
+names(top5releases.June2021) <- c("Release", "Radio", "TV", "Total")
 library(DT)
 datatable(top10releases.June2021, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
 ```
@@ -148,15 +148,15 @@ previousYear(tracking.data.May2021, tracking.data.May2020)
 
 ### Top Releases
 
-Most-used releases this month (including content released before this month).
+Most-used releases this month on TV and Radio (including content released before this month).
 
 ```{r May 2021 Top Releases, warning=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
 tracking.data.May2021.subsetted <- subset(tracking.data.May2021, source=="CC"|source=="CM"|source=="CMN")
-rankedreleases.May2021 <- rankReleases(tracking.data.May2021.subsetted)
+rankedreleases.May2021 <- rankReleasesTVRadioOnly(tracking.data.May2021.subsetted)
 top10releases.May2021 <-rankedreleases.May2021[c(1:10),]
-names(top10releases.May2021) <- c("Release", "Social", "Stories", "TV", "Total")
+names(top10releases.May2021) <- c("Release", "Radio", "TV", "Total")
 top5releases.May2021 <-rankedreleases.May2021[c(1:5),]
-names(top5releases.May2021) <- c("Release", "Social", "Stories", "TV", "Total")
+names(top5releases.May2021) <- c("Release", "Radio", "TV", "Total")
 library(DT)
 datatable(top10releases.May2021, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
 ```
