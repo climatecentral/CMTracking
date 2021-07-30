@@ -28,6 +28,9 @@ YTDdata2021 <- dataReformatted[which(dataReformatted$month %in% c("January", "Fe
 
 previousYear(YTDdata2021, YTDdata2020)
 ```
+\*Facebook and Other Social (Instagram and Youtube) tracking stopped May 2021.
+
+***
 
 ## TV
 
