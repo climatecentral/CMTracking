@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 7/16/2021"
+date: "Last updated: 8/18/2021"
 output: 
   html_document:
     toc: true
@@ -15,6 +15,16 @@ h1 {
   text-align: center;
 }
 ```
+# July 2021
+
+**Rebecca Spiess**, for Denverite, [discusses](https://denverite.com/2021/07/13/denvers-heat-island-effect-boosts-city-temperatures-by-over-5-degrees/) the urban heat island effect in Denver, Colorado with input from Climate Central’s senior data analyst, **Jen Brady**. 
+
+**Laura Klivans** [reported](https://www.kqed.org/science/1975879/more-heat-waves-coming-scientists-say-but-the-health-impacts-are-largely-preventable) on the increasing number of dangerous heat waves for KQED in the San Francisco Bay area.
+
+**Efran Afante** (WLTX/FOX, SC) uses many of our graphics to help [explain](https://www.iqmediacorp.com/ClipPlayer/?ClipID=cf82ea40-69fb-4633-ba61-fde7787fd888&ps=2) how temperatures are rising in Columbia, South Carolina, and across the country.
+
+**Andrea Michaels** (WPMT/FOX, PA) [makes the connection](https://www.iqmediacorp.com/ClipPlayer/?ClipID=750985b3-4866-4e04-84c1-479b53f26e5b&ps=2) between warmer summers and a longer mosquito and pollen season.
+
 # June 2021
 
 **Ashton Altieri**, for KCNC, 
