@@ -19,7 +19,7 @@ h1 {
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
 source("monthlyreport_functions.R")
-data <- read.csv('July2021TrackingData.csv')
+data <- read.csv('August2021TrackingData.csv')
 data$Date.Used <- strptime(as.character(data$Date.Used), "%m/%d/%Y")
 tracking.data <-reformat_googlesheet(data)
 library('tidyr')
@@ -29,6 +29,78 @@ tracking.data$date <- as.Date(tracking.data$date, format = "%Y-%m-%d")
 ```
 
 Repository for CM/N Programs Monthly Tracking reports.
+
+# August 2021
+
+```{r August 2021 Enrollment, eval=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
+values <- c(968, 92, 483, 55, 702)
+enrollment <- as.data.frame(cbind(rows, values))
+names(enrollment) <- c(" ", "Enrollment")
+library("formattable")
+formattable(enrollment)
+```
+
+
+### Hits by Program
+```{r August 2021 Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.August2021 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2021"),]
+
+#expanded view
+library("tidyr")
+expanded.hits.draft.August2021 <- hitsbyprogram(tracking.data.August2021)
+expanded.hits.August2021 <- expanded.hits.draft.August2021[,c("source", "Twitter", "fb", "other",
+                                  "online.article", "radio", "tv")]
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.August2021 <- subset(expanded.hits.August2021, source=="CC"|source=="CM"|source=="CMN")
+#aggregate hits according to nest program model
+CMN.August2021 <- expanded.hits.CMprograms.August2021[3,2:7]
+CM.August2021 <- CMN.August2021 + expanded.hits.CMprograms.August2021[2,2:7]
+CC.August2021 <- CM.August2021 + expanded.hits.CMprograms.August2021[1,2:7]
+aggregated.hits.CMprograms.August2021 <- rbind(CC.August2021, CM.August2021, CMN.August2021)
+rownames(aggregated.hits.CMprograms.August2021) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.August2021) <- c("Twitter", "Facebook", "Other ",
+                          "Online Articles", "Radio", "TV")
+library("formattable")
+aggregated.hits.formatted.August2021 <- formattable(aggregated.hits.CMprograms.August2021,
+                                       align=c("l", "c", "c", "c", "c", "c", "c"),
+                                       list(''))
+aggregated.hits.formatted.August2021
+```
+
+### Comparison with Last Year
+```{r August 2021 Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.August2021 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2021"),]
+tracking.data.August2020 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2020"),]
+previousYear(tracking.data.August2021, tracking.data.August2020)
+```
+
+### Top Releases
+
+Most-used releases this month on TV and Radio (including content released before this month).
+
+```{r August 2021 Top Releases, warning=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.August2021.subsetted <- subset(tracking.data.August2021, source=="CC"|source=="CM"|source=="CMN")
+rankedreleases.August2021 <- rankReleasesTVRadioOnly(tracking.data.August2021.subsetted)
+top10releases.August2021 <-rankedreleases.August2021[c(1:10),]
+names(top10releases.August2021) <- c("Release", "Radio", "TV", "Total")
+top5releases.August2021 <-rankedreleases.August2021[c(1:5),]
+names(top5releases.August2021) <- c("Release", "Radio", "TV", "Total")
+library(DT)
+datatable(top10releases.August2021, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
+```
+
+### Hits by Region
+```{r August 2021 Hits by Region, warning=FALSE, echo = FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.August2021 <- hitsbyregion(tracking.data.August2021.subsetted)
+month.hitsbyregion.August2021
+```
+
+***
+
+
 
 # July 2021
 
