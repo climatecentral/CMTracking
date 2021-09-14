@@ -477,6 +477,7 @@ colnames(monthcomp) <- c("Platform", "2021", "2020", "Percent Change (%)")
 monthcomp <- monthcomp[c(6,1,3,2,4,5),]
 monthcomp$Platform <- c("Twitter", "Facebook", "Other Social", "Online Articles", "Radio", "TV")
 rownames(monthcomp) <- NULL
+monthcomp <- monthcomp[c(1,4,5,6),]
 library('formattable')
 customGreen = "#71CA97"
 customRed = "#ff7f7f"

@@ -49,23 +49,26 @@ tracking.data.August2021 <- tracking.data[which(tracking.data$month=="August" & 
 #expanded view
 library("tidyr")
 expanded.hits.draft.August2021 <- hitsbyprogram(tracking.data.August2021)
-expanded.hits.August2021 <- expanded.hits.draft.August2021[,c("source", "Twitter", "fb", "other",
+expanded.hits.August2021 <- expanded.hits.draft.August2021[,c("source", "Twitter",
                                   "online.article", "radio", "tv")]
+
 #restrict data to CC, CM, CMN sources
 expanded.hits.CMprograms.August2021 <- subset(expanded.hits.August2021, source=="CC"|source=="CM"|source=="CMN")
 #aggregate hits according to nest program model
-CMN.August2021 <- expanded.hits.CMprograms.August2021[3,2:7]
-CM.August2021 <- CMN.August2021 + expanded.hits.CMprograms.August2021[2,2:7]
-CC.August2021 <- CM.August2021 + expanded.hits.CMprograms.August2021[1,2:7]
+CMN.August2021 <- expanded.hits.CMprograms.August2021[3,2:5]
+CM.August2021 <- CMN.August2021 + expanded.hits.CMprograms.August2021[2,2:5]
+CC.August2021 <- CM.August2021 + expanded.hits.CMprograms.August2021[1,2:5]
 aggregated.hits.CMprograms.August2021 <- rbind(CC.August2021, CM.August2021, CMN.August2021)
 rownames(aggregated.hits.CMprograms.August2021) <- c("CC", "CM", "CMN")
 #change column names
-names(aggregated.hits.CMprograms.August2021) <- c("Twitter", "Facebook", "Other ",
+names(aggregated.hits.CMprograms.August2021) <- c("Twitter",
                           "Online Articles", "Radio", "TV")
+
 library("formattable")
 aggregated.hits.formatted.August2021 <- formattable(aggregated.hits.CMprograms.August2021,
-                                       align=c("l", "c", "c", "c", "c", "c", "c"),
+                                       align=c("l", "c", "c", "c", "c"),
                                        list(''))
+
 aggregated.hits.formatted.August2021
 ```
 
@@ -121,22 +124,22 @@ tracking.data.July2021 <- tracking.data[which(tracking.data$month=="July" & trac
 #expanded view
 library("tidyr")
 expanded.hits.draft.July2021 <- hitsbyprogram(tracking.data.July2021)
-expanded.hits.July2021 <- expanded.hits.draft.July2021[,c("source", "Twitter", "fb", "other",
+expanded.hits.July2021 <- expanded.hits.draft.July2021[,c("source", "Twitter",
                                   "online.article", "radio", "tv")]
 #restrict data to CC, CM, CMN sources
 expanded.hits.CMprograms.July2021 <- subset(expanded.hits.July2021, source=="CC"|source=="CM"|source=="CMN")
 #aggregate hits according to nest program model
-CMN.July2021 <- expanded.hits.CMprograms.July2021[3,2:7]
-CM.July2021 <- CMN.July2021 + expanded.hits.CMprograms.July2021[2,2:7]
-CC.July2021 <- CM.July2021 + expanded.hits.CMprograms.July2021[1,2:7]
+CMN.July2021 <- expanded.hits.CMprograms.July2021[3,2:5]
+CM.July2021 <- CMN.July2021 + expanded.hits.CMprograms.July2021[2,2:5]
+CC.July2021 <- CM.July2021 + expanded.hits.CMprograms.July2021[1,2:5]
 aggregated.hits.CMprograms.July2021 <- rbind(CC.July2021, CM.July2021, CMN.July2021)
 rownames(aggregated.hits.CMprograms.July2021) <- c("CC", "CM", "CMN")
 #change column names
-names(aggregated.hits.CMprograms.July2021) <- c("Twitter", "Facebook", "Other ",
+names(aggregated.hits.CMprograms.July2021) <- c("Twitter",
                           "Online Articles", "Radio", "TV")
 library("formattable")
 aggregated.hits.formatted.July2021 <- formattable(aggregated.hits.CMprograms.July2021,
-                                       align=c("l", "c", "c", "c", "c", "c", "c"),
+                                       align=c("l", "c", "c", "c", "c"),
                                        list(''))
 aggregated.hits.formatted.July2021
 ```
@@ -191,22 +194,22 @@ tracking.data.June2021 <- tracking.data[which(tracking.data$month=="June" & trac
 #expanded view
 library("tidyr")
 expanded.hits.draft.June2021 <- hitsbyprogram(tracking.data.June2021)
-expanded.hits.June2021 <- expanded.hits.draft.June2021[,c("source", "Twitter", "fb", "other",
+expanded.hits.June2021 <- expanded.hits.draft.June2021[,c("source", "Twitter",
                                   "online.article", "radio", "tv")]
 #restrict data to CC, CM, CMN sources
 expanded.hits.CMprograms.June2021 <- subset(expanded.hits.June2021, source=="CC"|source=="CM"|source=="CMN")
 #aggregate hits according to nest program model
-CMN.June2021 <- expanded.hits.CMprograms.June2021[3,2:7]
-CM.June2021 <- CMN.June2021 + expanded.hits.CMprograms.June2021[2,2:7]
-CC.June2021 <- CM.June2021 + expanded.hits.CMprograms.June2021[1,2:7]
+CMN.June2021 <- expanded.hits.CMprograms.June2021[3,2:5]
+CM.June2021 <- CMN.June2021 + expanded.hits.CMprograms.June2021[2,2:5]
+CC.June2021 <- CM.June2021 + expanded.hits.CMprograms.June2021[1,2:5]
 aggregated.hits.CMprograms.June2021 <- rbind(CC.June2021, CM.June2021, CMN.June2021)
 rownames(aggregated.hits.CMprograms.June2021) <- c("CC", "CM", "CMN")
 #change column names
-names(aggregated.hits.CMprograms.June2021) <- c("Twitter", "Facebook", "Other ",
+names(aggregated.hits.CMprograms.June2021) <- c("Twitter",
                           "Online Articles", "Radio", "TV")
 library("formattable")
 aggregated.hits.formatted.June2021 <- formattable(aggregated.hits.CMprograms.June2021,
-                                       align=c("l", "c", "c", "c", "c", "c", "c"),
+                                       align=c("l", "c","c", "c", "c"),
                                        list(''))
 aggregated.hits.formatted.June2021
 ```
