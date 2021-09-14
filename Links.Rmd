@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 8/18/2021"
+date: "Last updated: 9/14/2021"
 output: 
   html_document:
     toc: true
@@ -15,6 +15,25 @@ h1 {
   text-align: center;
 }
 ```
+
+
+# August 2021
+
+**Briana Zamora-Nipper**, for KPRC in Houston, [discusses](https://www.click2houston.com/news/local/2021/08/01/houston-ranked-among-the-top-5-hottest-metros-in-the-country/) the factors that make a city an urban heat island
+
+**Maanvi Singh**, for The Guardian, [discusses](https://www.theguardian.com/us-news/2021/aug/25/wildfires-us-west-fire-weather-caldor) fire weather conditions and how they could have influenced the Caldor Fire.
+
+**Beth Finello**, for WTTV in Indiana, [identifies](https://cbs4indy.com/weather/identifying-heat-related-illnesses-in-both-people-and-pets/) heat-related illnesses in both people and pets.
+
+Another way to beat the summer heat in Boston — trees. Find out [how and why](https://www.boston25news.com/news/local-communities-planting-trees-offset-climate-change-consequences/YIX5XNUL5FAFDAHYBGQPRNFV3U/) from **Vicki Graf** and **Bob Dumas** at WFXT.
+
+**Chester Lampkin** (WUSA/CBS, Washington, DC) [discusses](https://www.iqmediacorp.com/ClipPlayer/?ClipID=c3cf9f8e-93d8-491a-a4b8-e49454fd6d0a&ps=2) how carbon dioxide is warming our planet.
+
+**Mike Nicco** (KGO/ABC, CA) [interviews](https://www.iqmediacorp.com/ClipPlayer/?ClipID=79658cc9-e3fa-4b96-8f23-7db27e9a0cdc&ps=2) our very own **Kaitlyn Weber** and **Andrew Perishing** about increasing fire weather days in the West.
+
+**Alex Garcia** (KABB/FOX, TX) [calls on](https://www.iqmediacorp.com/ClipPlayer/?ClipID=2b89addb-b24d-4161-a10f-72de86c831e5&ps=2) climate scientist Dr. Kathryn Hayhoe to explain how climate change is affecting Texas.
+
+
 # July 2021
 
 **Rebecca Spiess**, for Denverite, [discusses](https://denverite.com/2021/07/13/denvers-heat-island-effect-boosts-city-temperatures-by-over-5-degrees/) the urban heat island effect in Denver, Colorado with input from Climate Central’s senior data analyst, **Jen Brady**. 
