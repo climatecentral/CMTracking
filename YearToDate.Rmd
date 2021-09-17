@@ -136,6 +136,7 @@ theme(legend.title = element_blank()) +
     geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="August"), aes(label = value), nudge_x = 0.5, nudge_y = 50, color="black") +
     scale_x_discrete(limits = month.name)
   articlesgoalschart
+  
 ```
 
   
