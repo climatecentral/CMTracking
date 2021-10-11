@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 9/14/2021"
+date: "Last updated: 10/11/2021"
 output: 
   html_document:
     toc: true
@@ -16,6 +16,17 @@ h1 {
 }
 ```
 
+# Septmeber 2021
+
+**Jordan Gass-Poore** produced CNN’s recent [“Chasing Life”](https://www.cnn.com/audio/podcasts/chasing-life?episodeguid=9ee6b0be-8213-46cb-96c2-ad9f01650108) podcast on how rising temperatures impact human health.
+
+**Kate Williams** [reports](https://www.oregonlive.com/environment/2021/09/wildfire-smoke-latest-climate-crisis-to-hit-southern-oregon.html) on wildfire smoke and poor air quality for The Oregonian/Oregon Live. 
+
+**Frank Kummer**, for the Philadelphia Inquirer, [explains](https://www.inquirer.com/science/climate/ida-climate-change-philadelphia-flooding-tornado-20210904.html) climate change helped “prime the pump” for a destructive Hurricane Ida.
+
+**Mike Maze** (WRAL/NBC, NC) [discusses](https://www.iqmediacorp.com/ClipPlayer/?ClipID=7600688c-6f92-4925-9eb8-db9f27ffb243&ps=2) the impacts of drought and heatwaves on corn and soy crops.
+
+**Miri Marshall** (WUSA/CBS, DC) [explains](https://www.iqmediacorp.com/ClipPlayer/?ClipID=9d86f6df-e16d-4a91-b288-763f5fa16ab8&ps=2) how heavy rainfall has been increasing over the years.
 
 # August 2021
 
