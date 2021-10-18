@@ -1,7 +1,7 @@
 ---
 title: "Year-To-Date"
 output: html_document
-date: "Last updated: 9/14/2021"
+date: "Last updated: 10/18/2021"
 ---
 
 ```{css, echo=FALSE}
@@ -12,19 +12,19 @@ h1 {
 
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
-data <- read.csv('August2021TrackingData.csv')
+data <- read.csv('September2021TrackingData.csv')
 #load pre-written evaluation functions
 source("monthlyreport_functions.R")
 dataReformatted <- reformat_googlesheet(data)
 ```
 
-# Year-to-Date: August 2021
+# Year-to-Date: September 2021
 
 ```{r YTD Hit Type, echo=FALSE, warning=FALSE, message=FALSE}
 ## Hit Type
 library('openair')
-YTDdata2020 <- dataReformatted[which(dataReformatted$month %in% c("January", "February", "March", "April", "May", "June", "July", "August") & dataReformatted$year=="2020"),]
-YTDdata2021 <- dataReformatted[which(dataReformatted$month %in% c("January", "February", "March", "April", "May", "June", "July", "August") & dataReformatted$year=="2021"),]
+YTDdata2020 <- dataReformatted[which(dataReformatted$month %in% c("January", "February", "March", "April", "May", "June", "July", "August", "September") & dataReformatted$year=="2020"),]
+YTDdata2021 <- dataReformatted[which(dataReformatted$month %in% c("January", "February", "March", "April", "May", "June", "July", "August", "September") & dataReformatted$year=="2021"),]
 
 previousYear(YTDdata2021, YTDdata2020)
 ```
@@ -83,7 +83,7 @@ tvgoalschart <- ggplot(melted.tvgoalsandhits, aes(Month, value, group=variable, 
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="TV Airings", x="") +
 theme(legend.title = element_blank())+
-    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="August"), aes(label = value), nudge_x = 0.4, nudge_y = 50, color="black") +
+    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="September"), aes(label = value), nudge_x = 0.4, nudge_y = 50, color="black") +
     scale_x_discrete(limits = month.name)
 tvgoalschart
 ```
@@ -133,7 +133,7 @@ tvgoalschart
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="Articles", x="") +
 theme(legend.title = element_blank()) +
-    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="August"), aes(label = value), nudge_x = 0.5, nudge_y = 50, color="black") +
+    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="September"), aes(label = value), nudge_x = 0.5, nudge_y = 50, color="black") +
     scale_x_discrete(limits = month.name)
   articlesgoalschart
   
