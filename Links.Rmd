@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 10/11/2021"
+date: "Last updated: 11/19/2021"
 output: 
   html_document:
     toc: true
@@ -15,6 +15,23 @@ h1 {
   text-align: center;
 }
 ```
+# October 2021
+
+**Kerrin Jeromin**, for the Washington Post, [writes](https://www.washingtonpost.com/weather/2021/10/11/billion-dollar-disasters-2021-climate/) about the 18 billion-dollar weather disasters that have hit the U.S. this year.
+
+What sea level rise will look like around the globe? **John Keefe and Rachel Ramirez**, for CNN, [answer that question](https://www.cnn.com/2021/10/12/world/3-degrees-sea-level-rise-climate-central/index.html) with Climate Central sea level rise tools and graphics.
+
+In the wake of the Texas power concerns, **Frank Billingsley** [shows](https://www.click2houston.com/weather/2021/10/08/looking-for-power-look-up/) how renewables are scaling up and adding to the power mix in Houston and across Texas.
+
+From Spectrum News in Columbus, Ohio, **Justin Gehrts** [highlights](https://spectrumlocalnews.com/me/maine/weather/2021/10/12/climate-central-climate-change-sea-level-rise-images) the risk from rising sea levels to iconic areas from Florida to New York.
+
+**Grant Gilmore** (WTSP/CBS, FL) [showcases](https://www.iqmediacorp.com/ClipPlayer/?ClipID=98570a15-9916-4cb9-b02d-c21b2c15be8d&ps=2) future sea-level rise in the downtown Tampa.
+
+**Katy Morgan** (WZTV/FOX, TN) [discusses](https://www.iqmediacorp.com/ClipPlayer/?ClipID=014c1610-2f82-46e8-a6e1-149e2844444e&ps=2) frequent billion-dollar disasters.
+
+**Janice Huff** (WNBC/NBC, NY) [reports](https://www.iqmediacorp.com/ClipPlayer/?ClipID=709f022f-ff59-4b91-a9ef-ab776472bdce&ps=2) on Halloween extremes and October nights in New York City.
+
+**Adam Epstein** (KTXL/FOX, CA) [interviews](https://www.iqmediacorp.com/ClipPlayer/?ClipID=36d82531-bfb7-4a8c-b0e7-e68fa34f2516&ps=2) our CEO **Dr. Benjamin Strauss** about future sea-level rise.
 
 # Septmeber 2021
 
