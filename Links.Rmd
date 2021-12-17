@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 11/19/2021"
+date: "Last updated: 12/17/2021"
 output: 
   html_document:
     toc: true
@@ -15,6 +15,20 @@ h1 {
   text-align: center;
 }
 ```
+# November 2021
+
+**Adriana Navarro**, for Accuweather, [discusses](https://www.accuweather.com/en/climate/wettest-days-on-record-getting-wetter-in-several-us-cities/1045692#:~:text=The%20intensity%20of%20extreme%20rainfall,higher%20risk%20of%20flood%20events.) how the wettest days on record are getting even wetter.
+
+**Kaiti Blake**, for KSAT in San Antonio, [writes](https://www.ksat.com/weather/2021/10/25/bats-and-a-changing-climate-how-scientists-are-helping-an-endangered-species/) about how endangered bats are being affected by warmer temperatures. 
+
+**Ayurella Horn-Muller** (Climate Central), **Brendan Rivers** (ADAPT) and **Danielle Uliano** (WJXT) [report](https://adaptflorida.org/fewer-fumes-what-the-switch-to-electric-vehicles-means-for-jacksonville/) on electric vehicles for Adapt Florida. 
+
+**Maanvi Singh** and Climate Central’s **John Upton** and **Kaitlyn Weber** [report](https://www.theguardian.com/us-news/2021/nov/09/northern-california-wildfires-fire-weather-climate) on the rise in fire weather days in northern California for The Guardian.
+
+**Charles Roop** (WCTV/CBS, FL) [explains](https://www.iqmediacorp.com/ClipPlayer/?ClipID=746ec9a5-1614-4eba-9942-28c4bf57fe48&ps=2) why we should care about COP26
+
+**Samantha Jacques** (WZZM/ABC, MI) [uses](https://www.iqmediacorp.com/ClipPlayer/?ClipID=20c9a5ef-c15a-42b7-a728-696b1a20e3b4&ps=2) our Climate Change presentation to explain why climate change is simple, serious, and solvable. 
+
 # October 2021
 
 **Kerrin Jeromin**, for the Washington Post, [writes](https://www.washingtonpost.com/weather/2021/10/11/billion-dollar-disasters-2021-climate/) about the 18 billion-dollar weather disasters that have hit the U.S. this year.
