@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 12/17/2021"
+date: "Last updated: 1/11/2021"
 output: 
   html_document:
     toc: true
@@ -15,6 +15,23 @@ h1 {
   text-align: center;
 }
 ```
+# December 2021
+
+**Matt Pearl**, with WXIA in Atlanta, [discusses](https://www.wsfltv.com/news/national/two-americas/virtually-every-city-in-america-is-a-heat-island-heres-how-one-is-finding-its-voice) what the urban heat island effect means for residents of Mesa, Ariz. 
+
+**Alix Martichoux**, for Nexstar in San Francisco, [reports](https://kfor.com/news/winter-feel-warmer-lately-in-these-places-it-really-is/) on warming winters across the country.
+
+**Ayurella Horn-Muller**, **Brendan Rivers**, and **Danielle Uliano**, for ADAPT, [report](https://adaptflorida.org/rising-seas-swamp-black-spanish-and-indigenous-history-in-st-johns-county/) on sea level rise threats to historic landmarks that drive tourism in coastal Florida, using Climate Central analysis.
+
+**Brian Kahn**, for Gizmodo, [writes](https://www.gizmodo.com.au/2021/11/the-gateway-to-rocky-mountain-national-park-is-on-fire-in-november/) about November wildfires in Colorado using Climate Central analysis of longer fire seasons.
+
+**Scott Williams** (WTXF/FOX, PA) [explains](https://www.iqmediacorp.com/ClipPlayer/?ClipID=bafacb44-b831-4322-b267-248e4e633491&ps=2) how winters are working in Philadelphia.
+
+**Greg Dee** (WFTS/ABC, FL) [discusses](https://www.iqmediacorp.com/ClipPlayer/?ClipID=15131ad8-8548-4ce4-8543-b4151596625e&ps=2) the connection between tornadoes and climate change.
+
+**Haley Bouley** (WFFF/FOX, VT) [showcases](https://www.iqmediacorp.com/ClipPlayer/?ClipID=cfe86fb6-d305-43cc-93bf-85be33f67428&ps=2) how Christmas is warming over the year.
+
+
 # November 2021
 
 **Adriana Navarro**, for Accuweather, [discusses](https://www.accuweather.com/en/climate/wettest-days-on-record-getting-wetter-in-several-us-cities/1045692#:~:text=The%20intensity%20of%20extreme%20rainfall,higher%20risk%20of%20flood%20events.) how the wettest days on record are getting even wetter.
