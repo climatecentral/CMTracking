@@ -1,7 +1,7 @@
 ---
 title: "Year-To-Date"
 output: html_document
-date: "Last updated: 1/12/2021"
+date: "Last updated: 1/12/2022"
 ---
 
 ```{css, echo=FALSE}
@@ -12,21 +12,21 @@ h1 {
 
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
-data <- read.csv('December2021TrackingData.csv')
+data <- read.csv('January2022TrackingData.csv')
 #load pre-written evaluation functions
 source("monthlyreport_functions.R")
 dataReformatted <- reformat_googlesheet(data)
 ```
 
-# Year-to-Date: December 2021
+# Year-to-Date: January 2022
 
 ```{r YTD Hit Type, echo=FALSE, warning=FALSE, message=FALSE}
 ## Hit Type
 library('openair')
-YTDdata2020 <- dataReformatted[which(dataReformatted$month %in% c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December") & dataReformatted$year=="2020"),]
-YTDdata2021 <- dataReformatted[which(dataReformatted$month %in% c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December") & dataReformatted$year=="2021"),]
+YTDdata2021 <- dataReformatted[which(dataReformatted$month %in% c("January") & dataReformatted$year=="2021"),]
+YTDdata2022 <- dataReformatted[which(dataReformatted$month %in% c("January") & dataReformatted$year=="2022"),]
 
-previousYear(YTDdata2021, YTDdata2020)
+previousYear(YTDdata2022, YTDdata2021)
 ```
 \*Facebook and Other Social (Instagram and Youtube) tracking stopped June 2021.
 
@@ -36,17 +36,17 @@ previousYear(YTDdata2021, YTDdata2020)
 
 ```{r, TV Goals, echo=FALSE, warning=FALSE, message=FALSE}
 #subset 2021 data
-  data2021 <-dataReformatted[which(dataReformatted$year==2021),]
+  data2022 <-dataReformatted[which(dataReformatted$year==2022),]
   #one source per row
   library('tidyr')
-  data2021.sepsource <- separate_rows(data2021, source, sep = ",")
-  data2021.sepsource$source <- trimws(data2021.sepsource$source, which='both')
-  data2021.sepsource <- subset(data2021.sepsource, source=="CC"|source=="CM"|source=="CMN")
+  data2022.sepsource <- separate_rows(data2022, source, sep = ",")
+  data2022.sepsource$source <- trimws(data2022.sepsource$source, which='both')
+  data2022.sepsource <- subset(data2022.sepsource, source=="CC"|source=="CM"|source=="CMN")
   #replace NAs in tv column with 0s
-  data2021.sepsource$tv[is.na(data2021.sepsource$tv)] <- 0
+  data2022.sepsource$tv[is.na(data2022.sepsource$tv)] <- 0
   #summarize tv by month
   library("dplyr")
-  tvbymonth <- data2021.sepsource %>%
+  tvbymonth <- data2022.sepsource %>%
     group_by(month) %>%
     summarise(tv=sum(tv))
   #add 20% to tv
@@ -83,7 +83,7 @@ tvgoalschart <- ggplot(melted.tvgoalsandhits, aes(Month, value, group=variable, 
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="TV Airings", x="") +
 theme(legend.title = element_blank())+
-    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="December"), aes(label = 5685), nudge_x = 0.4, nudge_y = 50, color="black") +
+    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="January"), aes(label = 5685), nudge_x = 0.4, nudge_y = 50, color="black") +
     scale_x_discrete(limits = month.name)
 tvgoalschart
 ```
@@ -92,13 +92,13 @@ tvgoalschart
 
 ```{r, Article Goals, echo=FALSE, warning=FALSE, message=FALSE}
 #subset 2021 data
-  data2021 <-dataReformatted[which(dataReformatted$year==2021),]
+  data2022 <-dataReformatted[which(dataReformatted$year==2022),]
 #one source per row
-  data2021.sepsource <- separate_rows(data2021, source, sep = ",")
-  data2021.sepsource <- subset(data2021.sepsource, source=="CC"|source=="CM"|source=="CMN")
+  data2022.sepsource <- separate_rows(data2022, source, sep = ",")
+  data2022.sepsource <- subset(data2022.sepsource, source=="CC"|source=="CM"|source=="CMN")
   #summarize articles by month
   library("dplyr")
-  articlesbymonth <- data2021.sepsource %>%
+  articlesbymonth <- data2022.sepsource %>%
     group_by(month) %>%
     summarise(articles=sum(online.article))
   #order data by month
@@ -133,7 +133,7 @@ tvgoalschart
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="Articles", x="") +
 theme(legend.title = element_blank()) +
-    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="December"), aes(label = 5313), nudge_x = 0.5, nudge_y = 50, color="black") +
+    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="January"), aes(label = 5313), nudge_x = 0.5, nudge_y = 50, color="black") +
     scale_x_discrete(limits = month.name)
   articlesgoalschart
   

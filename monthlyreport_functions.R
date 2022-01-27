@@ -473,7 +473,7 @@ monthcomp$now <- as.numeric(monthcomp$now)
 monthcomp$then <- as.numeric(monthcomp$then)
 library('dplyr')
 monthcomp$percent.change <- round(((monthcomp$now-monthcomp$then)/monthcomp$now)*100, digits=0)
-colnames(monthcomp) <- c("Platform", "2021", "2020", "Percent Change (%)")
+colnames(monthcomp) <- c("Platform", "2022", "2021", "Percent Change (%)")
 monthcomp <- monthcomp[c(6,1,3,2,4,5),]
 monthcomp$Platform <- c("Twitter", "Facebook", "Other Social", "Online Articles", "Radio", "TV")
 rownames(monthcomp) <- NULL
