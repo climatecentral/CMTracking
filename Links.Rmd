@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 1/11/2021"
+date: "Last updated: 2/16/2022"
 output: 
   html_document:
     toc: true
@@ -15,6 +15,19 @@ h1 {
   text-align: center;
 }
 ```
+# January 2022
+
+**John Deem**, for Greensboro News & Record, [explains](https://greensboro.com/news/local_news/winter-of-discontent-fooled-by-false-spring-triad-plants-are-blooming-too-early/article_1431776e-6cf7-11ec-b553-6f746e18ee1a.html) how some Triad plants were fooled by a “false spring”.
+
+**Danielle Miller**, for WPMT, [interviews](https://www.fox43.com/article/weather/why-is-there-less-snow-in-pennsylvania-climate-change-warming-temperatures-snowfall-patterns/521-8cb50cea-4c33-4889-948b-cd0ea621eb9e) an expert on shifting snowfall patterns in Pennsylvania.
+
+**Jeff Ranieri** (KNTV - CA) [informs](https://www.iqmediacorp.com/ClipPlayer/?ClipID=05b4070d-faab-4e26-abdb-603435f9a223&ps=2) his viewers on how to lower their carbon footprint in the home.
+
+**Monica Woods** (KXTV - CA) [explains](https://www.iqmediacorp.com/ClipPlayer/?ClipID=7950b78f-a1d1-445a-9337-2d960e85ef70&ps=2) how climate change can cause record-setting snow and rain. 
+
+**Blake Hansen** (WZZM - MI) [reports](https://www.iqmediacorp.com/ClipPlayer/?ClipID=05212207-162f-444b-a894-91322aa5ef8f&ps=2) the 2021 U.S. temperature rankings.
+
+
 # December 2021
 
 **Matt Pearl**, with WXIA in Atlanta, [discusses](https://www.wsfltv.com/news/national/two-americas/virtually-every-city-in-america-is-a-heat-island-heres-how-one-is-finding-its-voice) what the urban heat island effect means for residents of Mesa, Ariz. 
