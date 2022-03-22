@@ -1,7 +1,7 @@
 ---
 title: "Year-To-Date"
 output: html_document
-date: "Last updated: 2/16/2022"
+date: "Last updated: 3/22/2022"
 ---
 
 ```{css, echo=FALSE}
@@ -58,7 +58,7 @@ previousYear(YTDdata2022, YTDdata2021)
   tvbymonth$cumulative.tv <- cumsum(tvbymonth$tv)
   tvbymonth <- as.data.frame(tvbymonth)
   #tv goals
-  tv.goals <- c(396, 792, 1188, 1584, 1980, 2376, 2772, 3168, 3564, 3960, 4356, 4752)
+  tv.goals <- c(541, 1082, 1623, 2164, 2705, 3246, 3787, 4328, 4869, 5410, 5951, 6500)
   month <- month.name
   tvgoals.bymonth <- data.frame(month, tv.goals)
   #merge hits and goals
@@ -83,14 +83,14 @@ tvgoalschart <- ggplot(melted.tvgoalsandhits, aes(Month, value, group=variable, 
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="TV Airings", x="") +
 theme(legend.title = element_blank())+
-    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="January"), aes(label = 5685), nudge_x = 0.4, nudge_y = 50, color="black") +
+    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="January"), aes(label = 342), nudge_x = 0.4, nudge_y = 50, color="black") +
     scale_x_discrete(limits = month.name)
 tvgoalschart
 ```
 
 ## Articles
 
-```{r, Article Goals, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, Article Goals, echo=FALSE, eval = FALSE, warning=FALSE, message=FALSE}
 #subset 2021 data
   data2022 <-dataReformatted[which(dataReformatted$year==2022),]
 #one source per row
@@ -133,7 +133,7 @@ tvgoalschart
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="Articles", x="") +
 theme(legend.title = element_blank()) +
-    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="January"), aes(label = 5313), nudge_x = 0.5, nudge_y = 50, color="black") +
+    geom_text(data=melted.articlesgoalsandhits %>% filter(variable=="Articles" & Month=="January"), aes(label = 268), nudge_x = 0.5, nudge_y = 50, color="black") +
     scale_x_discrete(limits = month.name)
   articlesgoalschart
   
