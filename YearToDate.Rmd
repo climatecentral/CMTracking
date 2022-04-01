@@ -12,19 +12,19 @@ h1 {
 
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
-data <- read.csv('January2022TrackingData.csv')
+data <- read.csv('Feburary2022TrackingData.csv')
 #load pre-written evaluation functions
 source("monthlyreport_functions.R")
 dataReformatted <- reformat_googlesheet(data)
 ```
 
-# Year-to-Date: January 2022
+# Year-to-Date: February 2022
 
 ```{r YTD Hit Type, echo=FALSE, warning=FALSE, message=FALSE}
 ## Hit Type
 library('openair')
-YTDdata2021 <- dataReformatted[which(dataReformatted$month %in% c("January") & dataReformatted$year=="2021"),]
-YTDdata2022 <- dataReformatted[which(dataReformatted$month %in% c("January") & dataReformatted$year=="2022"),]
+YTDdata2021 <- dataReformatted[which(dataReformatted$month %in% c("February") & dataReformatted$year=="2021"),]
+YTDdata2022 <- dataReformatted[which(dataReformatted$month %in% c("February") & dataReformatted$year=="2022"),]
 
 previousYear(YTDdata2022, YTDdata2021)
 ```
@@ -83,7 +83,7 @@ tvgoalschart <- ggplot(melted.tvgoalsandhits, aes(Month, value, group=variable, 
     scale_linetype_manual(values=c("dashed", "solid")) +
 labs(y="TV Airings", x="") +
 theme(legend.title = element_blank())+
-    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="January"), aes(label = 342), nudge_x = 0.4, nudge_y = 50, color="black") +
+    geom_text(data=melted.tvgoalsandhits %>% filter(variable=="Airings" & Month=="February"), aes(label = 342), nudge_x = 0.4, nudge_y = 50, color="black") +
     scale_x_discrete(limits = month.name)
 tvgoalschart
 ```

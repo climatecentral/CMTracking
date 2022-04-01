@@ -15,6 +15,9 @@ h1 {
   text-align: center;
 }
 ```
+
+# February 2022
+
 # January 2022
 
 **John Deem**, for Greensboro News & Record, [explains](https://greensboro.com/news/local_news/winter-of-discontent-fooled-by-false-spring-triad-plants-are-blooming-too-early/article_1431776e-6cf7-11ec-b553-6f746e18ee1a.html) how some Triad plants were fooled by a “false spring”.
