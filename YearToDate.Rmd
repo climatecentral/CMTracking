@@ -12,7 +12,6 @@ h1 {
 
 ```{r setup, include=FALSE}
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
-data <- read.csv('Feburary2022TrackingData.csv')
 #load pre-written evaluation functions
 source("monthlyreport_functions.R")
 dataReformatted <- reformat_googlesheet(data)
