@@ -1,6 +1,6 @@
 ---
 title: "Content Use Highlights"
-date: "Last updated: 3/22/2022"
+date: "Last updated: 7/6//2022"
 output: 
   html_document:
     toc: true
@@ -17,6 +17,18 @@ h1 {
 ```
 
 # February 2022
+
+CNN meteorologist **Tom Sater** [explains](https://climatecentral.cmail20.com/t/y-l-bjijjn-irijurjjhj-d/) the coastal impacts of rising sea levels by 2050.
+
+**Heather Waldman**, for KCRA, [reports](https://climatecentral.cmail20.com/t/y-l-bjijjn-irijurjjhj-h/) on the impacts of climate change on the future of snow sports.
+
+**Marc Tracy**, for the New York Times, [discusses](https://climatecentral.cmail19.com/t/y-l-byuikdy-irijurjjhj-b/) why the job of the TV weather person is getting more serious. 
+
+**Dan Schwartz**, for the Atlantic, follows one of our fellow Climate Matters members, Meteorologist Shel Winkley (KBTX in Texas), in an [in-depth piece](https://climatecentral.cmail20.com/t/y-l-bjhhkky-irijurjjhj-jl/) about why “local meteorologists are better positioned than anyone else to talk their communities through the facts about climate change”.
+
+**Glenn Schwartz** (WCAU - PA) [explains](https://www.iqmediacorp.com/ClipPlayer/?ClipID=e5fa2d85-9d93-4fe6-8659-242aad644c15&ps=2https://www.iqmediacorp.com/ClipPlayer/?ClipID=e5fa2d85-9d93-4fe6-8659-242aad644c15&ps=2) some of the signs of climate change and how we can curb emissions (WCAU - PA)  
+
+**Ted Phaeton** (WJZY - NC)  [discusses](https://www.iqmediacorp.com/ClipPlayer/?ClipID=3fc44a17-2307-489c-ba71-b3990aabbc1b&ps=2) how climate change can affect the Winter Olympics
 
 # January 2022
 
