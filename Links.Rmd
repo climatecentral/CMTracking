@@ -16,6 +16,7 @@ h1 {
 }
 ```
 
+
 # February 2022
 
 CNN meteorologist **Tom Sater** [explains](https://climatecentral.cmail20.com/t/y-l-bjijjn-irijurjjhj-d/) the coastal impacts of rising sea levels by 2050.
