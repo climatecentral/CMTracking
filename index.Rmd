@@ -1,6 +1,6 @@
 ---
 title: "Monthly Numbers"
-date: "Last updated: 3/22/2022"
+date: "Last updated: 6/17/2022"
 output:
   html_document:
     toc: true
@@ -20,7 +20,7 @@ h1 {
 library("knitr")
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
 source("monthlyreport_functions.R")
-data <- read.csv('March2022TrackingData.csv')
+data <- read.csv('June2022TrackingData.csv')
 data$Date.Used <- strptime(as.character(data$Date.Used), "%m/%d/%Y")
 tracking.data <-reformat_googlesheet(data)
 library('tidyr')
@@ -30,6 +30,219 @@ tracking.data$date <- as.Date(tracking.data$date, format = "%Y-%m-%d")
 ```
 
 Repository for CM/N Programs Monthly Tracking reports.
+
+# June 2022
+
+```{r Jubne 2022 Enrollment, eval=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
+values <- c(968, 92, 483, 55, 702)
+enrollment <- as.data.frame(cbind(rows, values))
+names(enrollment) <- c(" ", "Enrollment")
+library("formattable")
+formattable(enrollment)
+```
+
+
+### Hits by Program
+```{r June 2022 Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.June2022 <- tracking.data[which(tracking.data$month=="June" & tracking.data$year=="2022"),]
+
+#expanded view
+library("tidyr")
+expanded.hits.draft.June2022 <- hitsbyprogram(tracking.data.June2022)
+expanded.hits.June2022 <- expanded.hits.draft.June2022[,c("source", "Twitter",
+                                  "online.article", "radio", "tv")]
+
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.June2022 <- subset(expanded.hits.June2022, source=="CC"|source=="CM"|source=="CMN")
+#aggregate hits according to nest program model
+CMN.June2022 <- expanded.hits.CMprograms.June2022[3,2:5]
+CM.June2022 <- CMN.June2022 + expanded.hits.CMprograms.June2022[2,2:5]
+CC.June2022 <- CM.June2022 + expanded.hits.CMprograms.June2022[1,2:5]
+aggregated.hits.CMprograms.June2022 <- rbind(CC.June2022, CM.June2022, CMN.June2022)
+rownames(aggregated.hits.CMprograms.June2022) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.June2022) <- c("Twitter",
+                          "Online Articles", "Radio", "TV")
+
+library("formattable")
+aggregated.hits.formatted.June2022 <- formattable(aggregated.hits.CMprograms.June2022,
+                                       align=c("l", "c", "c", "c", "c"),
+                                       list(''))
+
+aggregated.hits.formatted.June2022
+```
+
+### Comparison with Last Year
+```{r June 2022 Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.June2022 <- tracking.data[which(tracking.data$month=="June" & tracking.data$year=="2022"),]
+tracking.data.June2021 <- tracking.data[which(tracking.data$month=="June" & tracking.data$year=="2021"),]
+previousYear(tracking.data.June2022, tracking.data.June2021)
+```
+
+### Top Releases
+
+Most-used releases this month on TV and Radio (including content released before this month).
+
+```{r June 2022 Top Releases, warning=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.June2022.subsetted <- subset(tracking.data.June2022, source=="CC"|source=="CM"|source=="CMN")
+rankedreleases.June2022 <- rankReleasesTVRadioOnly(tracking.data.June2022.subsetted)
+top10releases.June2022 <-rankedreleases.June2022[c(1:10),]
+names(top10releases.June2022) <- c("Release", "Radio", "TV", "Total")
+top5releases.June2022 <-rankedreleases.June2022[c(1:5),]
+names(top5releases.June2022) <- c("Release", "Radio", "TV", "Total")
+library(DT)
+datatable(top10releases.June2022, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
+```
+
+### Hits by Region
+```{r June 2022 Hits by Region, warning=FALSE, echo = FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.June2022 <- hitsbyregion(tracking.data.June2022.subsetted)
+month.hitsbyregion.June2022
+```
+
+# May 2022
+
+```{r May 2022 Enrollment, eval=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
+values <- c(968, 92, 483, 55, 702)
+enrollment <- as.data.frame(cbind(rows, values))
+names(enrollment) <- c(" ", "Enrollment")
+library("formattable")
+formattable(enrollment)
+```
+
+
+### Hits by Program
+```{r May 2022 Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.May2022 <- tracking.data[which(tracking.data$month=="May" & tracking.data$year=="2022"),]
+
+#expanded view
+library("tidyr")
+expanded.hits.draft.May2022 <- hitsbyprogram(tracking.data.May2022)
+expanded.hits.May2022 <- expanded.hits.draft.May2022[,c("source", "Twitter",
+                                  "online.article", "radio", "tv")]
+
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.May2022 <- subset(expanded.hits.May2022, source=="CC"|source=="CM"|source=="CMN")
+#aggregate hits according to nest program model
+CMN.May2022 <- expanded.hits.CMprograms.May2022[3,2:5]
+CM.May2022 <- CMN.May2022 + expanded.hits.CMprograms.May2022[2,2:5]
+CC.May2022 <- CM.May2022 + expanded.hits.CMprograms.May2022[1,2:5]
+aggregated.hits.CMprograms.May2022 <- rbind(CC.May2022, CM.May2022, CMN.May2022)
+rownames(aggregated.hits.CMprograms.May2022) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.May2022) <- c("Twitter",
+                          "Online Articles", "Radio", "TV")
+
+library("formattable")
+aggregated.hits.formatted.May2022 <- formattable(aggregated.hits.CMprograms.May2022,
+                                       align=c("l", "c", "c", "c", "c"),
+                                       list(''))
+
+aggregated.hits.formatted.May2022
+```
+
+### Comparison with Last Year
+```{r May 2022 Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.May2022 <- tracking.data[which(tracking.data$month=="May" & tracking.data$year=="2022"),]
+tracking.data.May2021 <- tracking.data[which(tracking.data$month=="May" & tracking.data$year=="2021"),]
+previousYear(tracking.data.May2022, tracking.data.May2021)
+```
+
+### Top Releases
+
+Most-used releases this month on TV and Radio (including content released before this month).
+
+```{r May 2022 Top Releases, warning=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.May2022.subsetted <- subset(tracking.data.May2022, source=="CC"|source=="CM"|source=="CMN")
+rankedreleases.May2022 <- rankReleasesTVRadioOnly(tracking.data.May2022.subsetted)
+top10releases.May2022 <-rankedreleases.May2022[c(1:10),]
+names(top10releases.May2022) <- c("Release", "Radio", "TV", "Total")
+top5releases.May2022 <-rankedreleases.May2022[c(1:5),]
+names(top5releases.May2022) <- c("Release", "Radio", "TV", "Total")
+library(DT)
+datatable(top10releases.May2022, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
+```
+
+### Hits by Region
+```{r May 2022 Hits by Region, warning=FALSE, echo = FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.May2022 <- hitsbyregion(tracking.data.May2022.subsetted)
+month.hitsbyregion.May2022
+```
+
+# April 2022
+
+```{r April 2022 Enrollment, eval=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
+values <- c(968, 92, 483, 55, 702)
+enrollment <- as.data.frame(cbind(rows, values))
+names(enrollment) <- c(" ", "Enrollment")
+library("formattable")
+formattable(enrollment)
+```
+
+
+### Hits by Program
+```{r April 2022 Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.April2022 <- tracking.data[which(tracking.data$month=="April" & tracking.data$year=="2022"),]
+
+#expanded view
+library("tidyr")
+expanded.hits.draft.April2022 <- hitsbyprogram(tracking.data.April2022)
+expanded.hits.April2022 <- expanded.hits.draft.April2022[,c("source", "Twitter",
+                                  "online.article", "radio", "tv")]
+
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.April2022 <- subset(expanded.hits.April2022, source=="CC"|source=="CM"|source=="CMN")
+#aggregate hits according to nest program model
+CMN.April2022 <- expanded.hits.CMprograms.April2022[3,2:5]
+CM.April2022 <- CMN.April2022 + expanded.hits.CMprograms.April2022[2,2:5]
+CC.April2022 <- CM.April2022 + expanded.hits.CMprograms.April2022[1,2:5]
+aggregated.hits.CMprograms.April2022 <- rbind(CC.April2022, CM.April2022, CMN.April2022)
+rownames(aggregated.hits.CMprograms.April2022) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.April2022) <- c("Twitter",
+                          "Online Articles", "Radio", "TV")
+
+library("formattable")
+aggregated.hits.formatted.April2022 <- formattable(aggregated.hits.CMprograms.April2022,
+                                       align=c("l", "c", "c", "c", "c"),
+                                       list(''))
+
+aggregated.hits.formatted.April2022
+```
+
+### Comparison with Last Year
+```{r April 2022 Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.April2022 <- tracking.data[which(tracking.data$month=="April" & tracking.data$year=="2022"),]
+tracking.data.April2021 <- tracking.data[which(tracking.data$month=="April" & tracking.data$year=="2021"),]
+previousYear(tracking.data.April2022, tracking.data.April2021)
+```
+
+### Top Releases
+
+Most-used releases this month on TV and Radio (including content released before this month).
+
+```{r April 2022 Top Releases, warning=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.April2022.subsetted <- subset(tracking.data.April2022, source=="CC"|source=="CM"|source=="CMN")
+rankedreleases.April2022 <- rankReleasesTVRadioOnly(tracking.data.April2022.subsetted)
+top10releases.April2022 <-rankedreleases.April2022[c(1:10),]
+names(top10releases.April2022) <- c("Release", "Radio", "TV", "Total")
+top5releases.April2022 <-rankedreleases.April2022[c(1:5),]
+names(top5releases.April2022) <- c("Release", "Radio", "TV", "Total")
+library(DT)
+datatable(top10releases.April2022, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
+```
+
+### Hits by Region
+```{r April 2022 Hits by Region, warning=FALSE, echo = FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.April2022 <- hitsbyregion(tracking.data.April2022.subsetted)
+month.hitsbyregion.April2022
+```
 
 # March 2022
 
