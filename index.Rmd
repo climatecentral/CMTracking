@@ -1,6 +1,6 @@
 ---
 title: "Monthly Numbers"
-date: "Last updated: 8/17/2022"
+date: "Last updated: 9/9/2022"
 output:
   html_document:
     toc: true
@@ -30,6 +30,76 @@ tracking.data$date <- as.Date(tracking.data$date, format = "%Y-%m-%d")
 ```
 
 Repository for CM/N Programs Monthly Tracking reports.
+
+# July 2022
+
+```{r July 2022 Enrollment, eval=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
+values <- c(968, 92, 483, 55, 702)
+enrollment <- as.data.frame(cbind(rows, values))
+names(enrollment) <- c(" ", "Enrollment")
+library("formattable")
+formattable(enrollment)
+```
+
+
+### Hits by Program
+```{r July 2022 Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.July2022 <- tracking.data[which(tracking.data$month=="July" & tracking.data$year=="2022"),]
+
+#expanded view
+library("tidyr")
+expanded.hits.draft.July2022 <- hitsbyprogram(tracking.data.July2022)
+expanded.hits.July2022 <- expanded.hits.draft.July2022[,c("source", "Twitter",
+                                  "online.article", "radio", "tv")]
+
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.July2022 <- subset(expanded.hits.July2022, source=="CC"|source=="CM"|source=="CMN")
+#aggregate hits according to nest program model
+CMN.July2022 <- expanded.hits.CMprograms.July2022[3,2:5]
+CM.July2022 <- CMN.July2022 + expanded.hits.CMprograms.July2022[2,2:5]
+CC.July2022 <- CM.July2022 + expanded.hits.CMprograms.July2022[1,2:5]
+aggregated.hits.CMprograms.July2022 <- rbind(CC.July2022, CM.July2022, CMN.July2022)
+rownames(aggregated.hits.CMprograms.July2022) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.July2022) <- c("Twitter",
+                          "Online Articles", "Radio", "TV")
+
+library("formattable")
+aggregated.hits.formatted.July2022 <- formattable(aggregated.hits.CMprograms.July2022,
+                                       align=c("l", "c", "c", "c", "c"),
+                                       list(''))
+
+aggregated.hits.formatted.July2022
+```
+
+### Comparison with Last Year
+```{r July 2022 Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.July2022 <- tracking.data[which(tracking.data$month=="July" & tracking.data$year=="2022"),]
+tracking.data.July2021 <- tracking.data[which(tracking.data$month=="July" & tracking.data$year=="2021"),]
+previousYear(tracking.data.July2022, tracking.data.July2021)
+```
+
+### Top Releases
+
+Most-used releases this month on TV and Radio (including content released before this month).
+
+```{r July 2022 Top Releases, warning=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.July2022.subsetted <- subset(tracking.data.July2022, source=="CC"|source=="CM"|source=="CMN")
+rankedreleases.July2022 <- rankReleasesTVRadioOnly(tracking.data.July2022.subsetted)
+top10releases.July2022 <-rankedreleases.July2022[c(1:10),]
+names(top10releases.July2022) <- c("Release", "Radio", "TV", "Total")
+top5releases.July2022 <-rankedreleases.July2022[c(1:5),]
+names(top5releases.July2022) <- c("Release", "Radio", "TV", "Total")
+library(DT)
+datatable(top10releases.July2022, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
+```
+
+### Hits by Region
+```{r July 2022 Hits by Region, warning=FALSE, echo = FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.July2022 <- hitsbyregion(tracking.data.July2022.subsetted)
+month.hitsbyregion.July2022
 
 # June 2022
 
