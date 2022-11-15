@@ -17,10 +17,10 @@ h1 {
 }
 ```
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
-library("knitr")
+library("knitr") 
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
 source("monthlyreport_functions.R")
-data <- read.csv('June2022TrackingData.csv')
+data <- read.csv('September2022TrackingData.csv')
 data$Date.Used <- strptime(as.character(data$Date.Used), "%m/%d/%Y")
 tracking.data <-reformat_googlesheet(data)
 library('tidyr')
@@ -30,6 +30,150 @@ tracking.data$date <- as.Date(tracking.data$date, format = "%Y-%m-%d")
 ```
 
 Repository for CM/N Programs Monthly Tracking reports.
+
+
+# September 2022
+
+```{r September 2022 Enrollment, eval=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
+values <- c(968, 92, 483, 55, 702)
+enrollment <- as.data.frame(cbind(rows, values))
+names(enrollment) <- c(" ", "Enrollment")
+library("formattable")
+formattable(enrollment)
+```
+
+
+### Hits by Program
+```{r September 2022 Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.September2022 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2022"),]
+
+#expanded view
+library("tidyr")
+expanded.hits.draft.September2022 <- hitsbyprogram(tracking.data.September2022)
+expanded.hits.September2022 <- expanded.hits.draft.September2022[,c("source", "Twitter",
+                                  "online.article", "radio", "tv")]
+
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.September2022 <- subset(expanded.hits.September2022, source=="CC"|source=="CM"|source=="CMN")
+#aggregate hits according to nest program model
+CMN.September2022 <- expanded.hits.CMprograms.September2022[3,2:5]
+CM.September2022 <- CMN.September2022 + expanded.hits.CMprograms.September2022[2,2:5]
+CC.September2022 <- CM.September2022 + expanded.hits.CMprograms.September2022[1,2:5]
+aggregated.hits.CMprograms.September2022 <- rbind(CC.September2022, CM.September2022, CMN.September2022)
+rownames(aggregated.hits.CMprograms.September2022) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.September2022) <- c("Twitter",
+                          "Online Articles", "Radio", "TV")
+
+library("formattable")
+aggregated.hits.formatted.September2022 <- formattable(aggregated.hits.CMprograms.September2022,
+                                       align=c("l", "c", "c", "c", "c"),
+                                       list(''))
+
+aggregated.hits.formatted.September2022
+```
+
+### Comparison with Last Year
+```{r September 2022 Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.September2022 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2022"),]
+tracking.data.September2021 <- tracking.data[which(tracking.data$month=="September" & tracking.data$year=="2021"),]
+previousYear(tracking.data.September2022, tracking.data.September2021)
+```
+
+### Top Releases
+
+Most-used releases this month on TV and Radio (including content released before this month).
+
+```{r September 2022 Top Releases, warning=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.September2022.subsetted <- subset(tracking.data.September2022, source=="CC"|source=="CM"|source=="CMN")
+rankedreleases.September2022 <- rankReleasesTVRadioOnly(tracking.data.September2022.subsetted)
+top10releases.September2022 <-rankedreleases.September2022[c(1:10),]
+names(top10releases.September2022) <- c("Release", "Radio", "TV", "Total")
+top5releases.September2022 <-rankedreleases.September2022[c(1:5),]
+names(top5releases.September2022) <- c("Release", "Radio", "TV", "Total")
+library(DT)
+datatable(top10releases.September2022, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
+```
+
+### Hits by Region
+```{r September 2022 Hits by Region, warning=FALSE, echo = FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.September2022 <- hitsbyregion(tracking.data.September2022.subsetted)
+month.hitsbyregion.September2022
+```
+
+# August 2022
+
+```{r August 2022 Enrollment, eval=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
+values <- c(968, 92, 483, 55, 702)
+enrollment <- as.data.frame(cbind(rows, values))
+names(enrollment) <- c(" ", "Enrollment")
+library("formattable")
+formattable(enrollment)
+```
+
+
+### Hits by Program
+```{r August 2022 Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.August2022 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2022"),]
+
+#expanded view
+library("tidyr")
+expanded.hits.draft.August2022 <- hitsbyprogram(tracking.data.August2022)
+expanded.hits.August2022 <- expanded.hits.draft.August2022[,c("source", "Twitter",
+                                  "online.article", "radio", "tv")]
+
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.August2022 <- subset(expanded.hits.August2022, source=="CC"|source=="CM"|source=="CMN")
+#aggregate hits according to nest program model
+CMN.August2022 <- expanded.hits.CMprograms.August2022[3,2:5]
+CM.August2022 <- CMN.August2022 + expanded.hits.CMprograms.August2022[2,2:5]
+CC.August2022 <- CM.August2022 + expanded.hits.CMprograms.August2022[1,2:5]
+aggregated.hits.CMprograms.August2022 <- rbind(CC.August2022, CM.August2022, CMN.August2022)
+rownames(aggregated.hits.CMprograms.August2022) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.August2022) <- c("Twitter",
+                          "Online Articles", "Radio", "TV")
+
+library("formattable")
+aggregated.hits.formatted.August2022 <- formattable(aggregated.hits.CMprograms.August2022,
+                                       align=c("l", "c", "c", "c", "c"),
+                                       list(''))
+
+aggregated.hits.formatted.August2022
+```
+
+### Comparison with Last Year
+```{r August 2022 Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.August2022 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2022"),]
+tracking.data.August2021 <- tracking.data[which(tracking.data$month=="August" & tracking.data$year=="2021"),]
+previousYear(tracking.data.August2022, tracking.data.August2021)
+```
+
+### Top Releases
+
+Most-used releases this month on TV and Radio (including content released before this month).
+
+```{r August 2022 Top Releases, warning=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.August2022.subsetted <- subset(tracking.data.August2022, source=="CC"|source=="CM"|source=="CMN")
+rankedreleases.August2022 <- rankReleasesTVRadioOnly(tracking.data.August2022.subsetted)
+top10releases.August2022 <-rankedreleases.August2022[c(1:10),]
+names(top10releases.August2022) <- c("Release", "Radio", "TV", "Total")
+top5releases.August2022 <-rankedreleases.August2022[c(1:5),]
+names(top5releases.August2022) <- c("Release", "Radio", "TV", "Total")
+library(DT)
+datatable(top10releases.August2022, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
+```
+
+### Hits by Region
+```{r August 2022 Hits by Region, warning=FALSE, echo = FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.August2022 <- hitsbyregion(tracking.data.August2022.subsetted)
+month.hitsbyregion.August2022
+```
+
 
 # July 2022
 
@@ -100,6 +244,8 @@ datatable(top10releases.July2022, fillContainer=FALSE, options = list(scrollX="7
 #compute hits by regions
 month.hitsbyregion.July2022 <- hitsbyregion(tracking.data.July2022.subsetted)
 month.hitsbyregion.July2022
+```
+
 
 # June 2022
 
