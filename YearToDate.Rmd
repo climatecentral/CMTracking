@@ -15,18 +15,18 @@ h1 {
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
 #load pre-written evaluation functions
 source("monthlyreport_functions.R")
-data <- read.csv('June2022TrackingData.csv')
+data <- read.csv('September2022TrackingData.csv')
 dataReformatted <- reformat_googlesheet(data)
 ```
 
 
-# Year-to-Date: June 2022
+# Year-to-Date: September 2022
 
 ```{r YTD Hit Type, echo=FALSE, warning=FALSE, message=FALSE}
 ## Hit Type
 library('openair')
-YTDdata2021 <- dataReformatted[which(dataReformatted$month %in% c("June") & dataReformatted$year=="2021"),]
-YTDdata2022 <- dataReformatted[which(dataReformatted$month %in% c("June") & dataReformatted$year=="2022"),]
+YTDdata2021 <- dataReformatted[which(dataReformatted$month %in% c("September") & dataReformatted$year=="2021"),]
+YTDdata2022 <- dataReformatted[which(dataReformatted$month %in% c("September") & dataReformatted$year=="2022"),]
 
 previousYear(YTDdata2022, YTDdata2021)
 ```
