@@ -61,7 +61,7 @@ CM.October2022 <- CMN.October2022 + expanded.hits.CMprograms.October2022[2,2:5]
 CC.October2022 <- CM.October2022 + expanded.hits.CMprograms.October2022[1,2:5]
 aggregated.hits.CMprograms.October2022 <- rbind(CC.October2022, CM.October2022, CMN.October2022)
 rownames(aggregated.hits.CMprograms.October2022) <- c("CC", "CM", "CMN")
-#change column names
+#change column namesg
 names(aggregated.hits.CMprograms.October2022) <- c("Twitter",
                           "Online Articles", "Radio", "TV")
 
