@@ -1,6 +1,6 @@
 ---
 title: "Monthly Numbers"
-date: "Last updated: 11/14/2022"
+date: "Last updated: 1/05/2023"
 output:
   html_document:
     toc: true
@@ -20,7 +20,7 @@ h1 {
 library("knitr") 
 knitr::opts_knit$set(echo=FALSE, warning=FALSE, message=FALSE)
 source("monthlyreport_functions.R")
-data <- read.csv('September2022TrackingData.csv')
+data <- read.csv('October2022TrackingData.csv')
 data$Date.Used <- strptime(as.character(data$Date.Used), "%m/%d/%Y")
 tracking.data <-reformat_googlesheet(data)
 library('tidyr')
@@ -31,6 +31,76 @@ tracking.data$date <- as.Date(tracking.data$date, format = "%Y-%m-%d")
 
 Repository for CM/N Programs Monthly Tracking reports.
 
+# October 2022
+
+```{r October 2022 Enrollment, eval=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+rows <- c("Media Meteorologists","Market Penetration (%)", "Local Television Stations", "Spanish-language Meteorologists", "Journalists Receiving CMN")
+values <- c(968, 92, 483, 55, 702)
+enrollment <- as.data.frame(cbind(rows, values))
+names(enrollment) <- c(" ", "Enrollment")
+library("formattable")
+formattable(enrollment)
+```
+
+
+### Hits by Program
+```{r October 2022 Hits by Type and Program, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.October2022 <- tracking.data[which(tracking.data$month=="October" & tracking.data$year=="2022"),]
+
+#expanded view
+library("tidyr")
+expanded.hits.draft.October2022 <- hitsbyprogram(tracking.data.October2022)
+expanded.hits.October2022 <- expanded.hits.draft.October2022[,c("source", "Twitter",
+                                  "online.article", "radio", "tv")]
+
+#restrict data to CC, CM, CMN sources
+expanded.hits.CMprograms.October2022 <- subset(expanded.hits.October2022, source=="CC"|source=="CM"|source=="CMN")
+#aggregate hits according to nest program model
+CMN.October2022 <- expanded.hits.CMprograms.October2022[3,2:5]
+CM.October2022 <- CMN.October2022 + expanded.hits.CMprograms.October2022[2,2:5]
+CC.October2022 <- CM.October2022 + expanded.hits.CMprograms.October2022[1,2:5]
+aggregated.hits.CMprograms.October2022 <- rbind(CC.October2022, CM.October2022, CMN.October2022)
+rownames(aggregated.hits.CMprograms.October2022) <- c("CC", "CM", "CMN")
+#change column names
+names(aggregated.hits.CMprograms.October2022) <- c("Twitter",
+                          "Online Articles", "Radio", "TV")
+
+library("formattable")
+aggregated.hits.formatted.October2022 <- formattable(aggregated.hits.CMprograms.October2022,
+                                       align=c("l", "c", "c", "c", "c"),
+                                       list(''))
+
+aggregated.hits.formatted.October2022
+```
+
+### Comparison with Last Year
+```{r October 2022 Last Year Comparison, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.October2022 <- tracking.data[which(tracking.data$month=="October" & tracking.data$year=="2022"),]
+tracking.data.October2021 <- tracking.data[which(tracking.data$month=="October" & tracking.data$year=="2021"),]
+previousYear(tracking.data.October2022, tracking.data.October2021)
+```
+
+### Top Releases
+
+Most-used releases this month on TV and Radio (including content released before this month).
+
+```{r October 2022 Top Releases, warning=FALSE, echo = FALSE, warning=FALSE, message=FALSE}
+tracking.data.October2022.subsetted <- subset(tracking.data.October2022, source=="CC"|source=="CM"|source=="CMN")
+rankedreleases.October2022 <- rankReleasesTVRadioOnly(tracking.data.October2022.subsetted)
+top10releases.October2022 <-rankedreleases.October2022[c(1:10),]
+names(top10releases.October2022) <- c("Release", "Radio", "TV", "Total")
+top5releases.October2022 <-rankedreleases.October2022[c(1:5),]
+names(top5releases.October2022) <- c("Release", "Radio", "TV", "Total")
+library(DT)
+datatable(top10releases.October2022, fillContainer=FALSE, options = list(scrollX="70px", scrollY="200px", pageLength = 5, dom = 'ftp'), rownames=FALSE)
+```
+
+### Hits by Region
+```{r October 2022 Hits by Region, warning=FALSE, echo = FALSE, message=FALSE}
+#compute hits by regions
+month.hitsbyregion.October2022 <- hitsbyregion(tracking.data.October2022.subsetted)
+month.hitsbyregion.October2022
+```
 
 # September 2022
 
